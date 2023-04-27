@@ -25,10 +25,10 @@ public class UserEntity {
     private boolean estEnseignant;
 
     @OneToMany
-    private List<MiahootEntity> miahoot;
+    private List<MiahootEntity> miahoots;
 
     @OneToMany
-    private List<ReponseEntity> reponse;
+    private List<ReponseEntity> reponses;
 
     @Override
     public boolean equals(Object o) {
