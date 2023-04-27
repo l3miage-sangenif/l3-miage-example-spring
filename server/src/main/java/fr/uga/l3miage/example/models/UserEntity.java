@@ -1,6 +1,5 @@
 package fr.uga.l3miage.example.models;
 
-
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -17,28 +16,31 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class MiahootEntity {
+public class UserEntity {
     @Id
-    @GeneratedValue
-    private Long idMiahoot;
+    private Long uid;
 
     private String nom;
 
-    private boolean estEnCours;
+    private boolean estEnseignant;
 
     @OneToMany
-    private List<QuestionEntity> faitPartieDe;
+    private List<MiahootEntity> miahoot;
+
+    @OneToMany
+    private List<ReponseEntity> reponse;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        MiahootEntity that = (MiahootEntity) o;
-        return getIdMiahoot() != null && Objects.equals(getIdMiahoot(), that.getIdMiahoot());
+        UserEntity that = (UserEntity) o;
+        return getUid() != null && Objects.equals(getUid(), that.getUid());
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }
