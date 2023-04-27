@@ -1,5 +1,6 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.response.Miahoot;
 import org.mapstruct.Mapper;
 

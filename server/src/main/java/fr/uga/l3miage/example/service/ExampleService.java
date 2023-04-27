@@ -4,6 +4,7 @@ import fr.uga.l3miage.example.component.ExampleComponent;
 import fr.uga.l3miage.example.exception.rest.*;
 import fr.uga.l3miage.example.exception.technical.*;
 import fr.uga.l3miage.example.mapper.TestMapper;
+import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.request.CreateTestRequest;
 import fr.uga.l3miage.example.response.Test;
 import lombok.RequiredArgsConstructor;

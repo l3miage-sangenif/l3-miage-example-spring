@@ -1,5 +1,6 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.response.Reponse;
 import org.mapstruct.Mapper;
 
