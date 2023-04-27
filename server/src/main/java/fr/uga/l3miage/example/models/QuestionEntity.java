@@ -26,7 +26,7 @@ public class QuestionEntity {
     private String label;
 
     @OneToMany
-    private List<ReponseEntity> EstReponseA;
+    private List<ReponseEntity> reponses;
 
     @Override
     public boolean equals(Object o) {

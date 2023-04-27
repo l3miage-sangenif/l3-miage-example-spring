@@ -27,7 +27,7 @@ public class MiahootEntity {
     private boolean estEnCours;
 
     @OneToMany
-    private List<QuestionEntity> faitPartieDe;
+    private List<QuestionEntity> questions;
 
     @Override
     public boolean equals(Object o) {
