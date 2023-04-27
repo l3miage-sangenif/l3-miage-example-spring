@@ -1,12 +1,15 @@
 package fr.uga.l3miage.example.models;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.Objects;
 
 /**
- * Correspond à l'entité Miahoot
+ * Correspond à l'entité Test
  * Les Annotations :
  * <ul>
  *     <li>{@link Getter} permet de créer tout les getters de tous les attributs. Voir la doc <a href="https://projectlombok.org/features/GetterSetter">projetlombok.org/features/Getter</a></li>
@@ -23,7 +26,7 @@ import javax.persistence.OneToMany;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Question {
+public class TestEntity {
     /**
      * Les annotations :
      * <ul>
@@ -33,10 +36,26 @@ public class Question {
      */
     @Id
     @GeneratedValue
-    private Long idQuestion;
+    private Long id;
 
-    private String label;
+    private String description;
 
-    @OneToMany
-    private List<Reponse> rep;
+    private String fieldMapping;
+
+    private int testInt;
+
+    private Boolean isTest;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        TestEntity that = (TestEntity) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
