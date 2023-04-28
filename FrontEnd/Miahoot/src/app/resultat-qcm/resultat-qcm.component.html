@@ -1,0 +1,16 @@
+<h2>Résultats du quiz</h2>
+<div *ngFor="let question of questions">
+  <h4>{{ question.text }}</h4>
+  <p>Réponse choisie : {{ question.selectedOption }}</p>
+  <p>Réponse correcte : {{ question.answer }}</p>
+  <p
+    [ngClass]="{
+      correct: question.selectedOption === question.answer,
+      incorrect: question.selectedOption !== question.answer
+    }"
+  >
+    {{
+      question.selectedOption === question.answer ? "Correct!" : "Incorrect."
+    }}
+  </p>
+</div>

@@ -1,0 +1,12 @@
+/*elemets pour le mattoulbar*/
+.filler {
+    flex: 1 1 auto;
+ }
+ .gap {
+    margin-right: 10px;
+ }
+
+/*Centre les éléments inline dans les éléments possédant un attribut class="centre"*/
+.centre{
+   text-align: center;
+ }

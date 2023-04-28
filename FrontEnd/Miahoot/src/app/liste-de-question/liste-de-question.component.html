@@ -1,0 +1,25 @@
+<ul>
+  <li *ngFor="let question of questions" (click)="onQuestionClick(question)">
+    <h3>{{ question.text }}</h3>
+    <ul>
+      <li *ngFor="let option of question.options">
+        <button style="background-color: rgb(209, 232, 244)" class="my-btn">
+          <label>
+            <input
+              type="radio"
+              name="{{ question.text }}"
+              [value]="option"
+              [(ngModel)]="question.selectedOption"
+              (change)="onAnswerSelected()"
+            />
+            {{ option }}
+          </label>
+        </button>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<button routerLink="/resultat" style="background-color: rgb(206, 107, 26)">
+  Reponses
+</button>
