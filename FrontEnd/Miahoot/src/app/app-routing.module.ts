@@ -4,18 +4,20 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { ListeDeQuestionComponent } from './liste-de-question/liste-de-question.component';
 import { ResultatQCMComponent } from './resultat-qcm/resultat-qcm.component';
+import { QCMComponent } from './qcm/qcm.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'accueil', component: AccueilComponent },
   { path: 'enseignant', component: EnseignantComponent },
+  { path: 'qcm', component: QCMComponent },
   { path: 'participant', component: ListeDeQuestionComponent },
   { path: 'resultat', component: ResultatQCMComponent },
-  { path: '**',   redirectTo: '/accueil', pathMatch: 'full' }
+  { path: '**', redirectTo: '/accueil', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
