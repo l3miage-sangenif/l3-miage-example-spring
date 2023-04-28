@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface MiahootRepository extends JpaRepository<MiahootEntity,Long> {
     Optional<MiahootEntity> findByIdMiahoot(final Long idMiahoot);
 
+    Optional<MiahootEntity> findByNom(final String nom);
+
     int deleteByIdMiahoot(final Long idMiahoot);
 }
