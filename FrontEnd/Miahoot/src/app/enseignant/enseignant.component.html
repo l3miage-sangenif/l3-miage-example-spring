@@ -1,0 +1,29 @@
+<ul>
+  <li><a href="#acceuil">Acceuil</a></li>
+  <!-- <li><a href="#historique">Historiques</a></li>
+  <li><a href="#logout">Log out</a></li>-->
+  <li style="float: right"><a class="active" href="#logout">Log out</a></li>
+</ul>
+<p>{{ name }}</p>
+<!-- Button de creation d'un Miahoot -->
+<div class="center">
+  <button (click)="choice()">Create a new Miahoot!</button>
+</div>
+<!-- Choix du Miahoot à creer -->
+<div *ngIf="b">
+  <label for="miahoot_title">Titre Miahoot :</label>
+  <input type="text" id="miahoot_title" name="miahoot_title" /><br /><br />
+  <button (click)="fermer()" onclick="getMiahootTitle()">OK</button>
+  <!--La recuperation du titre entré par l'utilisateur semble ne pas marche-->
+  <p>La valeur entrée est:{{ namemiahoot }} <span id="affichage"></span></p>
+
+  <div *ngIf="ok">
+    <h2>Choisissez un type de Miahoot à créer :</h2>
+    <ol>
+      <button><a href="#">Miahoot de type QCM</a></button>
+      <button><a href="#">Miahoot de type QCU</a></button>
+      <button><a href="#">Miahoot de type TRUE/FALSE</a></button>
+    </ol>
+  </div>
+  <p>{{ namemiahoot }}</p>
+</div>

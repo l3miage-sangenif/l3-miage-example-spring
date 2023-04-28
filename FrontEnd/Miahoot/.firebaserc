@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projetintegrateurmiahoot-61102": {
+      "hosting": {
+        "Miahoot": [
+          "projetintegrateurmiahoot-61102"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projetintegrateurmiahoot-61102"
+  }
+}

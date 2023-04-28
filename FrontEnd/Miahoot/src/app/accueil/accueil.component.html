@@ -1,0 +1,35 @@
+<!-- <mat-toolbar color = "primary">
+  <span class = "gap">Miahoot</span>
+  
+  <span class = "filler"></span>
+  <span class = "gap" >
+    <button mat-raised-button [matMenuTriggerFor]="beforeMenu">Register</button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="login()">Enseignant</button>
+      <button mat-menu-item>Participant</button>
+    </mat-menu>
+  </span>
+  <span>
+    <button mat-raised-button>Login</button>
+  </span>
+
+</mat-toolbar> -->
+<div class="centre">
+  <h2>
+    <button mat-raised-button style = "position:center; text-align:center; top:300px">Create miahoot as anonyme enseignant</button>
+  </h2>
+  <button mat-raised-button [matMenuTriggerFor]="menu" style = "position:center; text-align:center; top:300px">Join miahoot as anonyme participant</button>
+  <mat-menu #menu="matMenu">
+    <button mat-raised-button>Enter code of miahoot</button>
+  </mat-menu>
+</div>
+
+
+
+
+
+
+
+
+
+

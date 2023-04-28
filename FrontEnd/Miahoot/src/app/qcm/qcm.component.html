@@ -1,0 +1,21 @@
+<div class="center">
+  <button (click)="choice()">Create a new qcm!</button>
+</div>
+<div *ngIf="b">
+  <label for="question">Veuillez ecrire votre question :</label>
+  <input type="text" id="question" name="question" /><br /><br />
+  <button (click)="fermer()" onclick="getOptionQcm()">OK</button>
+</div>
+<!-- <p>La valeur entrée est:{{ qcm }} <span id="affichage"></span></p> -->
+<div *ngIf="ok">
+  <h2>
+    cliquez sur Ok que lorsque vous aurez terminé d'entrer toutes vos options
+    /!\
+  </h2>
+  <label for="question">Veuillez ecrire l'option 1:</label>
+  <!--<img src=""-->
+  <input type="text" id="option1" name="option1" /><br /><br />
+  <label for="question">Veuillez ecrire l'option 2 :</label>
+  <input type="text" id="option1" name="option1" /><br /><br />
+  <button (click)="fermer()" onclick="getOptionQcm()">OK</button>
+</div>
