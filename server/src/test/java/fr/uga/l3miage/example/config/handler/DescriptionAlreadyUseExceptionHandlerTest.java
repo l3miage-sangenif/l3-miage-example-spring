@@ -1,8 +1,9 @@
 package fr.uga.l3miage.example.config.handler;
 
-import fr.uga.l3miage.example.error.DescriptionAlreadyUseErrorResponse;
+import fr.uga.l3miage.example.config.handler.testHandler.DescriptionAlreadyUseExceptionHandler;
+import fr.uga.l3miage.example.error.testError.DescriptionAlreadyUseErrorResponse;
 import fr.uga.l3miage.example.error.ErrorResponse;
-import fr.uga.l3miage.example.exception.rest.DescriptionAlreadyUseRestException;
+import fr.uga.l3miage.example.exception.rest.restTestException.DescriptionAlreadyUseRestException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;

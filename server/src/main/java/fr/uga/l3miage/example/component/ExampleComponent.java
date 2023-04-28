@@ -1,6 +1,6 @@
 package fr.uga.l3miage.example.component;
 
-import fr.uga.l3miage.example.exception.technical.*;
+import fr.uga.l3miage.example.exception.technical.technicalTestException.*;
 import fr.uga.l3miage.example.mapper.TestMapper;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.repository.TestRepository;

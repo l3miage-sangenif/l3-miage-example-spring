@@ -1,8 +1,8 @@
 package fr.uga.l3miage.example.annotations;
 
-import fr.uga.l3miage.example.error.DescriptionAlreadyUseErrorResponse;
-import fr.uga.l3miage.example.error.IsNotTestErrorResponse;
-import fr.uga.l3miage.example.error.TestIntIsZeroErrorResponse;
+import fr.uga.l3miage.example.error.testError.DescriptionAlreadyUseErrorResponse;
+import fr.uga.l3miage.example.error.testError.IsNotTestErrorResponse;
+import fr.uga.l3miage.example.error.testError.TestIntIsZeroErrorResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.DiscriminatorMapping;
 import io.swagger.v3.oas.annotations.media.Schema;

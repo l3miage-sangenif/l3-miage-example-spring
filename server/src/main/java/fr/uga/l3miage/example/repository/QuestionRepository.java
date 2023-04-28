@@ -6,9 +6,31 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface QuestionRepository extends JpaRepository<QuestionEntity,Long>  {
-    Optional<QuestionEntity> findByIdQuestion(final Long idQuestion);
 
-    int deleteByIdQuestion(final Long idQuestion);
+/**
+ * Les annotations :
+ * <ul>
+ *     <li>{@link Repository} permet de dire à spring que cette interface peut être candidate à l'injection</li>
+ * </ul>
+ */
+@Repository
+public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
+
+    /**
+     * En JPA le nom de la méthode est parsé afin de créer la requête adéquate en fonction de votre besoin
+     * ici pour chercher une entité
+     *
+     * @param questionId de l'entité recherchée
+     * @return {@link Optional}<{@link QuestionEntity}>
+     */
+    Optional<QuestionEntity> findByQuestionId(final int questionId);
+
+    /**
+     * En JPA le nom de la méthode est parsé afin de créer la requête adéquate en fonction de votre besoin
+     * Ici pour delete une entité
+     *
+     * @param quetionId de l'entité à supprimer
+     * @return le nombre d'éléments supprimés
+     */
+    int deleteByQuestionId(final int quetionId);
 }

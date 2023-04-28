@@ -1,22 +1,24 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.mapper.utils.ReponseMapperUtils;
 import fr.uga.l3miage.example.models.ReponseEntity;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Reponse;
+import lombok.NonNull;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+
+@Mapper(uses = ReponseMapperUtils.class)
 public interface ReponseMapper {
-    /**
-     * Cette fonction va faire le mapping d'une entité vers le <b color="yellow">DTO</b> de Reponse
-     * @param reponseEntity l'entité à mapper en <b color="yellow">DTO</b>
-     * @return le <b color="yellow">DTO</b> d'une entité Reponse
-     */
-    Reponse toDTO(ReponseEntity reponseEntity);
 
-    /**
-     * Cette fonction fait le mapping d'un DTO  vers un <b color="yellow">ReponseEntity</b>
-     * @param reponse le DTO à mapper en <b color="yellow">Entity</b>
-     * @return la ReponseEntity correspondante
-     */
-    ReponseEntity toEntity(Reponse reponse);
+    Reponse toDto(ReponseEntity reponseEntity);
+
+
+    ReponseEntity toEntity(CreateReponseRequest request);
+
+
+
+    void mergeReponseEntity(@MappingTarget @NonNull ReponseEntity baseEntity, Reponse reponse);
+
 }

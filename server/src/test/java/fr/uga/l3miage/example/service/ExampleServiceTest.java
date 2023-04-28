@@ -2,8 +2,8 @@ package fr.uga.l3miage.example.service;
 
 import fr.uga.l3miage.example.component.ExampleComponent;
 import fr.uga.l3miage.example.config.HelloWordConfig;
-import fr.uga.l3miage.example.exception.rest.*;
-import fr.uga.l3miage.example.exception.technical.*;
+import fr.uga.l3miage.example.exception.rest.restTestException.*;
+import fr.uga.l3miage.example.exception.technical.technicalTestException.*;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.request.CreateTestRequest;
 import org.junit.jupiter.api.Test;

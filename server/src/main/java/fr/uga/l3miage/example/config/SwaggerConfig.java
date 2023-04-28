@@ -21,7 +21,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info()
-                        .title("Example Api for L3 MIAGE")
+                        .title("Miahoot Api for L3 MIAGE")
                         .version("1.0.0")
                         .description("Example Api for L3 MIAGE - API Swagger documentation"));
     }

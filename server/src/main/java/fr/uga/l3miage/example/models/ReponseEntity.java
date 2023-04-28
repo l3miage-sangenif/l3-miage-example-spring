@@ -1,13 +1,12 @@
 package fr.uga.l3miage.example.models;
 
-
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -17,8 +16,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ReponseEntity {
     @Id
-    @GeneratedValue
-    private Long idReponse;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int reponseId;
 
     private String label;
 
@@ -26,10 +25,13 @@ public class ReponseEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ReponseEntity that = (ReponseEntity) o;
-        return getIdReponse() != null && Objects.equals(getIdReponse(), that.getIdReponse());
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        return false;
     }
 
     @Override

@@ -6,11 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
+
 @Repository
-public interface ReponseRepository extends JpaRepository<ReponseEntity,Long> {
+public interface ReponseRepository extends JpaRepository<ReponseEntity, Long> {
 
-    Optional<ReponseEntity> findByIdReponse(final Long idReponse);
+    Optional<ReponseEntity> findByReponseId(final int reponseId);
 
-    int deleteByIdReponse(final Long idReponse);
 
+    int deleteByReponseId(final int reponseId);
 }

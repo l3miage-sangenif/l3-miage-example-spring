@@ -1,7 +1,7 @@
 package fr.uga.l3miage.example.controller;
 
 import fr.uga.l3miage.example.endpoint.ExampleEndpoint;
-import fr.uga.l3miage.example.exception.rest.IsInErrorRestException;
+import fr.uga.l3miage.example.exception.rest.restTestException.IsInErrorRestException;
 import fr.uga.l3miage.example.request.CreateTestRequest;
 import fr.uga.l3miage.example.response.Test;
 import fr.uga.l3miage.example.service.ExampleService;

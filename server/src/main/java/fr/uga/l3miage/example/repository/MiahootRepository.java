@@ -6,11 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
+
 @Repository
-public interface MiahootRepository extends JpaRepository<MiahootEntity,Long> {
-    Optional<MiahootEntity> findByIdMiahoot(final Long idMiahoot);
+public interface MiahootRepository extends JpaRepository<MiahootEntity, Long> {
 
-    Optional<MiahootEntity> findByNom(final String nom);
+    Optional<MiahootEntity> findByMiahootId(final int miahootId);
 
-    int deleteByIdMiahoot(final Long idMiahoot);
+    int deleteByMiahootId(final int miahootId);
 }

@@ -1,8 +1,9 @@
 package fr.uga.l3miage.example.config.handler;
 
+import fr.uga.l3miage.example.config.handler.testHandler.TestIntIsZeroExceptionHandler;
 import fr.uga.l3miage.example.error.ErrorResponse;
-import fr.uga.l3miage.example.error.TestIntIsZeroErrorResponse;
-import fr.uga.l3miage.example.exception.rest.TestIntIsZeroRestException;
+import fr.uga.l3miage.example.error.testError.TestIntIsZeroErrorResponse;
+import fr.uga.l3miage.example.exception.rest.restTestException.TestIntIsZeroRestException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;

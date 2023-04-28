@@ -1,8 +1,9 @@
 package fr.uga.l3miage.example.config.handler;
 
+import fr.uga.l3miage.example.config.handler.testHandler.TestEntityNotDeletedExceptionHandler;
 import fr.uga.l3miage.example.error.ErrorResponse;
-import fr.uga.l3miage.example.error.TestEntityNotDeletedErrorResponse;
-import fr.uga.l3miage.example.exception.rest.TestEntityNotDeletedRestException;
+import fr.uga.l3miage.example.error.testError.TestEntityNotDeletedErrorResponse;
+import fr.uga.l3miage.example.exception.rest.restTestException.TestEntityNotDeletedRestException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
