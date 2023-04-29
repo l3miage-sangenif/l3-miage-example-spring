@@ -5,6 +5,7 @@ import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
 import fr.uga.l3miage.example.response.Question;
+import fr.uga.l3miage.example.response.Reponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -82,7 +83,31 @@ public class QuestionMapperTest {
 
     @Test
     void toEntity() {
-        
+        List<Reponse> reponses = Arrays.asList(
+                Reponse.builder()
+                        .label("C'est une plateforme de quiz en ligne.")
+                        .estValide(true)
+                        .build(),
+                Reponse.builder()
+                        .label("C'est un langage de programmation.")
+                        .estValide(false)
+                        .build()
+        );
+
+        CreateQuestionRequest request = CreateQuestionRequest
+                .builder()
+                .label("Qu'est ce qu'un Miahoot ?")
+                .reponses(reponses)
+                .build();
+
+        QuestionEntity questionEntity = questionMapper.toEntity(request);
+
+        assertEquals(request.getLabel(), questionEntity.getLabel());
+        assertEquals(request.getReponses().size(), questionEntity.getReponses().size());
+        assertEquals(request.getReponses().get(0).getLabel(), questionEntity.getReponses().get(0).getLabel());
+        assertEquals(request.getReponses().get(0).getEstValide(), questionEntity.getReponses().get(0).getEstValide());
+        assertEquals(request.getReponses().get(1).getLabel(), questionEntity.getReponses().get(1).getLabel());
+        assertEquals(request.getReponses().get(1).getEstValide(), questionEntity.getReponses().get(1).getEstValide());
     }
 
 }
