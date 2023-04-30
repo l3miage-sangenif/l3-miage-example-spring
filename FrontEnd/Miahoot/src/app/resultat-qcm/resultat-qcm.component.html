@@ -1,16 +1,47 @@
-<h2>Résultats du quiz</h2>
-<div *ngFor="let question of questions">
-  <h4>{{ question.text }}</h4>
-  <p>Réponse choisie : {{ question.selectedOption }}</p>
-  <p>Réponse correcte : {{ question.answer }}</p>
-  <p
-    [ngClass]="{
-      correct: question.selectedOption === question.answer,
-      incorrect: question.selectedOption !== question.answer
-    }"
-  >
-    {{
-      question.selectedOption === question.answer ? "Correct!" : "Incorrect."
-    }}
-  </p>
+<div class="alert alert-primary">Résultats du quiz</div>
+
+<p>Votre score : {{ getScore() }}%</p>
+<br />
+<br />
+<br />
+<button
+  *ngIf="!showResponses"
+  class="btn btn-primary"
+  (click)="showResponsesClicked()"
+>
+  Afficher les réponses
+</button>
+
+<div *ngIf="showResponses">
+  <h3 class="alert alert-secondary">Réponses</h3>
+  <ul>
+    <li *ngFor="let response of getResponses()">
+      Vous avez sélectionné :
+      <strong>{{ response.label }}</strong>
+      <br />
+
+      Réponse valide : {{ response.estvalide }}
+      <div *ngIf="response.estvalide == true">
+        Bravo vous avez trouvez juste
+      </div>
+      <br />
+
+      <div *ngIf="response.estvalide === false">
+        vous avez pas trovez la bonne response
+      </div>
+    </li>
+  </ul>
 </div>
+
+<div class="fixed-bottom">
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <button routerLink="/accueil" class="btn btn-primary">
+          Retour à l'accueille
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- {{ getResponses() | json }} -->
