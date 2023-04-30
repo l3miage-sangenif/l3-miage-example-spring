@@ -14,7 +14,7 @@ import java.util.Optional;
  * </ul>
  */
 @Repository
-public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
+public interface QuestionRepository extends JpaRepository<QuestionEntity, Integer> {
 
     /**
      * En JPA le nom de la méthode est parsé afin de créer la requête adéquate en fonction de votre besoin
@@ -23,7 +23,7 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> 
      * @param questionId de l'entité recherchée
      * @return {@link Optional}<{@link QuestionEntity}>
      */
-    Optional<QuestionEntity> findByQuestionId(final int questionId);
+    Optional<QuestionEntity> findByQuestionId(final Integer questionId);
 
     /**
      * En JPA le nom de la méthode est parsé afin de créer la requête adéquate en fonction de votre besoin
@@ -32,5 +32,5 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> 
      * @param quetionId de l'entité à supprimer
      * @return le nombre d'éléments supprimés
      */
-    int deleteByQuestionId(final int quetionId);
+    int deleteByQuestionId(final Integer quetionId);
 }

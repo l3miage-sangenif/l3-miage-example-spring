@@ -3,10 +3,8 @@ package fr.uga.l3miage.example.models;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -16,26 +14,28 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class ReponseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int reponseId;
 
     private String label;
 
     private Boolean estValide;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "question_id")
+    private QuestionEntity question;
+
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-            return false;
-        }
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReponseEntity that = (ReponseEntity) o;
+        return reponseId == that.reponseId && Objects.equals(label, that.label) && Objects.equals(estValide, that.estValide) && Objects.equals(question, that.question);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(reponseId, label, estValide, question);
     }
 }

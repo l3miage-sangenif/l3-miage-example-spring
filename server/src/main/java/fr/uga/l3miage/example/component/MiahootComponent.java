@@ -16,7 +16,7 @@ public class MiahootComponent {
     private final MiahootMapper miahootMapper;
 
 
-    public MiahootEntity getMiahoot(final int miahootId) throws EntityNotFoundException {
+    public MiahootEntity getMiahoot(final Integer miahootId) throws EntityNotFoundException {
         return miahootRepository.findByMiahootId(miahootId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Aucune entité n'a été trouvée pour la Miahoot [%s]", miahootId), miahootId));
     }
@@ -35,10 +35,10 @@ public class MiahootComponent {
 
 
 
-    public void deleteMiahoot(final int miahootId) throws EntityNotFoundException {
+    public void deleteMiahoot(final Integer miahootId) throws EntityNotFoundException {
         int deleted = miahootRepository.deleteByMiahootId(miahootId);
         if (deleted == 0){
-            throw new EntityNotFoundException("L'entité à supprimer n'a pas été trouvée", miahootId);
+            throw new EntityNotFoundException("L'entité à supprimer n'a pas été trouvée", (Integer)miahootId);
         }
 
 

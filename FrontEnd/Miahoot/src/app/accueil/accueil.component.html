@@ -16,7 +16,7 @@
 </mat-toolbar> -->
 <div class="centre">
   <h2>
-    <button mat-raised-button style = "position:center; text-align:center; top:300px">Create miahoot as anonyme enseignant</button>
+    <button mat-raised-button style = "position:center; text-align:center; top:300px" (click)="loginAnonymously()">Create miahoot as anonyme enseignant</button>
   </h2>
   <button mat-raised-button [matMenuTriggerFor]="menu" style = "position:center; text-align:center; top:300px">Join miahoot as anonyme participant</button>
   <mat-menu #menu="matMenu">

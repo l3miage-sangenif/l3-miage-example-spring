@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -17,5 +20,5 @@ public class CreateQuestionRequest {
     private String label;
 
     @Schema(description = "Liste de reponses", example = "[{label:'R1', estValide:true}, {label:'R2', estValide:false}]")
-    private List<Reponse> reponses;
+    private List<CreateReponseRequest> reponses;
 }

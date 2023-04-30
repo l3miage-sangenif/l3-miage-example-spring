@@ -1,7 +1,10 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.models.TestEntity;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
+import fr.uga.l3miage.example.response.Reponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,16 +44,18 @@ class ReponseMapperTest {
 
     @Test
     void toDto() {
-        ReponseEntity reponseEntity = ReponseEntity
-                .builder()
-                .label("label")
+        ReponseEntity reponseEntity = ReponseEntity.builder()
+                .reponseId(1)
+                .label("Victor Hugo")
                 .estValide(true)
                 .build();
+
+        //conversion de l'entité vers le DTO
         fr.uga.l3miage.example.response.Reponse reponseGet = reponseMapper.toDto(reponseEntity);
 
-        fr.uga.l3miage.example.response.Reponse reponseExcepted = fr.uga.l3miage.example.response.Reponse
-                .builder()
-                .label("label")
+        // création du reponse(le DTO) qu'on est censé obtenir
+        Reponse reponseExcepted = Reponse.builder()
+                .label("Victor Hugo")
                 .estValide(true).
                 build();
 
@@ -60,22 +65,52 @@ class ReponseMapperTest {
 
     @Test
     void toEntity() {
-        fr.uga.l3miage.example.request.CreateReponseRequest reponseDTO = fr.uga.l3miage.example.request.CreateReponseRequest
+        //creation de la createReponseRequest pour la question Q1 : Qui a écrit "Les Misérables"
+        CreateReponseRequest createReponseRequest = CreateReponseRequest
                 .builder()
-                .label("label")
+                .label("Victor Hugo")
                 .estValide(true)
                 .build();
 
-        ReponseEntity reponseEntity = reponseMapper.toEntity(reponseDTO);
+        //conversion de dto vers l'entité
+        ReponseEntity reponseEntityGet = reponseMapper.toEntity(createReponseRequest);
 
-        ReponseEntity reponseExpected = ReponseEntity
+        // création du reponseEntity qu'on est censé obtenir
+        ReponseEntity reponseEntityExpected = ReponseEntity
                 .builder()
-                .label("label")
+                .label("Victor Hugo")
                 .estValide(true)
                 .build();
 
-        assertThat(reponseEntity).usingRecursiveComparison()
-                .ignoringFields("idReponse")
-                .isEqualTo(reponseExpected);
+        assertThat(reponseEntityGet).usingRecursiveComparison()
+                .isEqualTo(reponseEntityExpected);
+    }
+
+    @Test
+    void mergeReponseEntity(){
+        //creation d'une reponseEntity qui est le target pour la question Q1 : Qui a écrit "Les Misérables"
+        ReponseEntity targetEntity = ReponseEntity.builder()
+                .label("Victor Hugo")
+                .estValide(true)
+                .build();
+
+        //creation de la reponse a merger qui est la source des modifications(il s'agit d'un DTO)
+        Reponse reponseToMerge= Reponse.builder()
+                .label("V Hugo")
+                .estValide(false)
+                .build();
+
+        //merging
+        reponseMapper.mergeReponseEntity(targetEntity,reponseToMerge);
+
+        //creation du reponseEntity qu'on est censé avoir aprè-s le merging
+        ReponseEntity reponseEntityExpected = ReponseEntity.builder()
+                .label("V Hugo")
+                .estValide(false)
+                .build();
+
+        assertThat(targetEntity).usingRecursiveComparison()
+                .isEqualTo(reponseEntityExpected);
+
     }
 }

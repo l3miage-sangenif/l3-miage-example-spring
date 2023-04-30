@@ -17,10 +17,11 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly userDisposable: Subscription|undefined;
   public readonly user: Observable<User | null> = EMPTY;
 
-  showLoginButton : boolean;
+  showLoginButton = false ;
   showLogoutButton = false;
-  
-  
+  photo : string | null = "";
+  userId : string | undefined;
+  deconnexionAnonyme = false;
 
   constructor(@Optional() private auth: Auth, private router: Router) {
     this.showLoginButton = false;
@@ -50,7 +51,8 @@ export class AppComponent implements OnInit, OnDestroy {
     return await signInWithPopup(this.auth, new GoogleAuthProvider()).then((result)=>{
       console.log('User logged in');
       this.router.navigate(['/enseignant']);
-      this.showLoginButton = !this.showLoginButton;
+      this.photo = result.user.photoURL;
+      this.userId = result.user.uid;
     });    
   }
 
@@ -58,12 +60,17 @@ export class AppComponent implements OnInit, OnDestroy {
     return await signInWithPopup(this.auth, new GoogleAuthProvider()).then((result)=>{
       console.log('User logged in');
       this.router.navigate(['/participant']);
-      this.showLoginButton = !this.showLoginButton;
+      this.photo = result.user.photoURL;
+      this.userId = result.user.uid;
+      
     });    
   }
 
   async loginAnonymously() {
-    return await signInAnonymously(this.auth);
+    return await signInAnonymously(this.auth).then((result)=>{
+      this.router.navigate(['/enseignant']);
+      this.deconnexionAnonyme = ! this.deconnexionAnonyme;
+    });
   }
 
   async logout() {
@@ -71,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('User logged in');
       this.router.navigate(['/accueil']);
       this.showLogoutButton = !this.showLogoutButton;
+      
     });    
   }
 
