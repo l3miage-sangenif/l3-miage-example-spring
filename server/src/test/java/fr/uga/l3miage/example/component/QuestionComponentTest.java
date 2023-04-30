@@ -68,8 +68,8 @@ class QuestionComponentTest {
         // creation de la questionEntity qu'on va enregistrer puis recuperer
         QuestionEntity questionToSave = QuestionEntity.builder()
                 .label("Quel est le plus grand pays du monde par sa superficie ?")
-                .reponses(Arrays.asList(
-                        /*ReponseEntity.builder()
+                .reponses(new ArrayList<>(Arrays.asList(
+                        ReponseEntity.builder()
                                 .label("Canada")
                                 .estValide(false)
                                 .build(),
@@ -84,8 +84,8 @@ class QuestionComponentTest {
                         ReponseEntity.builder()
                                 .label("États-Unis")
                                 .estValide(false)
-                                .build()*/
-                )).build();
+                                .build()
+                ))).build();
         //enregistrement de la question
         questionComponent.createQuestion(questionToSave);
 
@@ -152,10 +152,10 @@ class QuestionComponentTest {
     void deleteQuestion() throws EntityNotFoundException {
         // Arrange
         QuestionEntity questionEntity = QuestionEntity.builder().label("Question : test ?")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         ReponseEntity.builder().label("R1").estValide(true).build(),
                         ReponseEntity.builder().label("R2").estValide(false).build()
-                )).build();
+                ))).build();
         QuestionEntity savedEntity = questionRepository.save(questionEntity);
 
         // Act

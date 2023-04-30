@@ -56,7 +56,7 @@ public class QuestionMapperTest {
     @Test
     void toDto() {
         //création des reponseEntity pour la question 2 : Quel est le plus grand pays du monde par sa superficie
-        List<ReponseEntity> reponseEntitiesForQ2 = Arrays.asList(
+        List<ReponseEntity> reponseEntitiesForQ2 = new ArrayList<>(Arrays.asList(
                 ReponseEntity.builder()
                         .label("Canada")
                         .estValide(false)
@@ -73,7 +73,7 @@ public class QuestionMapperTest {
                         .label("États-Unis")
                         .estValide(false)
                         .build()
-        );
+        ));
         // création de la questionEntity pour la question Q2 :Quel est le plus grand pays du monde par sa superficie
         QuestionEntity questionEntity = QuestionEntity
                 .builder()
@@ -87,7 +87,7 @@ public class QuestionMapperTest {
         // creation de la question(le DTO) qu'on s'attend a avoir
         Question questionExpected = Question.builder()
                 .label("Quel est le plus grand pays du monde par sa superficie ?")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         Reponse.builder()
                                 .label("Canada")
                                 .estValide(false)
@@ -104,7 +104,7 @@ public class QuestionMapperTest {
                                 .label("États-Unis")
                                 .estValide(false)
                                 .build()
-                )).build();
+                ))).build();
 
 
         assertThat(questionGet).usingRecursiveComparison()
@@ -115,7 +115,7 @@ public class QuestionMapperTest {
     @Test
     void toEntity() {
         // création des reponse de la question 1 : Qui a écrit "Les Misérables"
-        List<CreateReponseRequest> reponseForQ1 = Arrays.asList(
+        List<CreateReponseRequest> reponseForQ1 = new ArrayList<>(Arrays.asList(
                 CreateReponseRequest.builder()
                         .label("Victor Hugo")
                         .estValide(true)
@@ -132,7 +132,7 @@ public class QuestionMapperTest {
                         .label("Honoré de Balzac")
                         .estValide(false)
                         .build()
-        );
+        ));
 
         // création de la createQuestionRequest(c'est le dto de requete) de la question Q1:Qui a écrit "Les Misérables"
         CreateQuestionRequest createQuestionRequest = CreateQuestionRequest
@@ -148,7 +148,7 @@ public class QuestionMapperTest {
         QuestionEntity questionEntityExpected = QuestionEntity
                 .builder()
                 .label("Qui a écrit \"Les Misérables\"?")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         ReponseEntity.builder()
                                 .label("Victor Hugo")
                                 .estValide(true)
@@ -165,7 +165,7 @@ public class QuestionMapperTest {
                                 .label("Honoré de Balzac")
                                 .estValide(false)
                                 .build()
-                )).build();
+                ))).build();
 
         assertThat(questionEntityGet).usingRecursiveComparison()
                 .isEqualTo(questionEntityExpected);
@@ -177,7 +177,7 @@ public class QuestionMapperTest {
     void mergeTestEntity() {
         QuestionEntity targetEntity = QuestionEntity.builder()
                 .label("Quel est le plus grand pays du monde par sa superficie")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         ReponseEntity.builder()
                                 .label("Canada")
                                 .estValide(false)
@@ -194,12 +194,12 @@ public class QuestionMapperTest {
                                 .label("États-Unis")
                                 .estValide(false)
                                 .build()
-                )).build();
+                ))).build();
 
         //creation de la question a merger qui est la source des modifications(il s'agit d'un DTO)
         Question questionToMerge = Question.builder()
                 .label("Quel est le plus grand pays du monde par sa superficie")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         Reponse.builder()
                                 .label("Canada")
                                 .estValide(false)
@@ -216,7 +216,7 @@ public class QuestionMapperTest {
                                 .label("France")
                                 .estValide(false)
                                 .build()
-                )).build();
+                ))).build();
 
         //merging
         questionMapper.mergeQuestionEntity(targetEntity, questionToMerge);
@@ -224,7 +224,7 @@ public class QuestionMapperTest {
         //creation du questionEntity qu'on est censé avoir aprè-s le merging
         QuestionEntity questionEntityExpected = QuestionEntity.builder()
                 .label("Quel est le plus grand pays du monde par sa superficie")
-                .reponses(Arrays.asList(
+                .reponses(new ArrayList<>(Arrays.asList(
                         ReponseEntity.builder()
                                 .label("Canada")
                                 .estValide(false)
@@ -241,7 +241,7 @@ public class QuestionMapperTest {
                                 .label("France")
                                 .estValide(false)
                                 .build()
-                )).build();
+                ))).build();
 
         assertThat(targetEntity).usingRecursiveComparison()
                 .isEqualTo(questionEntityExpected);

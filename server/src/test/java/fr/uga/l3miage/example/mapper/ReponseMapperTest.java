@@ -1,5 +1,6 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.request.CreateReponseRequest;
@@ -43,8 +44,8 @@ class ReponseMapperTest {
 
     @Test
     void toDto() {
-        //creation d'une reponseEntity pour la question Q1 : Qui a écrit "Les Misérables"
         ReponseEntity reponseEntity = ReponseEntity.builder()
+                .reponseId(1)
                 .label("Victor Hugo")
                 .estValide(true)
                 .build();
@@ -53,8 +54,7 @@ class ReponseMapperTest {
         fr.uga.l3miage.example.response.Reponse reponseGet = reponseMapper.toDto(reponseEntity);
 
         // création du reponse(le DTO) qu'on est censé obtenir
-        fr.uga.l3miage.example.response.Reponse reponseExcepted = fr.uga.l3miage.example.response.Reponse
-                .builder()
+        Reponse reponseExcepted = Reponse.builder()
                 .label("Victor Hugo")
                 .estValide(true).
                 build();
