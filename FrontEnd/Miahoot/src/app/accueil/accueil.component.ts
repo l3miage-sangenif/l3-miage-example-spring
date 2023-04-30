@@ -19,6 +19,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
   showLoginButton = false;
   showLogoutButton = false;
   connexion = false;
+  deconnexionAnonyme = false;
   
 
   constructor(@Optional() private auth: Auth, private router: Router) {
@@ -42,20 +43,14 @@ export class AccueilComponent implements OnInit, OnDestroy {
     }
   }
 
-  async login() {
-    return await signInWithPopup(this.auth, new GoogleAuthProvider()).then((result)=>{
-      console.log('User logged in');
-      this.router.navigate(['/enseignant']);
-    });    
-  }
-
   async loginAnonymously() {
-    return await signInAnonymously(this.auth);
+    return await signInAnonymously(this.auth).then((result)=>{
+      this.router.navigate(['/enseignant']);
+      this.deconnexionAnonyme = ! this.deconnexionAnonyme;
+    });
   }
 
-  async logout() {
-    return await signOut(this.auth);
-  }
+  
 
   
 }

@@ -7,7 +7,7 @@ import { ResultatQCMComponent } from './resultat-qcm/resultat-qcm.component';
 import { QCMComponent } from './qcm/qcm.component';
 
 const routes: Routes = [
-  { path: '', component: AccueilComponent },
+  /* { path: '', component: AccueilComponent }, */
   { path: 'accueil', component: AccueilComponent },
   { path: 'enseignant', component: EnseignantComponent },
   { path: 'qcm', component: QCMComponent },
