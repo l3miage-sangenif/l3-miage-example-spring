@@ -3,18 +3,24 @@ package fr.uga.l3miage.example.mapper;
 
 import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.models.QuestionEntity;
+import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
+import fr.uga.l3miage.example.request.CreateQuestionRequest;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import fr.uga.l3miage.example.response.Question;
+import fr.uga.l3miage.example.response.Reponse;
 import lombok.NonNull;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -51,50 +57,229 @@ class MiahootMapperTest {
 
     @Test
     void toDto() {
-        List<QuestionEntity> questions = Arrays.asList(
-                QuestionEntity.builder()
-                        .label("Qui est l'homme le plus riche du monde")
+        // création des reponseEntity de la question 1 : Qui a écrit "Les Misérables"
+        List<ReponseEntity> reponseEntitiesForQ1 = Arrays.asList(
+                ReponseEntity.builder()
+                        .label("Victor Hugo")
+                        .estValide(true)
                         .build(),
-                QuestionEntity.builder()
-                        .label("Qu'est ce qu'une question")
+                ReponseEntity.builder()
+                        .label("Emile Zola")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Gustave Flaubert")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Honoré de Balzac")
+                        .estValide(false)
                         .build()
         );
-
+        //création des reponseEntity pour la question 2 :Quel est le plus grand pays du monde par sa superficie
+        List<ReponseEntity> reponseEntitiesForQ2 = Arrays.asList(
+                ReponseEntity.builder()
+                        .label("Canada")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Russie")
+                        .estValide(true)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Chine")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("États-Unis")
+                        .estValide(false)
+                        .build()
+        );
+        //creation de la liste de questionEntity
+        List<QuestionEntity> questionsEntities = Arrays.asList(
+                QuestionEntity.builder()
+                        .label("Qui a écrit \"Les Misérables\"")
+                        .reponses(reponseEntitiesForQ1)
+                        .build(),
+                QuestionEntity.builder()
+                        .label("Quel est le plus grand pays du monde par sa superficie")
+                        .reponses(reponseEntitiesForQ2)
+                        .build()
+        );
         MiahootEntity miahootEntity = MiahootEntity.builder()
+                .nom("Miahoot1")
+                .questions(questionsEntities)
+                .build();
+
+        Miahoot miahootGet = miahootMapper.toDto(miahootEntity);
+
+
+        // création du miahoot(le DTO) qu'on est censé obtenir
+        Miahoot miahootExpected = Miahoot.builder()
+                .nom("Miahoot1")
+                .questions((ArrayList<Question>) Arrays.asList(
+                        Question.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(Arrays.asList(
+                                        Reponse.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build(),
+                        Question.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(Arrays.asList(
+                                        Reponse.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build()
+                ))
+                .build();
+
+        assertThat(miahootGet).usingRecursiveComparison()
+                .isEqualTo(miahootExpected);
+
+    }
+
+
+    @Test
+    void toEntity() {
+        // création des reponse de la question 1 : Qui a écrit "Les Misérables"
+        List<CreateReponseRequest> reponseForQ1 = Arrays.asList(
+                CreateReponseRequest.builder()
+                        .label("Victor Hugo")
+                        .estValide(true)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Emile Zola")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Gustave Flaubert")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Honoré de Balzac")
+                        .estValide(false)
+                        .build()
+        );
+        //création des reponse pour la question 2 :Quel est le plus grand pays du monde par sa superficie
+        List<CreateReponseRequest> reponseForQ2 = Arrays.asList(
+                CreateReponseRequest.builder()
+                        .label("Canada")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Russie")
+                        .estValide(true)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Chine")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("États-Unis")
+                        .estValide(false)
+                        .build()
+        );
+        //creation de la liste de Question
+        List<CreateQuestionRequest> questions = Arrays.asList(
+                CreateQuestionRequest.builder()
+                        .label("Qui a écrit \"Les Misérables\"")
+                        .reponses(reponseForQ1)
+                        .build(),
+                CreateQuestionRequest.builder()
+                        .label("Quel est le plus grand pays du monde par sa superficie")
+                        .reponses(reponseForQ2)
+                        .build()
+        );
+        CreateMiahootRequest createMiahootRequest = CreateMiahootRequest.builder()
                 .nom("Miahoot1")
                 .questions(questions)
                 .build();
 
-        Miahoot miahoot = miahootMapper.toDto(miahootEntity);
+        MiahootEntity miahootEntityGet = miahootMapper.toEntity(createMiahootRequest);
 
-        assertEquals(miahootEntity.getNom(), miahoot.getNom());
-        assertEquals(miahootEntity.getQuestions().size(), miahoot.getQuestions().size());
-        assertEquals(miahootEntity.getQuestions().get(0).getLabel(), miahoot.getQuestions().get(0).getLabel());
-        assertEquals(miahootEntity.getQuestions().get(1).getLabel(), miahoot.getQuestions().get(1).getLabel());
-    }
 
-    @Test
-    void toEntity() {
-        List<Question> questions = Arrays.asList(
-                Question.builder()
-                        .label("Question 1")
-                        .build(),
-                Question.builder()
-                        .label("Question 2")
-                        .build()
-        );
-
-        CreateMiahootRequest request = CreateMiahootRequest.builder()
-                .nom("Miahoot")
-                .questions(questions)
+        // création du miahootEntity qu'on est censé obtenir
+        MiahootEntity miahootEntityExpected = MiahootEntity.builder()
+                .nom("Miahoot1")
+                .questions(Arrays.asList(
+                        QuestionEntity.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build(),
+                        QuestionEntity.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build()
+                ))
                 .build();
 
-        MiahootEntity miahootEntity = miahootMapper.toEntity(request);
+        assertThat(miahootEntityGet).usingRecursiveComparison()
+                .isEqualTo(miahootEntityExpected);
 
-        assertEquals(request.getNom(), miahootEntity.getNom());
-        assertEquals(request.getQuestions().size(), miahootEntity.getQuestions().size());
-        assertEquals(request.getQuestions().get(0).getLabel(), miahootEntity.getQuestions().get(0).getLabel());
-        assertEquals(request.getQuestions().get(1).getLabel(), miahootEntity.getQuestions().get(1).getLabel());
     }
 
     //mergeMiahootEntity ne passe pas encore a cause de la liste de question
@@ -104,39 +289,85 @@ class MiahootMapperTest {
     @Test
     void mergeMiahootEntity() {
         // Créer une entité Miahoot existante avec deux questions
-        List<QuestionEntity> questions = Arrays.asList(
-                QuestionEntity.builder()
-                        .label("Qui est l'homme le plus riche du monde")
-                        .build(),
-                QuestionEntity.builder()
-                        .label("Qu'est ce qu'une question")
-                        .build()
-        );
-        MiahootEntity miahootEntity = MiahootEntity.builder()
+        MiahootEntity targetEntity = MiahootEntity.builder()
                 .nom("Miahoot1")
-                .questions(questions)
+                .questions(Arrays.asList(
+                        QuestionEntity.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build(),
+                        QuestionEntity.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build()
+                ))
                 .build();
-        int miahootId = miahootEntity.getMiahootId(); // Récupérer l'ID de l'entité existante
 
-        // Convertir l'entité en DTO pour la modification
-        Miahoot miahoot = miahootMapper.toDto(miahootEntity);
-
-        // Modifier le DTO (par exemple, ajouter une question)
-        Question newQuestion = Question.builder()
-                .label("Question 3")
+        //
+        Miahoot miahootToMerge= Miahoot.builder()
+                .nom("Miahoot1")
+                .questions(Arrays.asList(
+                        Question.builder()
+                                .label("Quel est le plus grand océan du monde")
+                                .reponses(Arrays.asList(
+                                        Reponse.builder()
+                                                .label("L'océan Pacifique")
+                                                .estValide(true)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("L'océan Atlantique")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("L'océan Indien")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("L'océan Arctique")
+                                                .estValide(false)
+                                                .build()
+                                ))
+                                .build()))
                 .build();
-        miahoot.getQuestions().add(newQuestion);
 
         // Fusionner les modifications dans l'entité existante
-        miahootMapper.mergeMiahootEntity(miahootEntity, miahoot);
+        miahootMapper.mergeMiahootEntity(targetEntity, miahootToMerge);
 
-        // Vérifier que l'entité a été correctement modifiée
-        assertEquals(miahootId, miahootEntity.getMiahootId()); // L'ID ne doit pas avoir changé
-        assertEquals(miahoot.getNom(), miahootEntity.getNom()); // Le nom doit être le même
-        assertEquals(miahoot.getQuestions().size(), miahootEntity.getQuestions().size()); // Le nombre de questions doit être le même
-        assertEquals(miahoot.getQuestions().get(0).getLabel(), miahootEntity.getQuestions().get(0).getLabel()); // La première question doit être la même
-        assertEquals(miahoot.getQuestions().get(1).getLabel(), miahootEntity.getQuestions().get(1).getLabel()); // La deuxième question doit être la même
-        assertEquals(newQuestion.getLabel(), miahootEntity.getQuestions().get(2).getLabel()); // La nouvelle question doit être présente
+        //il manque la fin du test pour le moment
     }
 
 

@@ -4,12 +4,14 @@ import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Question;
 import fr.uga.l3miage.example.response.Reponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -50,64 +52,199 @@ public class QuestionMapperTest {
     private QuestionMapper questionMapper;
     @Autowired
     private ReponseMapper reponseMapper;
+
     @Test
     void toDto() {
-        List<ReponseEntity> listResponses = Arrays.asList(
+        //création des reponseEntity pour la question 2 : Quel est le plus grand pays du monde par sa superficie
+        List<ReponseEntity> reponseEntitiesForQ2 = Arrays.asList(
                 ReponseEntity.builder()
-                        .label("C'est une plateforme de quiz en ligne.")
+                        .label("Canada")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Russie")
                         .estValide(true)
                         .build(),
                 ReponseEntity.builder()
-                        .label("C'est un langage de programmation.")
+                        .label("Chine")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("États-Unis")
                         .estValide(false)
                         .build()
         );
-
+        // création de la questionEntity pour la question Q2 :Quel est le plus grand pays du monde par sa superficie
         QuestionEntity questionEntity = QuestionEntity
                 .builder()
-                .label("Qu'est ce qu'un Miahoot ?")
-                .reponses(listResponses)
+                .label("Quel est le plus grand pays du monde par sa superficie ?")
+                .reponses(reponseEntitiesForQ2)
                 .build();
 
+        //conversion de l'entité vers le DTO
+        Question questionGet = questionMapper.toDto(questionEntity);
 
-        fr.uga.l3miage.example.response.Question question = questionMapper.toDto(questionEntity);
+        // creation de la question(le DTO) qu'on s'attend a avoir
+        Question questionExpected = Question.builder()
+                .label("Quel est le plus grand pays du monde par sa superficie ?")
+                .reponses(Arrays.asList(
+                        Reponse.builder()
+                                .label("Canada")
+                                .estValide(false)
+                                .build(),
+                        Reponse.builder()
+                                .label("Russie")
+                                .estValide(true)
+                                .build(),
+                        Reponse.builder()
+                                .label("Chine")
+                                .estValide(false)
+                                .build(),
+                        Reponse.builder()
+                                .label("États-Unis")
+                                .estValide(false)
+                                .build()
+                )).build();
 
-        assertEquals(questionEntity.getLabel(), question.getLabel());
-        assertEquals(questionEntity.getReponses().size(), question.getReponses().size());
-        assertEquals(questionEntity.getReponses().get(0).getLabel(), question.getReponses().get(0).getLabel());
-        assertEquals(questionEntity.getReponses().get(0).getEstValide(), question.getReponses().get(0).getEstValide());
-        assertEquals(questionEntity.getReponses().get(1).getLabel(), question.getReponses().get(1).getLabel());
-        assertEquals(questionEntity.getReponses().get(1).getEstValide(), question.getReponses().get(1).getEstValide());
+
+        assertThat(questionGet).usingRecursiveComparison()
+                .isEqualTo(questionExpected);
 
     }
 
     @Test
     void toEntity() {
-        List<Reponse> reponses = Arrays.asList(
-                Reponse.builder()
-                        .label("C'est une plateforme de quiz en ligne.")
+        // création des reponse de la question 1 : Qui a écrit "Les Misérables"
+        List<CreateReponseRequest> reponseForQ1 = Arrays.asList(
+                CreateReponseRequest.builder()
+                        .label("Victor Hugo")
                         .estValide(true)
                         .build(),
-                Reponse.builder()
-                        .label("C'est un langage de programmation.")
+                CreateReponseRequest.builder()
+                        .label("Emile Zola")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Gustave Flaubert")
+                        .estValide(false)
+                        .build(),
+                CreateReponseRequest.builder()
+                        .label("Honoré de Balzac")
                         .estValide(false)
                         .build()
         );
 
-        CreateQuestionRequest request = CreateQuestionRequest
+        // création de la createQuestionRequest(c'est le dto de requete) de la question Q1:Qui a écrit "Les Misérables"
+        CreateQuestionRequest createQuestionRequest = CreateQuestionRequest
                 .builder()
-                .label("Qu'est ce qu'un Miahoot ?")
-                .reponses(reponses)
+                .label("Qui a écrit \"Les Misérables\"?")
+                .reponses(reponseForQ1)
                 .build();
 
-        QuestionEntity questionEntity = questionMapper.toEntity(request);
+        //conversion du dto vers l'entité
+        QuestionEntity questionEntityGet = questionMapper.toEntity(createQuestionRequest);
 
-        assertEquals(request.getLabel(), questionEntity.getLabel());
-        assertEquals(request.getReponses().size(), questionEntity.getReponses().size());
-        assertEquals(request.getReponses().get(0).getLabel(), questionEntity.getReponses().get(0).getLabel());
-        assertEquals(request.getReponses().get(0).getEstValide(), questionEntity.getReponses().get(0).getEstValide());
-        assertEquals(request.getReponses().get(1).getLabel(), questionEntity.getReponses().get(1).getLabel());
-        assertEquals(request.getReponses().get(1).getEstValide(), questionEntity.getReponses().get(1).getEstValide());
+        //création de l'entité (questionEntity qu'on s'attend a avoir
+        QuestionEntity questionEntityExpected = QuestionEntity
+                .builder()
+                .label("Qui a écrit \"Les Misérables\"?")
+                .reponses(Arrays.asList(
+                        ReponseEntity.builder()
+                                .label("Victor Hugo")
+                                .estValide(true)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Emile Zola")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Gustave Flaubert")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Honoré de Balzac")
+                                .estValide(false)
+                                .build()
+                )).build();
+
+        assertThat(questionEntityGet).usingRecursiveComparison()
+                .isEqualTo(questionEntityExpected);
+
+    }
+
+
+    @Test
+    void mergeTestEntity() {
+        QuestionEntity targetEntity = QuestionEntity.builder()
+                .label("Quel est le plus grand pays du monde par sa superficie")
+                .reponses(Arrays.asList(
+                        ReponseEntity.builder()
+                                .label("Canada")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Russie")
+                                .estValide(true)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Chine")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("États-Unis")
+                                .estValide(false)
+                                .build()
+                )).build();
+
+        //creation de la question a merger qui est la source des modifications(il s'agit d'un DTO)
+        Question questionToMerge = Question.builder()
+                .label("Quel est le plus grand pays du monde par sa superficie")
+                .reponses(Arrays.asList(
+                        Reponse.builder()
+                                .label("Canada")
+                                .estValide(false)
+                                .build(),
+                        Reponse.builder()
+                                .label("Russie")
+                                .estValide(true)
+                                .build(),
+                        Reponse.builder()
+                                .label("Chine")
+                                .estValide(false)
+                                .build(),
+                        Reponse.builder()
+                                .label("France")
+                                .estValide(false)
+                                .build()
+                )).build();
+
+        //merging
+        questionMapper.mergeQuestionEntity(targetEntity, questionToMerge);
+
+        //creation du questionEntity qu'on est censé avoir aprè-s le merging
+        QuestionEntity questionEntityExpected = QuestionEntity.builder()
+                .label("Quel est le plus grand pays du monde par sa superficie")
+                .reponses(Arrays.asList(
+                        ReponseEntity.builder()
+                                .label("Canada")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Russie")
+                                .estValide(true)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("Chine")
+                                .estValide(false)
+                                .build(),
+                        ReponseEntity.builder()
+                                .label("France")
+                                .estValide(false)
+                                .build()
+                )).build();
+
+        assertThat(targetEntity).usingRecursiveComparison()
+                .isEqualTo(questionEntityExpected);
     }
 
 }

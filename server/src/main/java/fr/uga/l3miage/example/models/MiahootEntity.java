@@ -4,7 +4,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -14,27 +16,28 @@ import java.util.List;
 @NoArgsConstructor
 public class MiahootEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int miahootId;
 
     private String nom;
 
-    @OneToMany
+    @OneToMany(mappedBy = "miahoot",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<QuestionEntity> questions;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-            return false;
-        }
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MiahootEntity that = (MiahootEntity) o;
+        return miahootId == that.miahootId && Objects.equals(nom, that.nom) && Objects.equals(questions, that.questions) && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(miahootId, nom, questions, user);
     }
 }

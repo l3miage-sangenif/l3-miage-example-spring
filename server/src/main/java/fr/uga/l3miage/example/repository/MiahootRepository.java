@@ -9,9 +9,9 @@ import java.util.Optional;
 
 
 @Repository
-public interface MiahootRepository extends JpaRepository<MiahootEntity, Long> {
+public interface MiahootRepository extends JpaRepository<MiahootEntity, Integer> {
 
-    Optional<MiahootEntity> findByMiahootId(final int miahootId);
+    Optional<MiahootEntity> findByMiahootId(final Integer miahootId);
 
-    int deleteByMiahootId(final int miahootId);
+    int deleteByMiahootId(final Integer miahootId);
 }
