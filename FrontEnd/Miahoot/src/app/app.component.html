@@ -2,6 +2,7 @@
   <span class="gap">Miahoot</span>
 
   <span class="filler"></span>
+<<<<<<< HEAD
   <span class="gap">
     <button mat-raised-button [matMenuTriggerFor]="beforeMenu">Register</button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -17,6 +18,61 @@
   <!-- <ng-template #elseBlock>
         <button mat-raised-button (click)="logout()">Logout</button>
     </ng-template> -->
+=======
+
+  <ng-container *ngIf="!(user | async)">
+    <span class="gap">
+      <button mat-raised-button [matMenuTriggerFor]="beforeMenu">
+        Register
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="loginEnseignant()">Enseignant</button>
+        <button mat-menu-item (click)="loginParticipant()">Participant</button>
+      </mat-menu>
+    </span>
+    <span>
+      <button mat-raised-button>Login</button>
+    </span>
+  </ng-container>
+
+  <ng-container *ngIf="user | async">
+    <span class="gap">
+      <mat-card-title>{{ (user | async)?.displayName }}</mat-card-title>
+    </span>
+    <span>
+      <div mat-card-avatar class="example-header-image">
+        <button
+          mat-button
+          [matMenuTriggerFor]="menu"
+          title="Afficher les options"
+        >
+          <img mat-card-image [src]="photo" alt="" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <nav>
+              <a
+                routerLink="/accountConfig"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                >Paramètres</a
+              >
+            </nav>
+          </button>
+          <!--Pour se déconnecter-->
+          <button mat-raised-button (click)="logout()">Logout</button>
+        </mat-menu>
+        <!--Pour se déconnecter-->
+        <button mat-raised-button (click)="logout()" *ngIf="deconnexionAnonyme">
+          Logout
+        </button>
+      </div>
+    </span>
+    <!-- <span>
+            <button mat-raised-button (click)="logout()">Logout</button>
+        </span> -->
+  </ng-container>
+>>>>>>> 017377a9fe759945eeeaffd841c27e8ed892bdd6
 </mat-toolbar>
 
 <router-outlet></router-outlet>

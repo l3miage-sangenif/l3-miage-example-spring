@@ -67,64 +67,80 @@ class ReponseComponentTest {
 
     @Test
     void getReponse() throws EntityNotFoundException {
-        // Given
+        //creation d'une reponse
         ReponseEntity expectedEntity = ReponseEntity.builder()
-                .label("Test Reponse")
+                .label("Victor Hugo")
                 .estValide(true)
                 .build();
+
+        //enregistrement de la reponse créé précédement
         ReponseEntity savedEntity = reponseRepository.save(expectedEntity);
 
-        // When
+        // recupéraion d'une réponse en utilisant l'id de la réponse enrégistré pour ensuite verifié
+        // que ce qu'on récupère est bien ce qu'on a enrégistré
         ReponseEntity actualEntity = reponseComponent.getReponse(savedEntity.getReponseId());
 
-        // Then
-        assertThat(actualEntity).isEqualTo(expectedEntity);
+        // on vérifie que que ce qu'on récupère est bien ce qu'on a enrégistré
+        assertThat(savedEntity).usingRecursiveComparison()
+                .isEqualTo(actualEntity);
     }
 
     @Test
     void CreateReponse() {
-        // Given
+        // Creation de la requete avec laquelle on va creer une reponse
         CreateReponseRequest request = CreateReponseRequest.builder()
-                .label("Test Reponse")
+                .label("Victor Hugo")
                 .estValide(true)
                 .build();
 
-        // When
-        reponseComponent.createReponse(reponseMapper.toEntity(request));
+        //conversion de la requete en entité
+        ReponseEntity reponseEntity=reponseMapper.toEntity(request);
+
+        // creation d'une reponse par le component avec au préalable conversion
+        reponseComponent.createReponse(reponseEntity);
 
         // Then
         List<ReponseEntity> entities = reponseRepository.findAll();
+        //on verifie qu'il n'y a qu'une seule réponse dans la base car nous avons enregistré une seule réponse
+        assertThat(reponseRepository.count()).isOne();
         assertThat(entities).isNotNull();
-        assertThat(entities.get(0).getLabel()).isEqualTo(request.getLabel());
-        assertThat(entities.get(0).getEstValide()).isEqualTo(request.getEstValide());
+        // on vérifie que que ce qu'on récupère est bien ce qu'on a enrégistré
+        assertThat(reponseEntity).usingRecursiveComparison()
+                .isEqualTo(entities.get(0));
     }
 
     @Test
     void updateReponse() throws EntityNotFoundException {
-        // Given
+        // construction de la réponse initiale
         ReponseEntity expectedEntity = ReponseEntity.builder()
                 .label("Test Reponse")
                 .estValide(true)
                 .build();
         ReponseEntity savedEntity = reponseRepository.save(expectedEntity);
 
-        Reponse updatedReponse = Reponse.builder()
+        //construction d'une nouvelle réponse pour mettre a jour a la précédente
+        Reponse updateReponse = Reponse.builder()
                 .label("Updated Test Reponse")
                 .estValide(false)
                 .build();
 
-        // When
-        reponseComponent.updateReponse(savedEntity.getReponseId(), updatedReponse);
+        // mise a jour de la réponse initial
+        reponseComponent.updateReponse(savedEntity.getReponseId(), updateReponse);
 
-        // Then
-        ReponseEntity actualEntity = reponseRepository.findById(savedEntity.getReponseId()).get();
-        assertThat(actualEntity.getLabel()).isEqualTo(updatedReponse.getLabel());
-        assertThat(actualEntity.getEstValide()).isEqualTo(updatedReponse.getEstValide());
+        //une fois mis a jour on récupère l'entité dans son état actuel
+
+        ReponseEntity actualEntity=reponseRepository.findByReponseId(savedEntity.getReponseId()).get();
+
+        // verification
+
+        assertThat(reponseMapper.toDto(actualEntity))
+                .usingRecursiveComparison()
+                .isEqualTo(updateReponse);
     }
 
     @Transactional
     @Test
-    void DeleteReponse() throws EntityNotFoundException{
+    void deleteReponse() throws EntityNotFoundException{
         // Given
         ReponseEntity expectedEntity = ReponseEntity.builder()
                 .label("Test Reponse")
@@ -135,7 +151,8 @@ class ReponseComponentTest {
         // When
         reponseComponent.deleteReponse(savedEntity.getReponseId());
 
-        // Then
+        // on verifie qu'il n'y a plus rien dans la base vu qu'on y a mis seulement un element qu'on vient de supprimer
+        assertThat(reponseRepository.count()).isZero();
         assertThat(reponseRepository.findById(savedEntity.getReponseId())).isEmpty();
     }
 

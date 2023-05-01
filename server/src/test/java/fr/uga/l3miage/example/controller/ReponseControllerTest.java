@@ -1,13 +1,20 @@
 package fr.uga.l3miage.example.controller;
 
+import fr.uga.l3miage.example.repository.ReponseRepository;
 import fr.uga.l3miage.example.repository.TestRepository;
 import fr.uga.l3miage.example.service.ExampleService;
+import fr.uga.l3miage.example.service.ReponseService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.HttpHeaders;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Ici on teste le controller Reponse<br>
@@ -43,15 +50,24 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 class ReponseControllerTest {
 
     @SpyBean
-    private ExampleService spyExampleService;
+    private ReponseService spyReponseService;
     @Autowired
-    private TestRepository testRepository;
+    private ReponseRepository reponseRepository;
 
     /**
      * Éxécuté à la fin de chaque test
      */
     @AfterEach
     void clear() {
-        testRepository.deleteAll();
+        reponseRepository.deleteAll();
+    }
+
+    @Test
+    void getReponseEntity() {
+        final int reponseId=1;
+        final HttpHeaders headers = new HttpHeaders();
+
+        final Map<String, Object> urlParams = new HashMap<>();
+        urlParams.put("1", reponseId);
     }
 }

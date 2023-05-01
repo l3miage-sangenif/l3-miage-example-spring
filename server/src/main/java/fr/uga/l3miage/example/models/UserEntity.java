@@ -3,9 +3,7 @@ package fr.uga.l3miage.example.models;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +21,7 @@ public class UserEntity {
 
     private boolean estEnseignant;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<MiahootEntity> miahoots;
 
     @OneToMany

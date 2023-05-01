@@ -1,18 +1,19 @@
+<!-- <app-resultat-qcm [miahoot]="miahoot"></app-resultat-qcm> -->
+<div class="alert alert-primary">Les Resultats</div>
 <ul>
-  <li *ngFor="let question of questions" (click)="onQuestionClick(question)">
-    <h3>{{ question.text }}</h3>
+  <li *ngFor="let question of miahoot?.questions">
+    <h3>{{ question.label }}</h3>
     <ul>
-      <li *ngFor="let option of question.options">
+      <li *ngFor="let option of question?.responses">
         <button style="background-color: rgb(209, 232, 244)" class="my-btn">
           <label>
             <input
               type="radio"
-              name="{{ question.text }}"
-              [value]="option"
-              [(ngModel)]="question.selectedOption"
-              (change)="onAnswerSelected()"
+              name="{{ question.label }}"
+              [value]="option.label"
+              [(ngModel)]="option.selected"
             />
-            {{ option }}
+            {{ option.label }}
           </label>
         </button>
       </li>
@@ -20,6 +21,10 @@
   </li>
 </ul>
 
-<button routerLink="/resultat" style="background-color: rgb(206, 107, 26)">
-  Reponses
+<button
+  (click)="submitAnswers()"
+  routerLink="/resultat"
+  class="btn btn-primary"
+>
+  Soumettre les réponses
 </button>

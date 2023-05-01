@@ -8,6 +8,7 @@ import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.repository.MiahootRepository;
 import fr.uga.l3miage.example.repository.TestRepository;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
+import fr.uga.l3miage.example.request.CreateQuestionRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import fr.uga.l3miage.example.response.Question;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,10 +72,10 @@ class MiahootComponentTest {
     void getMiahoot() throws EntityNotFoundException {
         MiahootEntity entity = MiahootEntity.builder()
                 .nom("Miahoot 1")
-                .questions(Arrays.asList(
+                .questions(new ArrayList<>(Arrays.asList(
                         QuestionEntity.builder().label("Q1").build(),
                         QuestionEntity.builder().label("Q2").build()
-                ))
+                )))
                 .build();
         miahootRepository.save(entity);
 
@@ -86,10 +88,10 @@ class MiahootComponentTest {
     void CreateMiahoot() throws Exception {
         CreateMiahootRequest request = CreateMiahootRequest.builder()
                 .nom("Miahoot 1")
-                .questions(Arrays.asList(
-                        Question.builder().label("Q1").build(),
-                        Question.builder().label("Q2").build()
-                ))
+                .questions(new ArrayList<>(Arrays.asList(
+                        CreateQuestionRequest.builder().label("Q1").build(),
+                        CreateQuestionRequest.builder().label("Q2").build()
+                )))
                 .build();
 
         MiahootEntity expected = miahootMapper.toEntity(request);
@@ -106,19 +108,19 @@ class MiahootComponentTest {
     void updateMiahoot() throws Exception {
         MiahootEntity miahootEntity = MiahootEntity.builder()
                 .nom("Miahoot 1")
-                .questions(Arrays.asList(
+                .questions(new ArrayList<>(Arrays.asList(
                         QuestionEntity.builder().label("Q1").build(),
                         QuestionEntity.builder().label("Q2").build()
-                ))
+                )))
                 .build();
         miahootRepository.save(miahootEntity);
 
         Miahoot miahoot = Miahoot.builder()
                 .nom("Miahoot 1 - modifié")
-                .questions(Arrays.asList(
+                .questions(new ArrayList<>(Arrays.asList(
                         Question.builder().label("Q2").build(),
                         Question.builder().label("Q3").build()
-                ))
+                )))
                 .build();
 
         miahootComponent.updateMiahoot(miahootEntity.getMiahootId(), miahoot);
@@ -134,10 +136,10 @@ class MiahootComponentTest {
     void DeleteMiahoot() throws EntityNotFoundException {
         MiahootEntity entity = MiahootEntity.builder()
                 .nom("Miahoot 1")
-                .questions(Arrays.asList(
+                .questions(new ArrayList<>(Arrays.asList(
                         QuestionEntity.builder().label("Q1").build(),
                         QuestionEntity.builder().label("Q2").build()
-                ))
+                )))
                 .build();
         miahootRepository.save(entity);
 

@@ -1,7 +1,7 @@
-.correct {
+.valid {
   color: green;
 }
 
-.incorrect {
+.invalid {
   color: red;
 }

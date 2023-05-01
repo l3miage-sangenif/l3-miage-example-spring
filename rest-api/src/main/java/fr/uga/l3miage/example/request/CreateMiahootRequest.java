@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -17,5 +19,5 @@ public class CreateMiahootRequest {
     private String nom;
 
     @Schema(description = "Liste de questions", example = "[{label:'Q1'}, {label:'Q2'}]")
-    private List<Question> questions;
+    private List<CreateQuestionRequest> questions;
 }
