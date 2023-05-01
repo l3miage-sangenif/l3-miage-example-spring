@@ -1,39 +1,39 @@
-<div class="alert alert-primary">Résultats du quiz</div>
+<div class="qcm" >Résultats du quiz</div>
 
-<p>Votre score : {{ getScore() }}%</p>
+<p class="container">Votre score : {{ getScore() }}%</p>
 <br />
 <br />
 <br />
-<button
-  *ngIf="!showResponses"
-  class="btn btn-primary"
-  (click)="showResponsesClicked()"
->
-  Afficher les réponses
-</button>
+<div class="centre">
+  <button mat-raised-button color="primary" *ngIf="!showResponses" (click)="showResponsesClicked()">
+    Afficher les réponses
+  </button>
 
-<div *ngIf="showResponses">
+</div>
+
+
+<div class="container" *ngIf="showResponses" >
   <h3 class="alert alert-secondary">Réponses</h3>
   <ul>
     <li *ngFor="let response of getResponses()">
       Vous avez sélectionné :
       <strong>{{ response.label }}</strong>
-      <br />
+      <br/>
 
       Réponse valide : {{ response.estvalide }}
-      <div *ngIf="response.estvalide == true">
+      <label *ngIf="response.estvalide == true">
         Bravo vous avez trouvez juste
-      </div>
-      <br />
+      </label>
+      <br/>
 
-      <div *ngIf="response.estvalide === false">
-        vous avez pas trovez la bonne response
-      </div>
+      <label *ngIf="response.estvalide === false">
+        vous n'avez pas trovez la bonne response
+      </label>
     </li>
   </ul>
 </div>
 
-<div class="fixed-bottom">
+<!-- <div class="fixed-bottom">
   <div class="container">
     <div class="row justify-content-end">
       <div class="col-auto">
@@ -43,5 +43,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- {{ getResponses() | json }} -->

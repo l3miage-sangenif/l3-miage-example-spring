@@ -7,7 +7,7 @@ import { EnseignantService } from '../services/enseignant.service';
   styleUrls: ['./enseignant.component.css'],
 })
 export class EnseignantComponent implements OnInit {
-  name: string = 'DEMBELE Oumou';
+  name: string = '';
   b: boolean = false;
   ok: boolean = false;
   namemiahoot: any;

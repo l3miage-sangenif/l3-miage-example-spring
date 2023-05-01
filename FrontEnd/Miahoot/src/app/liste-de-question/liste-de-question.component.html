@@ -1,30 +1,33 @@
 <!-- <app-resultat-qcm [miahoot]="miahoot"></app-resultat-qcm> -->
-<div class="alert alert-primary">Les Resultats</div>
-<ul>
-  <li *ngFor="let question of miahoot?.questions">
-    <h3>{{ question.label }}</h3>
-    <ul>
-      <li *ngFor="let option of question?.responses">
-        <button style="background-color: rgb(209, 232, 244)" class="my-btn">
-          <label>
-            <input
-              type="radio"
-              name="{{ question.label }}"
-              [value]="option.label"
-              [(ngModel)]="option.selected"
-            />
-            {{ option.label }}
-          </label>
-        </button>
-      </li>
-    </ul>
-  </li>
-</ul>
+<div class="qcm"> Participez au QCM</div>
+<div class="container">
+  
+  <ul>
+    <li *ngFor="let question of miahoot?.questions">
+      <h3>{{ question.label }}</h3>
+      <ul>
+        <li *ngFor="let option of question?.responses">
+          <button style="background-color: rgb(209, 232, 244)" class="my-btn">
+            <label>
+              <input
+                type="radio"
+                name="{{ question.label }}"
+                [value]="option.label"
+                [(ngModel)]="option.selected"
+              />
+              {{ option.label }}
+            </label>
+          </button>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
-<button
-  (click)="submitAnswers()"
-  routerLink="/resultat"
-  class="btn btn-primary"
->
-  Soumettre les réponses
-</button>
+</div>
+
+<div class="centre">
+  <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" routerLink="/resultat" >
+    Soumettre les réponses
+  </button>
+  
+</div>

@@ -5,3 +5,22 @@
 .invalid {
   color: red;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4% auto;
+  
+}
+
+.centre{
+  text-align: center;
+}
+
+.qcm{
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 1%;
+}

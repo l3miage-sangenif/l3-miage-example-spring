@@ -29,4 +29,13 @@ li a:hover {
 /* centrer horizontalement et verticalement*/
 .center {
   text-align: center;
+  margin-top: 1%;
+}
+
+.centerMiahoot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4% auto;
+  
 }

@@ -4,6 +4,7 @@ import { EMPTY, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { traceUntilFirst } from '@angular/fire/performance';
 import {Router} from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userId : string | undefined;
   deconnexionAnonyme = false;
 
-  constructor(@Optional() private auth: Auth, private router: Router) {
+  constructor(@Optional() private auth: Auth, private router: Router, private location: Location) {
     this.showLoginButton = false;
     if (auth) {
       console.log(this.user)
@@ -80,6 +81,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.showLogoutButton = !this.showLogoutButton;
       
     });    
+  }
+
+  goBack() {
+    // window.history.back();
+    this.location.back();
+
+    console.log( 'goBack()...' );
   }
 
   

@@ -1,13 +1,13 @@
 <div class="center">
   <button (click)="choice()">Create a new qcm!</button>
 </div>
-<div *ngIf="b">
+<div class="center" *ngIf="b">
   <label for="question">Veuillez ecrire votre question :</label>
   <input type="text" id="question" name="question" /><br /><br />
   <button (click)="fermer()" onclick="getOptionQcm()">OK</button>
 </div>
 <!-- <p>La valeur entrée est:{{ qcm }} <span id="affichage"></span></p> -->
-<div *ngIf="ok">
+<div class="center" *ngIf="ok">
   <h2>
     cliquez sur Ok que lorsque vous aurez terminé d'entrer toutes vos options
     /!\

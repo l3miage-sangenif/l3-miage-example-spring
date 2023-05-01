@@ -3,19 +3,14 @@
   <!-- <li><a href="#historique">Historiques</a></li>
   <li><a href="#logout">Log out</a></li>
   <li style="float: right"><a class="active" href="#logout">Log out</a></li>
-<<<<<<< HEAD
-</ul>
-<p>{{ miahoot.owner }}</p>
-=======
 </ul> -->
 <p>{{ name }}</p>
->>>>>>> 017377a9fe759945eeeaffd841c27e8ed892bdd6
 <!-- Button de creation d'un Miahoot -->
-<div class="center">
+<div class="centerMiahoot">
   <button (click)="choice()">Create a new Miahoot!</button>
 </div>
 <!-- Choix du Miahoot à creer -->
-<div *ngIf="b">
+<div class="center" *ngIf="b">
   <label for="miahoot_title">Titre Miahoot :</label>
   <input type="text" id="miahoot_title" name="miahoot_title" /><br /><br />
   <button (click)="fermer()" onclick="getMiahootTitle()">OK</button>
