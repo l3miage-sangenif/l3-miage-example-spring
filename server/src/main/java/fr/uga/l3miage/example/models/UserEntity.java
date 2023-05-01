@@ -1,3 +1,4 @@
+
 package fr.uga.l3miage.example.models;
 
 import lombok.*;
@@ -41,3 +42,4 @@ public class UserEntity {
     }
 
 }
+

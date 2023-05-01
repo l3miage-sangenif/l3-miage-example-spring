@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface ReponseRepository extends JpaRepository<ReponseEntity, Long> {
+public interface ReponseRepository extends JpaRepository<ReponseEntity, Integer> {
 
     Optional<ReponseEntity> findByReponseId(final int reponseId);
 

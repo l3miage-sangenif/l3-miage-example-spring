@@ -3,10 +3,15 @@ package fr.uga.l3miage.example.component;
 import fr.uga.l3miage.example.exception.technical.EntityNotFoundException;
 import fr.uga.l3miage.example.mapper.MiahootMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.QuestionEntity;
+import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.repository.MiahootRepository;
+import fr.uga.l3miage.example.repository.QuestionRepository;
 import fr.uga.l3miage.example.response.Miahoot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -14,6 +19,9 @@ import org.springframework.stereotype.Component;
 public class MiahootComponent {
     private final MiahootRepository miahootRepository;
     private final MiahootMapper miahootMapper;
+    private final QuestionComponent questionComponent;
+    private final ReponseComponent reponseComponent;
+    private final QuestionRepository questionRepository;
 
 
     public MiahootEntity getMiahoot(final Integer miahootId) throws EntityNotFoundException {
@@ -22,7 +30,7 @@ public class MiahootComponent {
     }
 
     public void createMiahoot(final MiahootEntity entity) {
-            miahootRepository.save(entity);
+        miahootRepository.save(entity);
     }
 
 

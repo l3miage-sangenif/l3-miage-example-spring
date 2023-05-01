@@ -34,3 +34,4 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Intege
      */
     int deleteByQuestionId(final Integer quetionId);
 }
+

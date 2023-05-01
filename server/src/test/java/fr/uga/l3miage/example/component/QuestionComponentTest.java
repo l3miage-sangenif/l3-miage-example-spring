@@ -96,41 +96,46 @@ class QuestionComponentTest {
                 .reponses(reponseEntitiesToSave)
                 .build();
 
-        //on affecte les reponses a la question
-        //questionToSave.setReponses(reponseEntitiesToSave);
-
         //enregistrement de la question
         questionComponent.createQuestion(questionToSave);
 
 
-        //on enregistre les reponses
-        /*for (ReponseEntity rep: reponseEntitiesToSave
-        ) {
-            reponseComponent.createReponse(rep);
-        }*/
-
         // recuperation de la question
         QuestionEntity questionEntityResult = questionComponent.getQuestion(questionToSave.getQuestionId());
 
-        System.out.printf("1"+questionToSave.toString());
-        System.out.printf("2"+questionEntityResult.toString());
-        // Pour le moment get question permet juste de recuperer une le label d'une question et une liste vide des réponses, on ne récupère pas les label et estValide des réponse de cette question
+
         // on verifie si ce qu'on a recupérer est bien ce que l'on voulait
-        //assertThat(questionEntityResult).usingRecursiveComparison()
-          //      .isEqualTo(questionToSave);
+        assertThat(questionEntityResult).usingRecursiveComparison()
+                .isEqualTo(questionToSave);
     }
 
     @Test
     void createQuestion() {
-        // Arrange
-        QuestionEntity questionToCreate = QuestionEntity.builder()
-                .label("Question : test ?")
-                .reponses(new ArrayList<>(Arrays.asList(
-                        ReponseEntity.builder().label("R1").estValide(true).build(),
-                        ReponseEntity.builder().label("R2").estValide(false).build()
-                )))
-                .build();
+        // creation des reponseEntity qu'on va enregistrer pour la question puis recuperer
+        List<ReponseEntity> reponseEntitiesToSave=new ArrayList<>(Arrays.asList(
+                ReponseEntity.builder()
+                        .label("Canada")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Russie")
+                        .estValide(true)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("Chine")
+                        .estValide(false)
+                        .build(),
+                ReponseEntity.builder()
+                        .label("États-Unis")
+                        .estValide(false)
+                        .build()
+        ));
 
+        // creation de la questionEntity qu'on va enregistrer puis recuperer
+        QuestionEntity questionToCreate = QuestionEntity.builder()
+                .label("Quel est le plus grand pays du monde par sa superficie ?")
+                .reponses(reponseEntitiesToSave)
+                .build();
         // Act
         questionComponent.createQuestion(questionToCreate);
 
@@ -190,4 +195,3 @@ class QuestionComponentTest {
     }
 
 }
-

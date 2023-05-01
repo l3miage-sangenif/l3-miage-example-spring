@@ -5,12 +5,15 @@ import fr.uga.l3miage.example.mapper.MiahootMapper;
 import fr.uga.l3miage.example.mapper.TestMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.models.QuestionEntity;
+import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.repository.MiahootRepository;
 import fr.uga.l3miage.example.repository.TestRepository;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import fr.uga.l3miage.example.response.Question;
+import fr.uga.l3miage.example.response.Reponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,18 +73,63 @@ class MiahootComponentTest {
 
     @Test
     void getMiahoot() throws EntityNotFoundException {
+       //construction du miahoot
         MiahootEntity entity = MiahootEntity.builder()
                 .nom("Miahoot 1")
                 .questions(new ArrayList<>(Arrays.asList(
-                        QuestionEntity.builder().label("Q1").build(),
-                        QuestionEntity.builder().label("Q2").build()
+                        QuestionEntity.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build(),
+                        QuestionEntity.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build()
                 )))
                 .build();
-        miahootRepository.save(entity);
 
+        //creation dans la bd du miahoot(précédemment construit)
+        miahootComponent.createMiahoot(entity);
+
+        //recuperation du Miahoot créé
         MiahootEntity actualEntity = miahootComponent.getMiahoot(entity.getMiahootId());
 
-        assertThat(actualEntity).isEqualTo(entity);
+        //comparaison
+        assertThat(actualEntity).usingRecursiveComparison().isEqualTo(entity);
     }
 
     @Test
@@ -89,8 +137,48 @@ class MiahootComponentTest {
         CreateMiahootRequest request = CreateMiahootRequest.builder()
                 .nom("Miahoot 1")
                 .questions(new ArrayList<>(Arrays.asList(
-                        CreateQuestionRequest.builder().label("Q1").build(),
-                        CreateQuestionRequest.builder().label("Q2").build()
+                        CreateQuestionRequest.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        CreateReponseRequest.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build(),
+                        CreateQuestionRequest.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        CreateReponseRequest.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        CreateReponseRequest.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build()
                 )))
                 .build();
 
@@ -98,52 +186,173 @@ class MiahootComponentTest {
 
         miahootComponent.createMiahoot(expected);
 
-        List<MiahootEntity> entities = miahootRepository.findAll();
-        assertEquals(entities.size(), 1);
-        assertThat(entities.get(0)).isEqualToIgnoringGivenFields(miahootMapper.toEntity(request), "miahootId");
+        MiahootEntity entityGet = miahootComponent.getMiahoot(expected.getMiahootId());
+        assertThat(entityGet).usingRecursiveComparison()
+                .isEqualTo(expected);
     }
 
 
     @Test
     void updateMiahoot() throws Exception {
+        //construction du miahoot
         MiahootEntity miahootEntity = MiahootEntity.builder()
                 .nom("Miahoot 1")
                 .questions(new ArrayList<>(Arrays.asList(
-                        QuestionEntity.builder().label("Q1").build(),
-                        QuestionEntity.builder().label("Q2").build()
+                        QuestionEntity.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build(),
+                        QuestionEntity.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build()
                 )))
                 .build();
         miahootRepository.save(miahootEntity);
 
-        Miahoot miahoot = Miahoot.builder()
+        Miahoot updatedMiahoot = Miahoot.builder()
                 .nom("Miahoot 1 - modifié")
                 .questions(new ArrayList<>(Arrays.asList(
-                        Question.builder().label("Q2").build(),
-                        Question.builder().label("Q3").build()
+                        Question.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        Reponse.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build(),
+                        Question.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        Reponse.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        Reponse.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build()
                 )))
                 .build();
 
-        miahootComponent.updateMiahoot(miahootEntity.getMiahootId(), miahoot);
+        miahootComponent.updateMiahoot(miahootEntity.getMiahootId(), updatedMiahoot);
 
 
         assertThat(miahootMapper.toDto(miahootComponent.getMiahoot(miahootEntity.getMiahootId())))
                 .usingRecursiveComparison()
-                .isEqualTo(miahoot);
+                .isEqualTo(updatedMiahoot);
     }
 
     @Transactional
     @Test
     void DeleteMiahoot() throws EntityNotFoundException {
-        MiahootEntity entity = MiahootEntity.builder()
+        MiahootEntity miahootEntity = MiahootEntity.builder()
                 .nom("Miahoot 1")
                 .questions(new ArrayList<>(Arrays.asList(
-                        QuestionEntity.builder().label("Q1").build(),
-                        QuestionEntity.builder().label("Q2").build()
+                        QuestionEntity.builder()
+                                .label("Qui a écrit \"Les Misérables\"")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Victor Hugo")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Emile Zola")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Gustave Flaubert")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Honoré de Balzac")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build(),
+                        QuestionEntity.builder()
+                                .label("Quel est le plus grand pays du monde par sa superficie")
+                                .reponses(new ArrayList<>(Arrays.asList(
+                                        ReponseEntity.builder()
+                                                .label("Canada")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Russie")
+                                                .estValide(true)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("Chine")
+                                                .estValide(false)
+                                                .build(),
+                                        ReponseEntity.builder()
+                                                .label("États-Unis")
+                                                .estValide(false)
+                                                .build()
+                                )))
+                                .build()
                 )))
                 .build();
-        miahootRepository.save(entity);
+        miahootRepository.save(miahootEntity);
 
-        miahootComponent.deleteMiahoot(entity.getMiahootId());
+        miahootComponent.deleteMiahoot(miahootEntity.getMiahootId());
 
         assertThat(miahootRepository.count()).isZero();
     }

@@ -1,11 +1,14 @@
 package fr.uga.l3miage.example.service;
 
 import fr.uga.l3miage.example.component.MiahootComponent;
+import fr.uga.l3miage.example.component.QuestionComponent;
+import fr.uga.l3miage.example.component.ReponseComponent;
 import fr.uga.l3miage.example.exception.rest.EntityNotDeletedRestException;
 import fr.uga.l3miage.example.exception.rest.EntityNotFoundRestException;
 import fr.uga.l3miage.example.exception.technical.EntityNotFoundException;
 import fr.uga.l3miage.example.mapper.MiahootMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,8 @@ import javax.transaction.Transactional;
 public class MiahootService {
     private final MiahootComponent miahootComponent;
     private final MiahootMapper miahootMapper;
+    private final QuestionComponent questionComponent;
+    private final ReponseComponent reponseComponent;
 
 
     public Miahoot getMiahoot(final int miahootId) {
@@ -32,6 +37,7 @@ public class MiahootService {
 
     public void createMiahoot(final CreateMiahootRequest createMiahootRequest) {
         MiahootEntity newMiahootEntity = miahootMapper.toEntity(createMiahootRequest);
+
         miahootComponent.createMiahoot(newMiahootEntity);
     }
 
