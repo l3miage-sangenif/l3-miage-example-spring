@@ -2,23 +2,6 @@
   <span class="gap">Miahoot</span>
 
   <span class="filler"></span>
-<<<<<<< HEAD
-  <span class="gap">
-    <button mat-raised-button [matMenuTriggerFor]="beforeMenu">Register</button>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="loginEnseignant()">Enseignant</button>
-      <button mat-menu-item (click)="loginParticipant()">Participant</button>
-    </mat-menu>
-  </span>
-  <span>
-    <button mat-raised-button>Login</button>
-  </span>
-
-  <!--</ng-template> -->
-  <!-- <ng-template #elseBlock>
-        <button mat-raised-button (click)="logout()">Logout</button>
-    </ng-template> -->
-=======
 
   <ng-container *ngIf="!(user | async)">
     <span class="gap">
@@ -72,7 +55,6 @@
             <button mat-raised-button (click)="logout()">Logout</button>
         </span> -->
   </ng-container>
->>>>>>> 017377a9fe759945eeeaffd841c27e8ed892bdd6
 </mat-toolbar>
 
 <router-outlet></router-outlet>

@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { Miahoot } from '../miahoot.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnseignantService {
-  url = 'http://localhost:8080/api/vo/miahoots';
+  baseUrl = 'http://localhost:8080/api/miahoots/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -16,6 +17,20 @@ export class EnseignantService {
   constructor(private http: HttpClient) {}
 
   getAllMiahoot(): Observable<any> {
-    return this.http.get(this.url);
+    return this.http.get(this.baseUrl);
+  }
+  /*Création d'un miahoot*/
+  creatMiahoot(miahootid: number): Observable<any> {
+    return this.http.post(this.baseUrl, miahootid, this.httpOptions);
+  }
+  /*Suppression d'un miahoot*/
+  deleteMiahoot(miahootid: number): Observable<any> {
+    const url = `${this.baseUrl}/${miahootid}`; // URL de la ressource à supprimer
+    return this.http.delete(url, this.httpOptions); // Effectue la requête DELETE
+  }
+  /*Mis à jour d'un miahoot*/
+  updateMiahoot(miahootid: number, updatedData: any): Observable<any> {
+    const url = `${this.baseUrl}/${miahootid}`; // URL de la ressource à mettre à jour
+    return this.http.put(url, updatedData, this.httpOptions); // Effectue la requête PUT
   }
 }
