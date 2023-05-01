@@ -21,7 +21,7 @@ public class ReponseEntity {
 
     private Boolean estValide;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "question_id")
     private QuestionEntity question;
 
