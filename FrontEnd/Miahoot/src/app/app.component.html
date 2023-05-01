@@ -2,6 +2,7 @@
   <span class="gap">Miahoot</span>
 
   <span class="filler"></span>
+
   <ng-container *ngIf="!(user | async)">
     <span class="gap">
       <button mat-raised-button [matMenuTriggerFor]="beforeMenu">
@@ -23,8 +24,12 @@
     </span>
     <span>
       <div mat-card-avatar class="example-header-image">
-        <button mat-button [matMenuTriggerFor]="menu">
-          <img mat-card-image [src]="photo" />
+        <button
+          mat-button
+          [matMenuTriggerFor]="menu"
+          title="Afficher les options"
+        >
+          <img mat-card-image [src]="photo" alt="" />
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
