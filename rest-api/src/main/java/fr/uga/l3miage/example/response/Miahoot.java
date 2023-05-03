@@ -15,6 +15,6 @@ public class Miahoot {
     @Schema(description = "Correspond au label de l'objet", example = "Miahoot affiché")
     String nom;
 
-    @Schema(description = "Liste de questions", example = "[{label:'Q1'}, {label:'Q2'}]")
+    @Schema(description = "Liste de questions", example = "[{label:'Q1', [{label:'reponse 1', estValide: false}, {label:'reponse 2', estValide:true}]}, {label:'Q2', [{label:'reponse 3', estValide: false}, {label:'reponse 4', estValide:true}]},]")
     List<Question> questions;
 }
