@@ -7,7 +7,7 @@ import { Miahoot } from '../miahoot.service';
   providedIn: 'root',
 })
 export class EnseignantService {
-  baseUrl = 'http://localhost:8080/api/miahoots/';
+  baseUrl = 'http://localhost:8080/api/miahoots/1';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,8 +20,8 @@ export class EnseignantService {
     return this.http.get(this.baseUrl);
   }
   /*Création d'un miahoot*/
-  creatMiahoot(miahootid: number): Observable<any> {
-    return this.http.post(this.baseUrl, miahootid, this.httpOptions);
+  creatMiahoot(miahoot: any): Observable<any> {
+    return this.http.post(this.baseUrl, miahoot, this.httpOptions);
   }
   /*Suppression d'un miahoot*/
   deleteMiahoot(miahootid: number): Observable<any> {

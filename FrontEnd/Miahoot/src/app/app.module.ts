@@ -26,6 +26,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ListeDeQuestionComponent } from './liste-de-question/liste-de-question.component';
 import { ResultatQCMComponent } from './resultat-qcm/resultat-qcm.component';
 import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -56,6 +57,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     HttpClientInMemoryWebApiModule,
     FormsModule,
+    MatSlideToggleModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

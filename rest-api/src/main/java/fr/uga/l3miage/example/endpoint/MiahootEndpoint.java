@@ -15,13 +15,24 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Tag(name = "Miahoot tag")
 @CrossOrigin
 @RestController
-@RequestMapping("api/miahoots/")
+@RequestMapping("api/miahoots")
 public interface MiahootEndpoint {
+
+
+    @Operation(description = "Récupérer tous les DTO de toutes les entité Miahoot qui a pour id celui passé en paramètre")
+    @ApiResponse(responseCode = "200", description = "Renvoieune liste de DTO d'entité Miahoot demandée",
+            content = @Content(schema = @Schema(implementation = Miahoot.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
+    content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("")
+    List<Miahoot> getAllMiahoot();
 
 
     @Operation(description = "Récupérer le DTO de l'entité Miahoot qui a pour id celui passé en paramètre")
@@ -30,7 +41,7 @@ public interface MiahootEndpoint {
     @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
     content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("{miahootId}")
+    @GetMapping("/{miahootId}")
     Miahoot getMiahootEntity(@PathVariable int miahootId);
 
 

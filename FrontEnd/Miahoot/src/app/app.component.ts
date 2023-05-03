@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, Optional } from '@angular/core';
 import { Auth, authState, signInAnonymously, signOut, User, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
-import { EMPTY, Observable, Subscription } from 'rxjs';
+import { EMPTY, Observable, Subscription, async } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { traceUntilFirst } from '@angular/fire/performance';
 import {Router} from '@angular/router';
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return await signInWithPopup(this.auth, new GoogleAuthProvider()).then((result)=>{
       console.log('User logged in');
       this.router.navigate(['/enseignant']);
-      this.photo = result.user.photoURL;
+      this.photo = result.user?.photoURL;
       this.userId = result.user.uid;
     });    
   }

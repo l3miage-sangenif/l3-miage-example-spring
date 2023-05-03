@@ -2,3 +2,130 @@
   text-align: center;
   margin: 4% auto;
 }
+.espace {
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+button:hover {
+  background-color: #0069d9;
+}
+
+/* début css ajouté par damessis*/
+
+.espace {
+  margin-right: 10px;
+}
+
+.buttonstyle {
+  background-color: #f9b208;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+option-row {
+    display: flex;
+    align-items: center;
+  }
+  .option-row-inner {
+    margin-bottom: 10px;
+  }
+  .option-row input {
+    margin-right: 1rem;
+    /*width: 10%;*/
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .add-icon::before {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: green;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  .remove-icon::before {
+    content: '-';
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  .add-icon,
+  .remove-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #3498db;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  .buttons-container button {
+    margin-left: 10px;
+  }
+
+  .buttons-container .buttonstyle {
+    margin-left: 20px;
+  }
+
+  .question-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .responses-container {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .option-column .d-flex {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+/*fin css ajouté par damessis*/

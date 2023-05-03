@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -34,6 +36,18 @@ public class MiahootService {
         }
     }
 
+    public List<Miahoot> getAllMiahoot() {
+        try {
+            List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahoot();
+            List<Miahoot> miahoots = new ArrayList<>();
+            for(MiahootEntity miahootEntity: miahootEntities){
+                miahoots.add(miahootMapper.toDto(miahootEntity));
+            }
+            return miahoots;
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundRestException(String.format("Impossible de charger l'entité. Raison : [%s]", ex.getMessage()), 0, ex);
+        }
+    }
 
     public void createMiahoot(final CreateMiahootRequest createMiahootRequest) {
         MiahootEntity newMiahootEntity = miahootMapper.toEntity(createMiahootRequest);

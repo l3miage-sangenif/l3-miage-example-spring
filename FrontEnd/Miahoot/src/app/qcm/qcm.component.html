@@ -1,21 +1,52 @@
-<div class="center">
-  <button (click)="choice()">Create a new qcm!</button>
-</div>
-<div class="center" *ngIf="b">
-  <label for="question">Veuillez ecrire votre question :</label>
-  <input type="text" id="question" name="question" /><br /><br />
-  <button (click)="fermer()" onclick="getOptionQcm()">OK</button>
-</div>
-<!-- <p>La valeur entrée est:{{ qcm }} <span id="affichage"></span></p> -->
-<div class="center" *ngIf="ok">
-  <h2>
-    cliquez sur Ok que lorsque vous aurez terminé d'entrer toutes vos options
-    /!\
-  </h2>
-  <label for="question">Veuillez ecrire l'option 1:</label>
-  <!--<img src=""-->
-  <input type="text" id="option1" name="option1" /><br /><br />
-  <label for="question">Veuillez ecrire l'option 2 :</label>
-  <input type="text" id="option1" name="option1" /><br /><br />
-  <button (click)="fermer()" onclick="getOptionQcm()">OK</button>
-</div>
+<div class="container">
+  <div class="center" *ngFor="let question of questions; let i = index">
+    <div class="question-container">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Question {{ i+1 }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="responses-container">
+        <input class="form-control" type="text" id="question{{i}}" name="question{{i}}" [(ngModel)]="question.label"
+          placeholder="Ecrivez votre question" required /><br /><br />
+        <div class="row">
+          <div *ngFor="let response of question.responses; let j = index;" class="col-sm-6 option-column">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Réponse {{ j+1 }}</span>
+              </div>
+              <input type="text" [(ngModel)]="response.label" [required]="true" class="form-control option-input"
+                placeholder="Entrez votre option ici...">
+              <div class="input-group-append" class="center">
+                <mat-slide-toggle class="center" [(ngModel)]="response.estValide"
+                  click="onToggleClick(question,response)">
+                  Réponse valide
+                </mat-slide-toggle>
+                <button *ngIf="question.responses.length > 2" (click)="removeResponse(i, j)" class="remove-icon">
+                  <i class="fa fa-minus-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="add-icon" (click)="addResponse(i)">
+        Ajoutez plus de réponse
+      </button>
+      <button class="remove-icon" (click)="removeQuestion(i)">
+        Supprimez la question
+      </button>
+    </div>
+  </div>
+  <div class="buttons-container">
+    <button class="add-icon" (click)="addQuestion()">
+      Ajoutez une question
+    </button>
+
+    <button class="buttonstyle" (click)="createMiahoot()" *ngIf="questions.length>0">
+      <a routerLink="/enseignant">SAVE</a>
+    </button>
+  </div>

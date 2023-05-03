@@ -7,6 +7,8 @@ import fr.uga.l3miage.example.service.MiahootService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +20,10 @@ public class MiahootController implements MiahootEndpoint {
         return miahootService.getMiahoot(miahootId);
     }
 
+    @Override
+    public List<Miahoot> getAllMiahoot() {
+        return miahootService.getAllMiahoot();
+    }
     @Override
     public void createMiahootEntity(final CreateMiahootRequest request) {
         miahootService.createMiahoot(request);

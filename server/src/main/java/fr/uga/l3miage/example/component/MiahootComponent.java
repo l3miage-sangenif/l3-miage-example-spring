@@ -29,6 +29,11 @@ public class MiahootComponent {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Aucune entité n'a été trouvée pour la Miahoot [%s]", miahootId), miahootId));
     }
 
+
+    public List<MiahootEntity> getAllMiahoot() throws EntityNotFoundException {
+            return miahootRepository.findAll();
+        }
+
     public void createMiahoot(final MiahootEntity entity) {
         miahootRepository.save(entity);
     }

@@ -6,7 +6,7 @@ import { catchError, retry, tap } from 'rxjs/operators';
 export interface Response {
   label: String;
   estvalide: Boolean;
-  selected: Boolean;
+  selected?: Boolean;
 }
 
 export interface Question {

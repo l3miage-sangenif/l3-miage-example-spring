@@ -1,29 +1,47 @@
 <!-- <ul>
-  <li><a href="#acceuil">Acceuil</a></li>
-  <!-- <li><a href="#historique">Historiques</a></li>
-  <li><a href="#logout">Log out</a></li>
-  <li style="float: right"><a class="active" href="#logout">Log out</a></li>
-</ul> -->
-<p>{{ name }}</p>
-<!-- Button de creation d'un Miahoot -->
-<div class="centerMiahoot">
-  <button (click)="choice()">Create a new Miahoot!</button>
-</div>
-<!-- Choix du Miahoot à creer -->
-<div class="center" *ngIf="b">
-  <label for="miahoot_title">Titre Miahoot :</label>
-  <input type="text" id="miahoot_title" name="miahoot_title" /><br /><br />
-  <button (click)="fermer()" onclick="getMiahootTitle()">OK</button>
-  <!--La recuperation du titre entré par l'utilisateur semble ne pas marche-->
-  <p>La valeur entrée est:{{ namemiahoot }} <span id="affichage"></span></p>
+  <li><a href="#acceuil">Acceuil</a></li> -->
+<!-- <li><a href="#historique">Historiques</a></li>
+  <li><a href="#logout">Log out</a></li>-->
+<!-- <li style="float: right"><a class="active" href="#logout">Log out</a></li>
+</ul>
+<p>{{ miahoot.owner }}</p>
+Button de creation d'un Miahoot -->
 
-  <div *ngIf="ok">
-    <h2>Choisissez un type de Miahoot à créer :</h2>
-    <ol>
-      <button><a routerLink="/qcm">Miahoot de type QCM</a></button>
-      <button><a href="#">Miahoot de type QCU</a></button>
-      <button><a href="#">Miahoot de type TRUE/FALSE</a></button>
-    </ol>
+<head></head>
+<div class="container">
+  <div class="center">
+    <button class="buttonstyle" (click)="choice()">
+      Create a new Miahoot!
+    </button>
   </div>
-  <p>{{ namemiahoot }}</p>
+  <p *ngIf="(miahoots|async)"> {{miahoots.nom}}</p>
+  <div *ngIf="b" class="center">
+    <div class="form-group">
+      <label class="espace" for="miahoot_title">Titre Miahoot :</label>
+      <input class="form-control" type="text" id="miahoot_title" name="miahoot_title" [(ngModel)]="namemiahoot" required/>
+    </div>
+
+    <p>La valeur entrée est : {{ namemiahoot }}</p>
+    <div>
+      <h2 class="center">Choisissez un type de Miahoot à créer :</h2>
+      <div class="row">
+        <div class="col-sm-4">
+          <button class="buttonstyle" *ngIf="namemiahoot" routerLink="/qcm">Miahoot de type QCM</button>
+          <button class="buttonstyle" *ngIf="!namemiahoot" (click)="showAlert()">Miahoot de type QCM</button>
+        </div>
+        <div class="col-sm-4">
+          <button class="buttonstyle" *ngIf="namemiahoot" href="#">Miahoot de type QCU</button>
+          <button class="buttonstyle" *ngIf="!namemiahoot" (click)="showAlert()">Miahoot de type QCU</button>
+        </div>
+        <div class="col-sm-4">
+          <button class="buttonstyle" *ngIf="namemiahoot" href="#">Miahoot de type TRUE/FALSE</button>
+          <button class="buttonstyle" *ngIf="!namemiahoot" (click)="showAlert()">Miahoot de type TRUE/FALSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+

@@ -7,13 +7,11 @@ import { EnseignantService } from '../services/enseignant.service';
   styleUrls: ['./enseignant.component.css'],
 })
 export class EnseignantComponent implements OnInit {
-  name: string = '';
   b: boolean = false;
-  ok: boolean = false;
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  miahoot = {
+  miahoot :any = {
     nom: 'Kadi',
     owner: 1,
     question: [
@@ -48,15 +46,10 @@ export class EnseignantComponent implements OnInit {
       console.error("L'élément avec l'ID 'affichage' n'a pas été trouvé");
     }
   }
-  public fermer() {
-    if (this.namemiahoot !== null) {
-      if (this.ok == true) {
-        this.ok = false;
-      } else {
-        this.ok = true;
-      }
-    } else {
-      console.log('Veuillez entrer un titre!');
-    }
+  showAlert(){
+      alert("Veuillez entrer un titre !");
+  }
+  createMiahoot(miahoot : any){
+    this.enseignantService.creatMiahoot(this.miahoot);
   }
 }

@@ -4,6 +4,7 @@ import fr.uga.l3miage.example.models.MiahootEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -14,4 +15,6 @@ public interface MiahootRepository extends JpaRepository<MiahootEntity, Integer>
     Optional<MiahootEntity> findByMiahootId(final Integer miahootId);
 
     int deleteByMiahootId(final Integer miahootId);
+
+    List<MiahootEntity> findAll();
 }
