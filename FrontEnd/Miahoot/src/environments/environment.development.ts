@@ -1,4 +1,6 @@
 export const environment = {
+  
+  baseUrl:'http://localhost:8080/api',
   firebase: {
     projectId: 'projetintegrateurmiahoot-61102',
     appId: '1:452461067766:web:7117b7e3c19147cc4e9bd7',
@@ -6,4 +8,5 @@ export const environment = {
     apiKey: 'AIzaSyAn4CStWRjcuU3FgBwtKqRLzCsbfQaSOdc',
     authDomain: 'projetintegrateurmiahoot-61102.firebaseapp.com',
     messagingSenderId: '452461067766',
-  },};
+  },
+};

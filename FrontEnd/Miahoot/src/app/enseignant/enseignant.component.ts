@@ -26,6 +26,7 @@ export class EnseignantComponent implements OnInit {
   ngOnInit(): void {
     this.enseignantService.getAllMiahoot().subscribe((data) => {
       this.miahoots = data;
+      console.log(this.miahoots);
     });
   }
 

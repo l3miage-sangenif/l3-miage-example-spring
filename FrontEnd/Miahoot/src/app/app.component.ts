@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { traceUntilFirst } from '@angular/fire/performance';
 import {Router} from '@angular/router';
 import { Location } from '@angular/common';
+import { EnseignantService } from './services/enseignant.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
 
   ngOnDestroy(): void {
     if (this.userDisposable) {
