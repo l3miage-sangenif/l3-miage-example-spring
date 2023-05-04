@@ -95,7 +95,7 @@ export class QCMComponent implements OnInit {
       name: this.titreMiahoot,
       questions: this.questions
     }
-    console.log({miahoot});
+    console.log(miahoot);
     this.serviceE.createMiahoot(miahoot).subscribe(response => {
       console.log({response});
     });
