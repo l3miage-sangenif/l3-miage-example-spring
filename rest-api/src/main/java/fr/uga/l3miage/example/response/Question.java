@@ -12,6 +12,9 @@ import java.util.List;
 @Schema(description = "correspond au DTO de l'entité Question")
 public class Question {
 
+    @Schema(description = "Correspond a l'id de l'objet question")
+    int questionId;
+
     @Schema(description = "Correspond au label de l'objet", example = "Quetion affichée")
     String label;
 

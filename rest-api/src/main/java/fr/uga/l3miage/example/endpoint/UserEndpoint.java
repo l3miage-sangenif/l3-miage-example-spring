@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 
@@ -81,15 +82,13 @@ public interface UserEndpoint {
     @Error400Custom
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    void createUserEntity(@Valid @RequestBody CreateUserRequest request);
+    void createUser(@Valid @RequestBody CreateUserRequest request);
 
 
     /**
      * @param uid la description de l'entité en BD à mettre à jour
      * @param user le <b color="yellow"> DTO</b> de l'entité qui va permettre la modification
-     * @throws TestEntityNotFoundException si l'entité avec une lastDescription n'est pas trouvée en BD
-     * @throws IsNotTestException si le champ isTest n'est pas true
-     * @throws DescriptionAlreadyExistException si la description qui est modifiée existe déjà en BD
+     * @throws EntityNotFoundException si l'entité avec une lastDescription n'est pas trouvée en BD
      */
     @Operation(description = "Mise à jour d'une entité User")
     @ApiResponse(responseCode = "202", description = "L'entité à bien été mis à jour")
@@ -98,7 +97,7 @@ public interface UserEndpoint {
     @Error400Custom
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PatchMapping("/{uid}")
-    void updateUserEntity(@PathVariable final int uid, @RequestBody final User user);
+    void updateUser(@PathVariable final String uid, @RequestBody final User user) throws EntityNotFoundException;
 
 
     /**
@@ -140,6 +139,6 @@ public interface UserEndpoint {
             content = @Content(schema = @Schema(implementation = TestEntityNotDeletedErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{uid}")
-    void deleteUserEntity(@PathVariable Integer uid);
+    void deleteUser(@PathVariable String uid) ;
 
 }
