@@ -18,4 +18,5 @@ public class Reponse {
 
     @Schema(description = "Correspond à la validité de la Reponse", example = "true")
     Boolean estValide;
+
 }

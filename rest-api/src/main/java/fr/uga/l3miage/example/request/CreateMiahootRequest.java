@@ -15,9 +15,11 @@ import java.util.List;
 @Schema(description = "Correspond à la requête permettant de créer une entité Miahoot")
 public class CreateMiahootRequest {
 
+
     @Schema(description = "Label de l'objet Miahoot", example = "Miahoot 1")
     private String nom;
 
     @Schema(description = "Liste de questions", example = "[{label:'Q1', [{label:'reponse 1', estValide: false}, {label:'reponse 2', estValide:true}]}, {label:'Q2', [{label:'reponse 3', estValide: false}, {label:'reponse 4', estValide:true}]},]")
     private List<CreateQuestionRequest> questions;
+
 }
