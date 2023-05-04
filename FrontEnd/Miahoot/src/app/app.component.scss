@@ -36,10 +36,14 @@
 }
 
 .example-header-image {
-  width: 40px;
+  /*width: 50px;*/
   height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
+  /*border-radius: 50%;
+  overflow: hidden;*/
+}
+
+.profil{
+  height: 60px;
 }
 
 .avatar button {
@@ -56,10 +60,6 @@
 .router-container {
 position: relative;
 height: 100%;
-<<<<<<< HEAD
-
-=======
->>>>>>> de91c55f801619a89b9770f2826a0857fac6e0f5
 }
 
 
