@@ -13,7 +13,7 @@ export class EnseignantComponent implements OnInit {
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  miahoot :any = {
+  /*miahoot :any = {
     nom: 'Kadi',
     owner: 1,
     question: [
@@ -22,7 +22,7 @@ export class EnseignantComponent implements OnInit {
         response: [{ label: 'Ami', estvalide: true }],
       },
     ],
-  };
+  };*/
 
   tableauDesMiahoots : Miahoot[] = [];
   
@@ -56,8 +56,8 @@ export class EnseignantComponent implements OnInit {
   showAlert(){
       alert("Veuillez entrer un titre !");
   }
-  createMiahoot(miahoot : any){
-    this.enseignantService.createMiahoot(this.miahoot);
+  createMiahoot(miahoot : Miahoot){
+    this.enseignantService.createMiahoot(miahoot);
   }
 
   /*Pour récupérer tous les miahoots déjà crées */

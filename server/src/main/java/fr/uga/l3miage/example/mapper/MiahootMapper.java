@@ -10,7 +10,7 @@ import org.mapstruct.MappingTarget;
 
 @Mapper()
 public interface MiahootMapper {
-    Miahoot toDto(MiahootEntity MiahootEntity);
+    Miahoot toDto(MiahootEntity miahootEntity);
 
     MiahootEntity toEntity(CreateMiahootRequest request);
 
