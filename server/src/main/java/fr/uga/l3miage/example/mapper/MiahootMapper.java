@@ -8,12 +8,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 
-@Mapper()
+@Mapper(uses = QuestionMapper.class)
 public interface MiahootMapper {
     Miahoot toDto(MiahootEntity miahootEntity);
 
     MiahootEntity toEntity(CreateMiahootRequest request);
 
     void mergeMiahootEntity(@MappingTarget @NonNull MiahootEntity baseEntity, Miahoot Miahoot);
+
+
 
 }

@@ -10,7 +10,7 @@ import lombok.NonNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(uses = MiahootMapper.class)
 public interface UserMapper {
 
     User toDTO(UserEntity userEntity);

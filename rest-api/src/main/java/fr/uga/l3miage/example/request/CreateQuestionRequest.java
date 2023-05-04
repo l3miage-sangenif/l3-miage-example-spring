@@ -1,5 +1,6 @@
 package fr.uga.l3miage.example.request;
 
+import fr.uga.l3miage.example.response.Miahoot;
 import fr.uga.l3miage.example.response.Reponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -17,8 +18,8 @@ import java.util.List;
 public class CreateQuestionRequest {
 
     @Schema(description = "Label de l'objet Quetion", example = "Question : question ?")
-    private String label;
+    String label;
 
     @Schema(description = "Liste de reponses", example = "[{label:'R1', estValide:true}, {label:'R2', estValide:false}]")
-    private List<CreateReponseRequest> reponses;
+    List<Reponse> reponses;
 }

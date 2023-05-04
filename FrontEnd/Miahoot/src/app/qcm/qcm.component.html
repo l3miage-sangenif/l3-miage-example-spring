@@ -20,8 +20,7 @@
               <input type="text" [(ngModel)]="response.label" [required]="true" class="form-control option-input"
                 placeholder="Entrez votre option ici...">
               <div class="input-group-append" class="center">
-                <mat-slide-toggle class="center" [(ngModel)]="response.estValide"
-                  click="onToggleClick(question,response)">
+                <mat-slide-toggle class="center" [(ngModel)]="response.estValide" (click)="onToggleClick(response, question)">
                   Réponse valide
                 </mat-slide-toggle>
                 <button *ngIf="question.responses.length > 2" (click)="removeResponse(i, j)" class="remove-icon">

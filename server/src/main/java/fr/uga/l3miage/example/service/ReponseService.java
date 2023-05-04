@@ -58,10 +58,10 @@ public class ReponseService {
         }
     }
 
-
+/*
     public void createReponse(CreateReponseRequest createReponseRequest, QuestionEntity question) {
         ReponseEntity newReponseEntity = reponseMapper.toEntity(createReponseRequest);
         newReponseEntity.setQuestion(question);
         reponseComponent.createReponse(newReponseEntity);
-    }
+    }*/
 }

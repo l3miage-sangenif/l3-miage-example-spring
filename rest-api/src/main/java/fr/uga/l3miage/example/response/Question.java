@@ -20,4 +20,5 @@ public class Question {
 
     @Schema(description = "Liste de reponses", example = "[{label:'R1', estValide:true}, {label:'R2', estValide:false}]")
     List<Reponse> reponses;
+
 }
