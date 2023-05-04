@@ -4,6 +4,8 @@ import fr.uga.l3miage.example.component.ReponseComponent;
 import fr.uga.l3miage.example.exception.rest.*;
 import fr.uga.l3miage.example.exception.technical.*;
 import fr.uga.l3miage.example.mapper.ReponseMapper;
+import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Reponse;
@@ -57,4 +59,9 @@ public class ReponseService {
     }
 
 
+    public void createReponse(CreateReponseRequest createReponseRequest, QuestionEntity question) {
+        ReponseEntity newReponseEntity = reponseMapper.toEntity(createReponseRequest);
+        newReponseEntity.setQuestion(question);
+        reponseComponent.createReponse(newReponseEntity);
+    }
 }

@@ -7,9 +7,12 @@ import fr.uga.l3miage.example.exception.rest.EntityNotDeletedRestException;
 import fr.uga.l3miage.example.exception.rest.EntityNotFoundRestException;
 import fr.uga.l3miage.example.exception.technical.EntityNotFoundException;
 import fr.uga.l3miage.example.mapper.MiahootMapper;
+import fr.uga.l3miage.example.mapper.QuestionMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
+import fr.uga.l3miage.example.request.CreateQuestionRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,6 +28,8 @@ import java.util.List;
 public class MiahootService {
     private final MiahootComponent miahootComponent;
     private final MiahootMapper miahootMapper;
+    private final QuestionMapper questionMapper;
+    private final QuestionService questionService;
 
 
     public Miahoot getMiahoot(final int miahootId) {
@@ -48,9 +54,15 @@ public class MiahootService {
     }
 
     public void createMiahoot(final CreateMiahootRequest createMiahootRequest) {
+        List<CreateQuestionRequest> listQuestion = createMiahootRequest.getQuestions();
         MiahootEntity newMiahootEntity = miahootMapper.toEntity(createMiahootRequest);
+        newMiahootEntity.setQuestions(null);
 
         miahootComponent.createMiahoot(newMiahootEntity);
+        for (CreateQuestionRequest q : listQuestion) {
+            questionService.createQuestion(q,newMiahootEntity);
+        }
+
     }
 
 
