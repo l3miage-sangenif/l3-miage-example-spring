@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnseignantService } from '../services/enseignant.service';
+import { Miahoot } from '../models/miahoot';
+import { MiahootService } from '../miahoot.service';
 
 @Component({
   selector: 'app-enseignant',
@@ -21,13 +23,17 @@ export class EnseignantComponent implements OnInit {
       },
     ],
   };
+
+  tableauDesMiahoots : Miahoot[] = [];
+  
   constructor(private enseignantService: EnseignantService) {}
 
   ngOnInit(): void {
-    this.enseignantService.getAllMiahoot().subscribe((data) => {
+    /*this.enseignantService.getAllMiahoot().subscribe((data) => {
       this.miahoots = data;
       console.log(this.miahoots);
-    });
+    });*/
+    console.log(this.miahoots);
   }
 
   public choice() {
@@ -51,6 +57,15 @@ export class EnseignantComponent implements OnInit {
       alert("Veuillez entrer un titre !");
   }
   createMiahoot(miahoot : any){
-    this.enseignantService.creatMiahoot(this.miahoot);
+    this.enseignantService.createMiahoot(this.miahoot);
+  }
+
+  /*Pour récupérer tous les miahoots déjà crées */
+  getAllMiahoots(): Miahoot[]{
+    this.enseignantService.getAllMiahoot().subscribe((data) => {
+      this.tableauDesMiahoots = data;
+    });
+    
+    return this.tableauDesMiahoots;
   }
 }

@@ -1,11 +1,11 @@
-<div class="ht"></div>
+
 <mat-toolbar color="primary">
   <!--<div class="logo">
     <img src="logo.png" alt="Miahoot Logo" />
   </div>-->
   <span class="title">Miahoot</span>
   <!--<span *ngIf="user | async">
-    <!-- anchor must be a passive link -->
+    anchor must be a passive link -->
     <!--<a href="javascript:void(0)" (click)="goBack()" class="back-link">
       <mat-icon aria-hidden="false" aria-label="Back">arrow_back</mat-icon>
     </a>
@@ -13,46 +13,48 @@
 
   <span class="filler"></span>
   <ng-container *ngIf="!(user | async)">
-<span class="gap">
-<button mat-raised-button [matMenuTriggerFor]="beforeMenu" class="register-button">
-<mat-icon aria-hidden="false" aria-label="Register">person_add</mat-icon> Register
-</button>
-<mat-menu #beforeMenu="matMenu" xPosition="before">
-<button mat-menu-item (click)="loginEnseignant()">Enseignant</button>
-<button mat-menu-item (click)="loginParticipant()">Participant</button>
-</mat-menu>
-</span>
     <span class="gap">
-<button mat-raised-button class="login-button">
-<mat-icon aria-hidden="false" aria-label="Login">login</mat-icon> Login
-</button>
-</span>
+      <button mat-raised-button [matMenuTriggerFor]="beforeMenu" class="register-button">
+        <mat-icon aria-hidden="false" aria-label="Register">person_add</mat-icon> Register
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="loginEnseignant()">Enseignant</button>
+        <button mat-menu-item (click)="loginParticipant()">Participant</button>
+      </mat-menu>
+    </span>
+    <span class="gap">
+      <button mat-raised-button class="login-button">
+        <mat-icon aria-hidden="false" aria-label="Login">login</mat-icon> Login
+      </button>
+    </span>
   </ng-container>
 
   <ng-container *ngIf="user | async">
-<span class="gap">
-<mat-card-title>{{ (user | async)?.displayName }}</mat-card-title>
-</span>
+    <span class="gap">
+      <mat-card-title>{{ (user | async)?.displayName }}</mat-card-title>
+    </span>
     <span class="avatar">
-<div mat-card-avatar class="example-header-image">
-<button mat-button [matMenuTriggerFor]="menu" title="Afficher les options">
-<img mat-card-image [src]="photo" alt="" />
-</button>
-<mat-menu #menu="matMenu">
-<button mat-menu-item>
-<nav>
-<a routerLink="/accountConfig" routerLinkActive="active" ariaCurrentWhenActive="page"><mat-icon aria-hidden="false" aria-label="Settings">settings</mat-icon> Paramètres</a>
-</nav>
-</button>
-  <!--Pour se déconnecter-->
-<button mat-raised-button (click)="logout()"><mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon> Logout</button>
-</mat-menu>
-  <!--Pour se déconnecter-->
-<button mat-raised-button (click)="logout()" *ngIf="deconnexionAnonyme"><mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon> Logout</button>
-</div>
-</span>
+      <div mat-card-avatar class="example-header-image">
+        <button mat-button [matMenuTriggerFor]="menu" title="Afficher les options">
+          <img mat-card-image [src]="photo" alt="" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <nav>
+            <a routerLink="/accountConfig" routerLinkActive="active" ariaCurrentWhenActive="page"><mat-icon aria-hidden="false" aria-label="Settings">settings</mat-icon> Paramètres</a>
+            </nav>
+          </button>
+            <!--Pour se déconnecter-->
+          <button mat-raised-button (click)="logout()"><mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon> Logout</button>
+        </mat-menu>
+          <!--Pour se déconnecter-->
+        <button mat-raised-button (click)="logout()" *ngIf="deconnexionAnonyme"><mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon> Logout</button>
+      </div>
+    </span>
   </ng-container>
 </mat-toolbar>
+
+
 <div class="router-container">
   <router-outlet></router-outlet>
 </div>

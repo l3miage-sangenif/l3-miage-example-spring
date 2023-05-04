@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class EnseignantService {
+
+  baseUrl = 'http://localhost:8080/api';
   
   httpOptions = {
     headers: new HttpHeaders({
@@ -24,9 +26,10 @@ getMiahootById(miahootid: number): Observable<any> {
   getAllMiahoot(): Observable<any> {
     return this.http.get(environment.baseUrl+'/miahoots');
   }
-  /*Création d'un miahoot*/
-  creatMiahoot(miahoot: any): Observable<any> {
-    return this.http.post(environment.baseUrl+'/miahoots', miahoot, this.httpOptions);
+  // exemple de méthode POST pour créer un miahoot
+  createMiahoot(miahoot: any): Observable<any> {
+    const url = `${this.baseUrl}/miahoots/`; // endpoint pour créer un miahoot
+    return this.http.post(url, miahoot);
   }
   /*Suppression d'un miahoot*/
   deleteMiahoot(miahootid: number): Observable<any> {

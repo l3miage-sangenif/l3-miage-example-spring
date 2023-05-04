@@ -55,6 +55,8 @@
 
 .router-container {
 position: relative;
+height: 100%;
+
 }
 
 
@@ -85,8 +87,7 @@ height:100%;
   }
   /* Ajout d'étapes supplémentaires pour un dégradé plus fluide */
 
-  animation-timing-function: ease-in-out;
-  /* Utilisation d'une fonction d'animation pour une transition plus douce */
+  /* animation-timing-function: ease-in-out;
+  Utilisation d'une fonction d'animation pour une transition plus douce */
 }
 
-/*fin du css ajouté par damessis*/
