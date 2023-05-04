@@ -21,8 +21,8 @@ public class MiahootController implements MiahootEndpoint {
     }
 
     @Override
-    public List<Miahoot> getAllMiahoot() {
-        return miahootService.getAllMiahoot();
+    public List<Miahoot> getAllMiahootByUserUid(final String uid) {
+        return miahootService.getAllMiahootByUser(uid);
     }
     @Override
     public void createMiahootEntity(final CreateMiahootRequest request) {

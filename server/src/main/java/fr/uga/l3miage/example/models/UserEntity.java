@@ -16,7 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class UserEntity {
     @Id
-    private Long uid;
+    private String uid;
 
     private String nom;
 
@@ -25,8 +25,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<MiahootEntity> miahoots;
 
-    @OneToMany
-    private List<ReponseEntity> reponses;
+    //a supprimer, ce n'est pas censé etre ici : Remarque faite par damessis
+    //@OneToMany
+    //private List<ReponseEntity> reponses;
 
     @Override
     public boolean equals(Object o) {

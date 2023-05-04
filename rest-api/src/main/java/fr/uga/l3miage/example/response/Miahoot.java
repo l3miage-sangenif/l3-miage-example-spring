@@ -11,6 +11,8 @@ import java.util.List;
 @Builder
 @Schema(description = "correspond au DTO de l'entité Miahoot")
 public class Miahoot {
+    //@Schema(description = "Correspond au label de l'objet", example = "Miahoot affiché")
+    //String miahootId;
 
     @Schema(description = "Correspond au label de l'objet", example = "Miahoot affiché")
     String nom;

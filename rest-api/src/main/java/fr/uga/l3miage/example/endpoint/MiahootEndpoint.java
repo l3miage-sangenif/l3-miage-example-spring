@@ -21,7 +21,7 @@ import java.util.List;
 @Tag(name = "Miahoot tag")
 @CrossOrigin
 @RestController
-@RequestMapping("api/miahoots")
+@RequestMapping("api/")
 public interface MiahootEndpoint {
 
 
@@ -31,8 +31,8 @@ public interface MiahootEndpoint {
     @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
     content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("")
-    List<Miahoot> getAllMiahoot();
+    @GetMapping("/users/{uid}/miahoots")
+    List<Miahoot> getAllMiahootByUserUid(@PathVariable String uid);
 
 
     @Operation(description = "Récupérer le DTO de l'entité Miahoot qui a pour id celui passé en paramètre")
@@ -41,7 +41,7 @@ public interface MiahootEndpoint {
     @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
     content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{miahootId}")
+    @GetMapping("miahoots/{miahootId}")
     Miahoot getMiahootEntity(@PathVariable int miahootId);
 
 
@@ -50,7 +50,7 @@ public interface MiahootEndpoint {
     @ApiResponse(responseCode = "201", description = "L'entité Miahoot a bien été créée.")
     @Error400Custom
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping("miahoots")
     void createMiahootEntity(@Valid @RequestBody CreateMiahootRequest request);
 
 
@@ -60,7 +60,7 @@ public interface MiahootEndpoint {
             content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @Error400Custom
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PatchMapping("{miahootId}")
+    @PatchMapping("miahoots/{miahootId}")
     void updateMiahootEntity(@PathVariable final int miahootId, @RequestBody final Miahoot miahoot);
 
 
@@ -70,6 +70,6 @@ public interface MiahootEndpoint {
     @ApiResponse(responseCode = "418", description = "Renvoie une erreur 418 si l'entité n'a pu être supprimée",
             content = @Content(schema = @Schema(implementation = EntityNotDeletedErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("{miahootId}")
+    @DeleteMapping("miahoots/{miahootId}")
     void deleteMiahootEntity(@PathVariable int miahootId);
 }

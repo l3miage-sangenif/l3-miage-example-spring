@@ -25,7 +25,7 @@ public class MiahootEntity {
     private List<QuestionEntity> questions;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "uid")
     private UserEntity user;
 
     @Override
