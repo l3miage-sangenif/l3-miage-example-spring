@@ -10,6 +10,9 @@ import lombok.Data;
 @Schema(description = "correspond au DTO de l'entité Reponse")
 public class Reponse {
 
+    @Schema(description = "Correspond a l'id de l'objet reponse")
+    int reponseId;
+
     @Schema(description = "Correspond au label de l'objet", example = "Reponse 1 affichée")
     String label;
 

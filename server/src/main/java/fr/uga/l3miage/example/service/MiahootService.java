@@ -24,8 +24,6 @@ import java.util.List;
 public class MiahootService {
     private final MiahootComponent miahootComponent;
     private final MiahootMapper miahootMapper;
-    private final QuestionComponent questionComponent;
-    private final ReponseComponent reponseComponent;
 
 
     public Miahoot getMiahoot(final int miahootId) {
@@ -36,9 +34,9 @@ public class MiahootService {
         }
     }
 
-    public List<Miahoot> getAllMiahoot() {
+    public List<Miahoot> getAllMiahootByUser(final String uid) {
         try {
-            List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahoot();
+            List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahootByUserUid(uid);
             List<Miahoot> miahoots = new ArrayList<>();
             for(MiahootEntity miahootEntity: miahootEntities){
                 miahoots.add(miahootMapper.toDto(miahootEntity));
