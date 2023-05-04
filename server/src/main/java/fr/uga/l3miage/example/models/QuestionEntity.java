@@ -24,7 +24,7 @@ public class QuestionEntity {
     private List<ReponseEntity> reponses;
 
     @ManyToOne
-    @JoinColumn(name="miahoot_id")
+    @JoinColumn(name="miahootId")
     private MiahootEntity miahoot;
 
     @Override

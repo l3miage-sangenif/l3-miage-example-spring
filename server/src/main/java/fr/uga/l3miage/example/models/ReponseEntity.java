@@ -23,7 +23,7 @@ public class ReponseEntity {
     private Boolean estValide;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "questionId")
     private QuestionEntity question;
 
 
