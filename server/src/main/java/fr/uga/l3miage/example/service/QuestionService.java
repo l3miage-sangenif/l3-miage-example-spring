@@ -5,14 +5,16 @@ import fr.uga.l3miage.example.exception.rest.EntityNotDeletedRestException;
 import fr.uga.l3miage.example.exception.rest.EntityNotFoundRestException;
 import fr.uga.l3miage.example.exception.technical.EntityNotFoundException;
 import fr.uga.l3miage.example.mapper.QuestionMapper;
+import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
+import fr.uga.l3miage.example.request.CreateReponseRequest;
 import fr.uga.l3miage.example.response.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
+import java.util.List;
 
 
 @Service
@@ -20,6 +22,7 @@ import javax.transaction.Transactional;
 public class QuestionService {
     private final QuestionComponent QuestionComponent;
     private final QuestionMapper QuestionMapper;
+    private final ReponseService reponseService;
 
 
     public Question getQuestion(final int questionId) {
@@ -56,4 +59,15 @@ public class QuestionService {
     }
 
 
+    public void createQuestion(final CreateQuestionRequest createQuestionRequest,final MiahootEntity newMiahootEntity) {
+        List<CreateReponseRequest> listReponse = createQuestionRequest.getReponses();
+        QuestionEntity newQuestionEntity = QuestionMapper.toEntity(createQuestionRequest);
+        newQuestionEntity.setMiahoot(newMiahootEntity);
+        newQuestionEntity.setReponses(null);
+        QuestionComponent.createQuestion(newQuestionEntity);
+
+        for (CreateReponseRequest q : listReponse) {
+            reponseService.createReponse(q,newQuestionEntity);
+        }
+    }
 }

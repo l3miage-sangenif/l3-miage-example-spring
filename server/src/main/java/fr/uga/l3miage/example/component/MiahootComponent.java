@@ -30,12 +30,8 @@ public class MiahootComponent {
      * @throws EntityNotFoundException si aucune entité Miahoot n'est trouvée
      */
     public MiahootEntity getMiahoot(final Integer miahootId) throws EntityNotFoundException {
-        Optional<MiahootEntity> miahoot = miahootRepository.findByMiahootId(miahootId);
-        if (miahoot.isPresent()) {
-            return miahoot.get();
-        }else {
-            throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour miahootId [%s]", miahootId), miahootId);
-        }
+        return miahootRepository.findByMiahootId(miahootId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Aucune entité n'a été trouvée pour la Miahoot [%s]", miahootId), miahootId));
     }
 
     /**
