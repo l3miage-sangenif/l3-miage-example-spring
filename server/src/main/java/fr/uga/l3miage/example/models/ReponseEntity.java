@@ -21,22 +21,22 @@ public class ReponseEntity {
     private String label;
 
     private Boolean estValide;
-
+/*
     @ManyToOne
     @JoinColumn(name = "question_id")
     private QuestionEntity question;
-
+*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReponseEntity that = (ReponseEntity) o;
-        return reponseId == that.reponseId && Objects.equals(label, that.label) && Objects.equals(estValide, that.estValide) && Objects.equals(question, that.question);
+        return reponseId == that.reponseId && Objects.equals(label, that.label) && Objects.equals(estValide, that.estValide);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reponseId, label, estValide, question);
+        return Objects.hash(reponseId, label, estValide);
     }
 }

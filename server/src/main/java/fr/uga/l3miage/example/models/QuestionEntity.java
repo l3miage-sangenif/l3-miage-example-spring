@@ -20,23 +20,23 @@ public class QuestionEntity {
 
     private String label;
 
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)//(mappedBy = "question",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<ReponseEntity> reponses;
-
+/*
     @ManyToOne
     @JoinColumn(name="miahoot_id")
     private MiahootEntity miahoot;
-
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QuestionEntity that = (QuestionEntity) o;
-        return questionId == that.questionId && Objects.equals(label, that.label) && Objects.equals(reponses, that.reponses) && Objects.equals(miahoot, that.miahoot);
+        return questionId == that.questionId && Objects.equals(label, that.label) && Objects.equals(reponses, that.reponses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(questionId, label, reponses, miahoot);
+        return Objects.hash(questionId, label, reponses);
     }
 }

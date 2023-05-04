@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 
-@Mapper()
+@Mapper(uses = ReponseMapper.class)
 public interface QuestionMapper {
     Question toDto(QuestionEntity questionEntity);
 
