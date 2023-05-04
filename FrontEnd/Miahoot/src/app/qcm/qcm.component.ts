@@ -1,27 +1,16 @@
-import { Component } from '@angular/core';
-
-
-interface Response {
-  label: string;
-  estValide: boolean;
-}
-
-interface Question {
-  label: string;
-  responses: Response[];
-}
-
-interface Miahoot {
-  nom: string;
-  questions: Question[];
-}
+import { Component, OnInit } from '@angular/core';
+import { Miahoot } from '../models/miahoot';
+import { Question } from '../models/question';
+import { Response } from '../models/response';
+import { ActivatedRoute } from '@angular/router';
+import { EnseignantService } from '../services/enseignant.service';
 
 @Component({
   selector: 'app-qcm',
   templateUrl: './qcm.component.html',
   styleUrls: ['./qcm.component.css'],
 })
-export class QCMComponent {
+export class QCMComponent implements OnInit {
   b: boolean = false;
   qrcode: boolean = false;
   lien: boolean = false;
@@ -37,6 +26,16 @@ export class QCMComponent {
     },
   ];
 
+  titreMiahoot = '';
+
+  constructor(private serviceE : EnseignantService, private route : ActivatedRoute){
+
+  }
+  ngOnInit(): void {
+    console.log(this.route.snapshot.paramMap.get('name'));
+    this.titreMiahoot = this.route.snapshot.paramMap.get('name') as string;
+  }
+
   public choice() {
     //le clique sur le button create a new Miahoot met le booleen b à true
     if (this.b == true) {
@@ -45,15 +44,7 @@ export class QCMComponent {
       this.b = true;
     }
   }
-  /*A Implementé
-  getLienQrcode() {
-    const affichageElement = document.getElementById('affichage');
-    if (affichageElement !== null) {
-      affichageElement.textContent = this.qcm;
-    } else {
-      console.error("L'élément avec l'ID 'affichage' n'a pas été trouvé");
-    }
-  }*/
+  
   public qr_code() {
     if (this.qrcode === true) {
       this.qrcode = false;
@@ -100,5 +91,13 @@ export class QCMComponent {
     }
   }
   createMiahoot(){
+    const miahoot = {
+      name: this.titreMiahoot,
+      questions: this.questions
+    }
+    console.log({miahoot});
+    this.serviceE.createMiahoot(miahoot).subscribe(response => {
+      console.log({response});
+    });
   }
 }

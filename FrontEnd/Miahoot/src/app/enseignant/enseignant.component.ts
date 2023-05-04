@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnseignantService } from '../services/enseignant.service';
+import { Miahoot } from '../models/miahoot';
+import { MiahootService } from '../miahoot.service';
 
 @Component({
   selector: 'app-enseignant',
@@ -11,7 +13,7 @@ export class EnseignantComponent implements OnInit {
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  miahoot :any = {
+  /*miahoot :any = {
     nom: 'Kadi',
     owner: 1,
     question: [
@@ -20,14 +22,18 @@ export class EnseignantComponent implements OnInit {
         response: [{ label: 'Ami', estvalide: true }],
       },
     ],
-  };
+  };*/
+
+  tableauDesMiahoots : Miahoot[] = [];
+  
   constructor(private enseignantService: EnseignantService) {}
 
   ngOnInit(): void {
-    this.enseignantService.getAllMiahoot().subscribe((data) => {
+    /*this.enseignantService.getAllMiahoot().subscribe((data) => {
       this.miahoots = data;
       console.log(this.miahoots);
-    });
+    });*/
+    console.log(this.miahoots);
   }
 
   public choice() {
@@ -50,7 +56,16 @@ export class EnseignantComponent implements OnInit {
   showAlert(){
       alert("Veuillez entrer un titre !");
   }
-  createMiahoot(miahoot : any){
-    this.enseignantService.creatMiahoot(this.miahoot);
+  createMiahoot(miahoot : Miahoot){
+    this.enseignantService.createMiahoot(miahoot);
+  }
+
+  /*Pour récupérer tous les miahoots déjà crées */
+  getAllMiahoots(): Miahoot[]{
+    this.enseignantService.getAllMiahoot().subscribe((data) => {
+      this.tableauDesMiahoots = data;
+    });
+    
+    return this.tableauDesMiahoots;
   }
 }

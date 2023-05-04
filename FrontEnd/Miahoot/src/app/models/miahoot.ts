@@ -1,5 +1,6 @@
-interface Miahoot {
+import { Question } from "./question";
+
+export interface Miahoot {
   nom: string;
-  owner: number;
-  question: Question[];
+  questions: Question[];
 }

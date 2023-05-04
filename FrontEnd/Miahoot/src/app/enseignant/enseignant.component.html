@@ -1,13 +1,4 @@
-<!-- <ul>
-  <li><a href="#acceuil">Acceuil</a></li> -->
-<!-- <li><a href="#historique">Historiques</a></li>
-  <li><a href="#logout">Log out</a></li>-->
-<!-- <li style="float: right"><a class="active" href="#logout">Log out</a></li>
-</ul>
-<p>{{ miahoot.owner }}</p>
-Button de creation d'un Miahoot -->
 
-<head></head>
 <div class="container">
   <div class="center">
     <button class="buttonstyle" (click)="choice()">
@@ -21,12 +12,11 @@ Button de creation d'un Miahoot -->
       <input class="form-control" type="text" id="miahoot_title" name="miahoot_title" [(ngModel)]="namemiahoot" required/>
     </div>
 
-    <p>La valeur entrée est : {{ namemiahoot }}</p>
     <div>
       <h2 class="center">Choisissez un type de Miahoot à créer :</h2>
       <div class="row">
         <div class="col-sm-4">
-          <button class="buttonstyle" *ngIf="namemiahoot" routerLink="/qcm">Miahoot de type QCM</button>
+          <button class="buttonstyle" *ngIf="namemiahoot" [routerLink]="['/qcm', namemiahoot]">Miahoot de type QCM</button>
           <button class="buttonstyle" *ngIf="!namemiahoot" (click)="showAlert()">Miahoot de type QCM</button>
         </div>
         <div class="col-sm-4">

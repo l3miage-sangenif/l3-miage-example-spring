@@ -10,7 +10,7 @@ const routes: Routes = [
   /* { path: '', component: AccueilComponent }, */
   { path: 'accueil', component: AccueilComponent },
   { path: 'enseignant', component: EnseignantComponent },
-  { path: 'qcm', component: QCMComponent },
+  { path: 'qcm/:name', component: QCMComponent },
   { path: 'participant', component: ListeDeQuestionComponent },
   { path: 'resultat', component: ResultatQCMComponent },
   { path: '**', redirectTo: '/accueil', pathMatch: 'full' },
