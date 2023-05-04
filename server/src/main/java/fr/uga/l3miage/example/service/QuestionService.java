@@ -58,16 +58,4 @@ public class QuestionService {
         }
     }
 
-/*
-    public void createQuestion(final CreateQuestionRequest createQuestionRequest,final MiahootEntity newMiahootEntity) {
-        List<CreateReponseRequest> listReponse = createQuestionRequest.getReponses();
-        QuestionEntity newQuestionEntity = QuestionMapper.toEntity(createQuestionRequest);
-        newQuestionEntity.setMiahoot(newMiahootEntity);
-        newQuestionEntity.setReponses(null);
-        QuestionComponent.createQuestion(newQuestionEntity);
-
-        for (CreateReponseRequest q : listReponse) {
-            reponseService.createReponse(q,newQuestionEntity);
-        }
-    }*/
 }

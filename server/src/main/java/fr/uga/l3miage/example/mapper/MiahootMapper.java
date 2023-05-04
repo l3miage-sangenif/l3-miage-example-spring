@@ -10,10 +10,12 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(uses = QuestionMapper.class)
 public interface MiahootMapper {
-    Miahoot toDto(MiahootEntity MiahootEntity);
+    Miahoot toDto(MiahootEntity miahootEntity);
 
     MiahootEntity toEntity(CreateMiahootRequest request);
 
     void mergeMiahootEntity(@MappingTarget @NonNull MiahootEntity baseEntity, Miahoot Miahoot);
+
+
 
 }

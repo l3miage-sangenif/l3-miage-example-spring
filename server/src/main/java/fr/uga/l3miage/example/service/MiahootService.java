@@ -54,15 +54,8 @@ public class MiahootService {
     }
 
     public void createMiahoot(final CreateMiahootRequest createMiahootRequest) {
-        //List<CreateQuestionRequest> listQuestion = createMiahootRequest.getQuestions();
         MiahootEntity newMiahootEntity = miahootMapper.toEntity(createMiahootRequest);
-        //newMiahootEntity.setQuestions(null);
-
         miahootComponent.createMiahoot(newMiahootEntity);
-        /*
-        for (CreateQuestionRequest q : listQuestion) {
-            questionService.createQuestion(q,newMiahootEntity);
-        }*/
 
     }
 

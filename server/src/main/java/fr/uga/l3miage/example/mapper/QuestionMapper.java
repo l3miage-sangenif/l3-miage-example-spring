@@ -1,5 +1,6 @@
 package fr.uga.l3miage.example.mapper;
 
+import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
 import fr.uga.l3miage.example.response.Question;
