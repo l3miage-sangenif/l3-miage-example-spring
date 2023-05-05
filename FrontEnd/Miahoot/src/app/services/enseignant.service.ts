@@ -23,8 +23,9 @@ getMiahootById(miahootid: number): Observable<any> {
   const url = `${environment.baseUrl}/miahoots/${miahootid}`; // URL de la ressource à supprimer
   return this.http.get(url, this.httpOptions); // Effectue la requête DELETE
 }
-  getAllMiahoot(): Observable<any> {
-    return this.http.get(environment.baseUrl+'/miahoots');
+  getAllMiahoot(uid:string): Observable<any> {
+    const url = `${environment.baseUrl}/users/${uid}/miahoots`; // URL de la ressource à supprimer
+    return this.http.get(url, this.httpOptions);
   }
   // exemple de méthode POST pour créer un miahoot
   createMiahoot(miahoot: any): Observable<any> {
@@ -40,5 +41,11 @@ getMiahootById(miahootid: number): Observable<any> {
   updateMiahoot(miahootid: number, updatedData: any): Observable<any> {
     const url = `${environment.baseUrl}/miahoots/${miahootid}`; // URL de la ressource à mettre à jour
     return this.http.put(url, updatedData, this.httpOptions); // Effectue la requête PUT
+  }
+
+  /*création d'un user*/
+  createUser(user : any) : Observable<any> {
+    const url = `${this.baseUrl}/users`;
+    return this.http.post(url, user);
   }
 }

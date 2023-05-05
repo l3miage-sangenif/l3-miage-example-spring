@@ -1,33 +1,38 @@
-<!-- <app-resultat-qcm [miahoot]="miahoot"></app-resultat-qcm> -->
-<div class="qcm"> Participez au QCM</div>
+<div class="qcm"> Participez au QCM du miahoot : {{miahootRecupere.miahoot.nom}} </div>
 <div class="container">
   
   <ul>
-    <li *ngFor="let question of miahoot?.questions">
-      <h3>{{ question.label }}</h3>
+    <li *ngFor="let question of miahootRecupere.miahoot.questions">
+      <label>{{ question.label }}</label>
       <ul>
-        <li *ngFor="let option of question?.responses">
-          <button style="background-color: rgb(209, 232, 244)" class="my-btn">
-            <label>
-              <input
-                type="radio"
-                name="{{ question.label }}"
-                [value]="option.label"
-                [(ngModel)]="option.selected"
-              />
-              {{ option.label }}
-            </label>
-          </button>
-        </li>
+          <li *ngFor="let option of question.responses">
+            <button style="background-color: rgb(209, 232, 244)" class="my-btn">
+              <label>
+                <input
+                  type="radio"
+                  name="{{ question.label }}"
+                  [value]="option"
+                  [(ngModel)]="selectedResponse"
+                />
+                {{ option.label }}
+              </label>
+            </button>
+          </li>        
       </ul>
     </li>
   </ul>
+  
+  
 
-</div>
-
+</div> 
 <div class="centre">
   <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" routerLink="/resultat" >
     Soumettre les réponses
   </button>
-  
+
 </div>
+
+<div>Your favorite choice is: {{selectedResponse | json }}</div>
+
+
+
