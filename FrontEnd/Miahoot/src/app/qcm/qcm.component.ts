@@ -17,16 +17,19 @@ export class QCMComponent implements OnInit {
   qcm:any
   chaine: string =
     'https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp';
-
-  //ajouté par damessis
+  //ajouté par damessis pour qu'on ai au minimum deux reponse par question
   questions: Question[] = [
     {
       label: '',
       responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
     },
   ];
-
   titreMiahoot = '';
+   miahoot :Miahoot= {
+    nom: this.titreMiahoot,
+    questions: this.questions
+  }
+  
 
   constructor(private serviceE : EnseignantService, private route : ActivatedRoute){
 
@@ -34,6 +37,14 @@ export class QCMComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.route.snapshot.paramMap.get('name'));
     this.titreMiahoot = this.route.snapshot.paramMap.get('name') as string;
+    /*if(this.miahoot.nom!==''){
+    this.route.params.subscribe(params => {
+      this.miahoot = {
+        nom: params['nom'],
+        questions: params['questions'] || []
+      };
+    });
+    }*/
   }
 
   public choice() {
@@ -62,18 +73,18 @@ export class QCMComponent implements OnInit {
 
   //ajouté par damessis
   addQuestion() {
-    this.questions.push({
+    this.miahoot.questions.push({
       label: '',
       responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
     });
   }
 
   addResponse(questionIndex: number) {
-    this.questions[questionIndex].responses.push({ label: '', estValide: false });
+    this.miahoot.questions[questionIndex].responses.push({ label: '', estValide: false });
   }
 
   removeResponse(questionIndex: number,index: number) {
-    this.questions[questionIndex].responses.splice(index, 1);
+    this.miahoot.questions[questionIndex].responses.splice(index, 1);
   }
   removeQuestion(index: number) {
     this.questions.splice(index, 1);
@@ -91,12 +102,9 @@ export class QCMComponent implements OnInit {
     }
   }
   createMiahoot(){
-    const miahoot = {
-      name: this.titreMiahoot,
-      questions: this.questions
-    }
-    console.log({miahoot});
-    this.serviceE.createMiahoot(miahoot).subscribe(response => {
+    const m=this.miahoot;
+    console.log({m});
+    this.serviceE.createMiahoot(this.miahoot).subscribe(response => {
       console.log({response});
     });
   }
