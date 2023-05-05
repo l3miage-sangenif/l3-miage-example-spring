@@ -30,6 +30,7 @@ public class MiahootService {
     private final MiahootMapper miahootMapper;
     private final QuestionMapper questionMapper;
     private final QuestionService questionService;
+    private  final UserService userService;
 
 
     public Miahoot getMiahoot(final int miahootId) {
@@ -42,13 +43,14 @@ public class MiahootService {
 
     public List<Miahoot> getAllMiahootByUser(final String uid) {
         try {
-            List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahootByUserUid(uid);
+            //List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahootByUserUid(uid);
+            List<MiahootEntity> miahootEntities=userService.getAllMiahootByUserUid(uid);
             List<Miahoot> miahoots = new ArrayList<>();
             for(MiahootEntity miahootEntity: miahootEntities){
                 miahoots.add(miahootMapper.toDto(miahootEntity));
             }
             return miahoots;
-        } catch (EntityNotFoundException ex) {
+        } catch (Exception ex) {
             throw new EntityNotFoundRestException(String.format("Impossible de charger l'entité. Raison : [%s]", ex.getMessage()), 0, ex);
         }
     }

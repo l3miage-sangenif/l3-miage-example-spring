@@ -39,13 +39,14 @@ public class MiahootComponent {
      * @return une {@link List<MiahootEntity>} correspondant à miahootId donnée
      * @throws EntityNotFoundException si aucune entité Miahoot n'est trouvée
      */
+    /*
     public List<MiahootEntity> getAllMiahootByUserUid(final String uid) throws EntityNotFoundException {
         List<MiahootEntity> miahoots = miahootRepository.findAllByUserUid(uid);
         if (miahoots.isEmpty()) {
             throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour user  [%s]", uid),404);
         }
         return miahoots;
-    }
+    }*/
 
     /**
      * @param entity qui est l'entité Miahoot a creer

@@ -16,7 +16,7 @@
         <input class="form-control" type="text" id="question{{i}}" name="question{{i}}" [(ngModel)]="question.label"
           placeholder="Ecrivez votre question" required /><br /><br />
         <div class="row">
-          <div *ngFor="let response of question.responses; let j = index;" class="col-sm-6 option-column">
+          <div *ngFor="let response of question.reponses; let j = index;" class="col-sm-6 option-column">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">Réponse {{ j+1 }}</span>
@@ -27,7 +27,7 @@
                 <mat-slide-toggle class="center" [(ngModel)]="response.estValide" (click)="onToggleClick(response, question)">
                   Réponse valide
                 </mat-slide-toggle>
-                <button *ngIf="question.responses.length > 2" (click)="removeResponse(i, j)" class="remove-icon">
+                <button *ngIf="question.reponses.length > 2" (click)="removeResponse(i, j)" class="remove-icon">
                   <i class="fa fa-minus-circle"></i>
                 </button>
               </div>

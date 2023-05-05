@@ -17,7 +17,7 @@ export class ListeDeQuestionComponent implements OnInit {
 
   
   idMiahoot!: number;
-  miahootApresenter : any ;
+ // miahootApresenter : Miahoot ;
   selectedResponse! : Response ;
   
 
@@ -44,6 +44,7 @@ export class ListeDeQuestionComponent implements OnInit {
   };*/
 
   constructor(private serviceQ : EnseignantService, public miahootRecupere : PartageMiahootService){
+    //this.miahootRecupere.s
 
   }
 

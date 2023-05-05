@@ -28,11 +28,12 @@ export class QCMComponent implements OnInit {
   titreMiahoot = '';
 
   miahoot :Miahoot= {
+    miahootId:0,
     nom: '',
     questions: [
-      {
+      { 
         label: '',
-        responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
+        reponses: [{label: '', estValide: false,isSelected:false }, { label: '', estValide: false,isSelected:false }],
       }
     ]
   }
@@ -77,23 +78,23 @@ export class QCMComponent implements OnInit {
   addQuestion() {
     this.miahoot.questions.push({
       label: '',
-      responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
+      reponses: [{ label: '', estValide: false , isSelected:false}, { label: '', estValide: false,isSelected:false }],
     });
   }
 
   addResponse(questionIndex: number) {
-    this.miahoot.questions[questionIndex].responses.push({ label: '', estValide: false });
+    this.miahoot.questions[questionIndex].reponses.push({ label: '', estValide: false, isSelected:false});
   }
 
   removeResponse(questionIndex: number,index: number) {
-    this.miahoot.questions[questionIndex].responses.splice(index, 1);
+    this.miahoot.questions[questionIndex].reponses.splice(index, 1);
   }
   removeQuestion(index: number) {
     this.miahoot.questions.splice(index, 1);
   }
 
   getValidResponses(question:Question) {
-    return question.responses.filter(response => response.estValide);
+    return question.reponses.filter(response => response.estValide);
   }
 
   onToggleClick(response: any, question: any) {

@@ -34,10 +34,17 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       
       </mat-table>
-    </div>    
+  
+    
+    </div>   
+    <!--<ul>
+      <li >
+        <p style="color: red;">eqgtsrhsrzh {{miahoot|json}}</p>
+      </li>
+    </ul> -->
   </div>
   <!--fin du tableau qui affiche tos les miahoot de l'utilisateur-->
-  <p *ngIf="(miahoots|async)"> {{miahoots.nom}}</p>
+  <!--<p *ngIf="(miahoots|async)"> {{miahoots.nom}}</p>-->
   <div *ngIf="b" class="center">
     <div class="form-group">
       <label class="espace" for="miahoot_title">Titre Miahoot :</label>

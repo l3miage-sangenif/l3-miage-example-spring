@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Pour respecter l'architecture hexagonale, ici nous ne traitons que les données
  * <br>
@@ -93,6 +96,15 @@ public class UserComponent {
         }catch (DataAccessException ex) {
             throw new RuntimeException("Impossible de supprimer l'entité Miahoot : " + ex.getMessage(), ex);
         }
+    }
+
+    public List<MiahootEntity> getAllMiahootByUserUid(final String uid) throws EntityNotFoundException {
+        Optional<UserEntity> user = userRepository.findByUid(uid);
+        if (user.isEmpty()) {
+            throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour user  [%s]", uid),404);
+        }
+
+        return user.get().getMiahoots();
     }
 }
 

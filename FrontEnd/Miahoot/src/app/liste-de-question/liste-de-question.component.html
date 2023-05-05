@@ -1,12 +1,10 @@
 <div class="qcm"> Participez au QCM du miahoot : {{miahootRecupere.miahoot.nom}} </div>
 <div class="container">
-  
   <ul>
-    <li *ngFor="let question of miahootRecupere.miahoot.questions">
+    <li *ngFor="let question of miahootRecupere.miahoot.questions ">
       <label>{{ question.label }}</label>
       <ul>
-        <label>egdsgzr{{ question.responses[0].label }}</label>
-          <li *ngFor="let option of question.responses">
+          <li *ngFor="let option of question.reponses">
             <button style="background-color: rgb(209, 232, 244)" class="my-btn">
               <label>
                 <input

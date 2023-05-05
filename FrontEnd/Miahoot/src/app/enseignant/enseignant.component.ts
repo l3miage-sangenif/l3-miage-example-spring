@@ -17,26 +17,7 @@ export class EnseignantComponent implements OnInit {
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  miahoot :Miahoot[] = [{
-    nom: 'Kadi',
-    questions: [
-      {
-        label: 'Dili',
-        responses: [
-          { label: 'Ami', estValide: true },
-          { label: 'AB', estValide: false }
-      ],
-      },
-      {
-        label: 'Dila',
-        responses: [
-          { label: 'Ami', estValide: false },
-          { label: 'CC', estValide: true}
-
-      ],
-      },
-    ],
-  }];
+  miahoot:Miahoot[]=[];
 
   tableauDesMiahoots : Miahoot[] = [];
 
@@ -45,6 +26,7 @@ export class EnseignantComponent implements OnInit {
   constructor(private enseignantService: EnseignantService,private router: Router, public miahootRecupere : PartageMiahootService, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {}
 
   ngOnInit(): void {
+    
     this.getAllMiahoots();
     console.log(this.miahoots);
   }
@@ -72,12 +54,10 @@ export class EnseignantComponent implements OnInit {
 
   /*Pour récupérer tous les miahoots déjà crées */
   getAllMiahoots(): Miahoot[]{
-    /*this.enseignantService.getAllMiahoot('123').subscribe((data) => {
+    this.enseignantService.getAllMiahoot('123').subscribe((data) => {
       this.tableauDesMiahoots = data;
-    });*/
-    this.enseignantService.getMiahootById(1).subscribe((data) => {
-     this.tableauDesMiahoots.push(data);
-    })
+      console.log(data);
+    });
     return this.tableauDesMiahoots;
   }
 
@@ -92,6 +72,7 @@ export class EnseignantComponent implements OnInit {
   }
   onPresent(miahoot:Miahoot):void{
     this.miahootRecupere.miahoot = miahoot; 
+    console.log(this.miahootRecupere.miahoot);
     this.router.navigate(['/participant']);
   }
 }

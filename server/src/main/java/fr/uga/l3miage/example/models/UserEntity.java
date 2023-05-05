@@ -22,7 +22,7 @@ public class UserEntity {
 
     private boolean estEnseignant;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<MiahootEntity> miahoots;
 
     //a supprimer, ce n'est pas censé etre ici : Remarque faite par damessis
