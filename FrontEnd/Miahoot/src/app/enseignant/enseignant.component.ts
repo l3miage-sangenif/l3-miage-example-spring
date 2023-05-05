@@ -3,6 +3,7 @@ import { EnseignantService } from '../services/enseignant.service';
 import { Miahoot } from '../models/miahoot';
 import { MiahootService } from '../miahoot.service';
 import { Router } from '@angular/router';
+import { PartageMiahootService } from '../partage-miahoot.service';
 import { TransfertEnseignantQcmService } from '../transfert-enseignant-qcm.service';
 
 
@@ -16,13 +17,23 @@ export class EnseignantComponent implements OnInit {
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  miahoot :any[] = [{
+  miahoot :Miahoot[] = [{
     nom: 'Kadi',
-    owner: 1,
     questions: [
       {
         label: 'Dili',
-        responses: [{ label: 'Ami', estValide: true }],
+        responses: [
+          { label: 'Ami', estValide: true },
+          { label: 'AB', estValide: false }
+      ],
+      },
+      {
+        label: 'Dila',
+        responses: [
+          { label: 'Ami', estValide: false },
+          { label: 'CC', estValide: true}
+
+      ],
       },
     ],
   }];
@@ -31,7 +42,7 @@ export class EnseignantComponent implements OnInit {
 
   displayedColumns: string[] = ['No', 'nom',/*'question'*/ 'actions'];
   
-  constructor(private enseignantService: EnseignantService,private router: Router, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {}
+  constructor(private enseignantService: EnseignantService,private router: Router, public miahootRecupere : PartageMiahootService, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {}
 
   ngOnInit(): void {
     this.getAllMiahoots();
@@ -61,7 +72,7 @@ export class EnseignantComponent implements OnInit {
 
   /*Pour récupérer tous les miahoots déjà crées */
   getAllMiahoots(): Miahoot[]{
-    this.enseignantService.getAllMiahoot().subscribe((data) => {
+    this.enseignantService.getAllMiahoot('123').subscribe((data) => {
       this.tableauDesMiahoots = data;
     });
     
@@ -78,6 +89,7 @@ export class EnseignantComponent implements OnInit {
     //this.enseignantService.deleteMiahoot(miahoot.id).subscribe();
   }
   onPresent(miahoot:Miahoot):void{
-
+    this.miahootRecupere.miahoot = miahoot; 
+    this.router.navigate(['/participant']);
   }
 }

@@ -26,7 +26,7 @@ public interface MiahootEndpoint {
 
 
     @Operation(description = "Récupérer tous les DTO de toutes les entité Miahoot qui a pour id celui passé en paramètre")
-    @ApiResponse(responseCode = "200", description = "Renvoieune liste de DTO d'entité Miahoot demandée",
+    @ApiResponse(responseCode = "200", description = "Renvoie une liste de DTO d'entité Miahoot demandée",
             content = @Content(schema = @Schema(implementation = Miahoot.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
     content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
