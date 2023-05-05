@@ -1,6 +1,8 @@
 <div class="container">
-  <h1 class="center"> Titre du Miahoot : {{miahoot.nom}}</h1>
-  <div class="center" *ngFor="let question of this.miahoot.questions; let i = index">
+  <div class="input-group-prepend">
+    <h1 class="center" class="input-group-text"> Titre du Miahoot : {{miahoot.nom}}</h1>
+  </div>
+  <div class="center" *ngFor="let question of miahoot.questions; let i = index">
     <div class="question-container">
       <div class="input-group">
         <div class="input-group-prepend">
@@ -10,6 +12,7 @@
         </div>
       </div>
       <div class="responses-container">
+        <p>{{this.miahoot.questions[0].label}}</p>
         <input class="form-control" type="text" id="question{{i}}" name="question{{i}}" [(ngModel)]="question.label"
           placeholder="Ecrivez votre question" required /><br /><br />
         <div class="row">
@@ -46,7 +49,7 @@
       Ajoutez une question
     </button>
 
-    <button class="buttonstyle" (click)="createMiahoot()" *ngIf="questions.length>0">
+    <button class="buttonstyle" (click)="createMiahoot()" *ngIf="miahoot.questions.length>0">
       SAVE 
     </button>
     

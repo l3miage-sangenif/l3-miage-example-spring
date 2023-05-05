@@ -4,6 +4,7 @@ import { Question } from '../models/question';
 import { Response } from '../models/response';
 import { ActivatedRoute } from '@angular/router';
 import { EnseignantService } from '../services/enseignant.service';
+import { TransfertEnseignantQcmService } from '../transfert-enseignant-qcm.service';
 
 @Component({
   selector: 'app-qcm',
@@ -18,33 +19,34 @@ export class QCMComponent implements OnInit {
   chaine: string =
     'https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp';
   //ajouté par damessis pour qu'on ai au minimum deux reponse par question
-  questions: Question[] = [
+  /*questions: Question[] = [
     {
       label: '',
       responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
     },
-  ];
+  ];*/
   titreMiahoot = '';
-   miahoot :Miahoot= {
-    nom: this.titreMiahoot,
-    questions: this.questions
+
+  miahoot :Miahoot= {
+    nom: '',
+    questions: [
+      {
+        label: '',
+        responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
+      }
+    ]
   }
   
 
-  constructor(private serviceE : EnseignantService, private route : ActivatedRoute){
+  constructor(private serviceE : EnseignantService, private route : ActivatedRoute,private transfertEnseignantQcmService:TransfertEnseignantQcmService){
 
   }
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('name'));
-    this.titreMiahoot = this.route.snapshot.paramMap.get('name') as string;
-    /*if(this.miahoot.nom!==''){
-    this.route.params.subscribe(params => {
-      this.miahoot = {
-        nom: params['nom'],
-        questions: params['questions'] || []
-      };
-    });
-    }*/
+    //console.log(this.route.snapshot.paramMap.get('name'));
+    this.miahoot.nom = this.route.snapshot.paramMap.get('name') as string;
+    //this.miahoot = this.transfertEnseignantQcmService.miahoot;
+
+
   }
 
   public choice() {
@@ -87,7 +89,7 @@ export class QCMComponent implements OnInit {
     this.miahoot.questions[questionIndex].responses.splice(index, 1);
   }
   removeQuestion(index: number) {
-    this.questions.splice(index, 1);
+    this.miahoot.questions.splice(index, 1);
   }
 
   getValidResponses(question:Question) {
