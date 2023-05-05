@@ -18,7 +18,7 @@ export class ListeDeQuestionComponent implements OnInit {
   
   idMiahoot!: number;
   miahootApresenter : any ;
-  responseSelected! : Response ;
+  selectedResponse! : Response ;
   
 
   /*Definition d'un tableau de Miahoot nommé miahoot en dure

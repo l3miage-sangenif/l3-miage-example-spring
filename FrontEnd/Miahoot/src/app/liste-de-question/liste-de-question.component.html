@@ -2,26 +2,27 @@
 <div class="container">
   
   <ul>
-    <li *ngFor="let question of miahootRecupere.miahoot.questions ">
-      <label >{{ question.label }}</label>
+    <li *ngFor="let question of miahootRecupere.miahoot.questions">
+      <label>{{ question.label }}</label>
       <ul>
-        <li *ngFor="let option of question.responses">
-          <button style="background-color: rgb(209, 232, 244)" class="my-btn">
-            <label>
-              <input
-                type="radio"
-                name="{{ question.label }}"
-                [value]="option"
-                [(ngModel)]="responseSelected"
-              />
-              {{ option.label }}
-            </label>
-          </button>
-        </li>
+          <li *ngFor="let option of question.responses">
+            <button style="background-color: rgb(209, 232, 244)" class="my-btn">
+              <label>
+                <input
+                  type="radio"
+                  name="{{ question.label }}"
+                  [value]="option"
+                  [(ngModel)]="selectedResponse"
+                />
+                {{ option.label }}
+              </label>
+            </button>
+          </li>        
       </ul>
-      
     </li>
   </ul>
+  
+  
 
 </div> 
 <div class="centre">
@@ -31,23 +32,7 @@
 
 </div>
 
-<div>Your favorite choice is: {{responseSelected | json }}</div>
+<div>Your favorite choice is: {{selectedResponse | json }}</div>
 
 
 
-<!--<h3>{{ question.label }}</h3>
-      <ul>
-        <li *ngFor="let option of question?.responses">
-          <button style="background-color: rgb(209, 232, 244)" class="my-btn">
-            <label>
-              <input
-                type="radio"
-                name="{{ question.label }}"
-                [value]="option.label"
-                [(ngModel)]="option.selected"
-              />
-              {{ option.label }}
-            </label>
-          </button>
-        </li>
-      </ul> -->
