@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +47,16 @@ public class UserService {
             userComponent.deleteUser(uid);
         } catch (EntityNotFoundException ex) {
             throw new EntityNotDeletedRestException(ex.getMessage());
+        }
+    }
+
+    public List<MiahootEntity> getAllMiahootByUserUid(final String uid) {
+        try {
+            //List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahootByUserUid(uid);
+            List<MiahootEntity> miahootEntities=userComponent.getAllMiahootByUserUid(uid);
+            return miahootEntities;
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundRestException(String.format("Impossible de charger l'entité. Raison : [%s]", ex.getMessage()), 0, ex);
         }
     }
 }

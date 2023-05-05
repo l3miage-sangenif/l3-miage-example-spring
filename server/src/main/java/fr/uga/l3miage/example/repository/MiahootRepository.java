@@ -28,8 +28,8 @@ public interface MiahootRepository extends JpaRepository<MiahootEntity, Integer>
 
     //recuperation de tous les miahoot d'un utilisateur spécifique identifié par uid
     /**
-     * @param miahootId de l'entité à recuper
+     * @param uid de l'entité à recuper
      * @return une {@link Optional<MiahootEntity>} correspondant au miahootId donnée
      */
-    List<MiahootEntity> findAllByUserUid(final String uid);
+    //List<MiahootEntity> findAllByUserUid(final String uid);
 }

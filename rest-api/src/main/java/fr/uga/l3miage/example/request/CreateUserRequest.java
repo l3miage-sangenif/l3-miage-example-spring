@@ -12,7 +12,7 @@ import java.util.List;
 @Schema(description = "Correspond à la requête permettant de créer une entité User")
 public class CreateUserRequest {
     @Schema(description = "User id")
-    private Long uid;
+    private String uid;
 
     @Schema(description = "nom du user", example = "john")
     private String nom;
