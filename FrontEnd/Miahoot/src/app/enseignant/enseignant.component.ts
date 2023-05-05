@@ -3,6 +3,7 @@ import { EnseignantService } from '../services/enseignant.service';
 import { Miahoot } from '../models/miahoot';
 import { MiahootService } from '../miahoot.service';
 import { Router } from '@angular/router';
+import { TransfertEnseignantQcmService } from '../transfert-enseignant-qcm.service';
 
 
 @Component({
@@ -18,25 +19,21 @@ export class EnseignantComponent implements OnInit {
   miahoot :any[] = [{
     nom: 'Kadi',
     owner: 1,
-    question: [
+    questions: [
       {
         label: 'Dili',
-        response: [{ label: 'Ami', estvalide: true }],
+        responses: [{ label: 'Ami', estValide: true }],
       },
     ],
   }];
 
   tableauDesMiahoots : Miahoot[] = [];
 
-  displayedColumns: string[] = ['No', 'nom', 'actions'];
+  displayedColumns: string[] = ['No', 'nom',/*'question'*/ 'actions'];
   
-  constructor(private enseignantService: EnseignantService,private router: Router) {}
+  constructor(private enseignantService: EnseignantService,private router: Router, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {}
 
   ngOnInit(): void {
-    /*this.enseignantService.getAllMiahoot().subscribe((data) => {
-      this.miahoots = data;
-      console.log(this.miahoots);
-    });*/
     this.getAllMiahoots();
     console.log(this.miahoots);
   }
@@ -73,7 +70,8 @@ export class EnseignantComponent implements OnInit {
 
   //cette fonction ouvrira une boite de dialogue ou on pourra editer unmiahoot
   onEdit(miahoot:Miahoot):void{
-    //this.router.navigate(['/qcm/'+miahoot.nom, miahoot]);
+    //this.transfertEnseignantQcmService.miahoot = miahoot;
+    //this.router.navigate(['/qcm']);
   }
 
   onDelete(miahoot:Miahoot):void{
