@@ -22,12 +22,8 @@ public class UserEntity {
 
     private boolean estEnseignant;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<MiahootEntity> miahoots;
-
-    //a supprimer, ce n'est pas censé etre ici : Remarque faite par damessis
-    //@OneToMany
-    //private List<ReponseEntity> reponses;
 
     @Override
     public boolean equals(Object o) {

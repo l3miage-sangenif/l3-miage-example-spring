@@ -23,9 +23,9 @@ public class MiahootEntity {
 
     @OneToMany(cascade = CascadeType.PERSIST)//(mappedBy = "miahoot",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<QuestionEntity> questions;
-/*
+
     @ManyToOne
-    private UserEntity user;*/
+    private UserEntity user;
 
     @Override
     public boolean equals(Object o) {

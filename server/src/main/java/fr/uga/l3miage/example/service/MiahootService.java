@@ -11,6 +11,8 @@ import fr.uga.l3miage.example.mapper.QuestionMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
 import fr.uga.l3miage.example.models.QuestionEntity;
 import fr.uga.l3miage.example.models.ReponseEntity;
+import fr.uga.l3miage.example.models.UserEntity;
+import fr.uga.l3miage.example.repository.UserRepository;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
 import fr.uga.l3miage.example.request.CreateQuestionRequest;
 import fr.uga.l3miage.example.response.Miahoot;
@@ -31,6 +33,7 @@ public class MiahootService {
     private final QuestionMapper questionMapper;
     private final QuestionService questionService;
     private  final UserService userService;
+    private final UserRepository userRepository;
 
 
     public Miahoot getMiahoot(final int miahootId) {
@@ -56,7 +59,10 @@ public class MiahootService {
     }
 
     public void createMiahoot(final CreateMiahootRequest createMiahootRequest) {
+        UserEntity user = userRepository.findById(createMiahootRequest.getUid())
+                .orElseThrow(() -> new EntityNotFoundRestException("User not found with id: " + createMiahootRequest.getUid().toString(),404));
         MiahootEntity newMiahootEntity = miahootMapper.toEntity(createMiahootRequest);
+        newMiahootEntity.setUser(user);
         miahootComponent.createMiahoot(newMiahootEntity);
 
     }
