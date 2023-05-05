@@ -61,9 +61,6 @@ export class EnseignantComponent implements OnInit {
   showAlert(){
       alert("Veuillez entrer un titre !");
   }
-  createMiahoot(miahoot : Miahoot){
-    this.enseignantService.createMiahoot(miahoot);
-  }
 
   /*Pour récupérer tous les miahoots déjà crées */
   getAllMiahoots(): Miahoot[]{

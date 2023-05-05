@@ -9,13 +9,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 
-@Mapper(/*uses = ReponseMapper.class*/componentModel = "spring")
+@Mapper(uses = ReponseMapper.class)
 public interface QuestionMapper {
     Question toDto(QuestionEntity questionEntity);
 
     QuestionEntity toEntity(CreateQuestionRequest request);
 
     void mergeQuestionEntity(@MappingTarget @NonNull QuestionEntity baseEntity, Question question);
-
 
 }

@@ -41,4 +41,10 @@ getMiahootById(miahootid: number): Observable<any> {
     const url = `${environment.baseUrl}/miahoots/${miahootid}`; // URL de la ressource à mettre à jour
     return this.http.put(url, updatedData, this.httpOptions); // Effectue la requête PUT
   }
+
+  /*création d'un user*/
+  createUser(user : any) : Observable<any> {
+    const url = `${this.baseUrl}/users`;
+    return this.http.post(url, user);
+  }
 }

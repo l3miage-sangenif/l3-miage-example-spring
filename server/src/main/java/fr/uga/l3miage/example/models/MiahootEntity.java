@@ -21,7 +21,7 @@ public class MiahootEntity {
 
     private String nom;
 
-    @OneToMany(mappedBy = "miahoot",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)//(mappedBy = "miahoot",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<QuestionEntity> questions;
 
     @ManyToOne
