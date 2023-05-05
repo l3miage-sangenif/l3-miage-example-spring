@@ -1,14 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { MiahootService } from '../miahoot.service';
-import {
-  Miahoot,
-  Question,
-  Response,
-  SelectedOption,
-} from '../miahoot.service';
+
 import { Observable, of } from 'rxjs';
+import { EnseignantService } from '../services/enseignant.service';
+import { Miahoot } from '../models/miahoot';
+import { Response } from '../models/response';
 
 @Component({
   selector: 'app-liste-de-question',
@@ -16,6 +13,26 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./liste-de-question.component.css'],
 })
 export class ListeDeQuestionComponent implements OnInit {
+
+  
+  idMiahoot!: number;
+  miahootApresenter : any ;
+  responseSelected! : Response ;
+
+  constructor(private serviceQ : EnseignantService){
+
+  }
+
+  ngOnInit(): void {
+    this.serviceQ.getMiahootById(this.idMiahoot).subscribe((data) => {
+      this.miahootApresenter = data;
+    });
+  }
+  
+  
+
+
+
   /**************** Les attributs ***********************/
   public Result: boolean[] | undefined;
   @Output() answerSelected = new EventEmitter<void>();
@@ -30,10 +47,10 @@ export class ListeDeQuestionComponent implements OnInit {
 
   /*********   Partie constructor *************************/
 
-  constructor(private miahootService: MiahootService) {}
+  /*constructor(private miahootService: MiahootService) {}
   ngOnInit(): void {
     this.miahoot = this.miahootService.getMiahoot();
-  }
+  }*/
 
   /****************** Les Methodes **************************/
 

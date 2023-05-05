@@ -1,10 +1,33 @@
 <!-- <app-resultat-qcm [miahoot]="miahoot"></app-resultat-qcm> -->
-<div class="qcm"> Participez au QCM</div>
+
 <div class="container">
-  
+  <div class="qcm"> Participez au QCM du miahoot : {{miahootApresenter.nom}} </div>
   <ul>
-    <li *ngFor="let question of miahoot?.questions">
-      <h3>{{ question.label }}</h3>
+    <li *ngFor="let question of miahootApresenter?.questions">
+      <label id="example-radio-group-label">{{ question.label }}</label>
+      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        [(ngModel)]="responseSelected">
+          <mat-radio-button class="example-radio-button" *ngFor="let response of question.responses" [value]="response">
+            {{response}}
+          </mat-radio-button>
+    </mat-radio-group>
+      
+    </li>
+  </ul>
+
+</div>
+
+<div class="centre">
+  <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" routerLink="/resultat" >
+    Soumettre les réponses
+  </button>
+  
+</div>
+
+
+<!--<h3>{{ question.label }}</h3>
       <ul>
         <li *ngFor="let option of question?.responses">
           <button style="background-color: rgb(209, 232, 244)" class="my-btn">
@@ -19,15 +42,4 @@
             </label>
           </button>
         </li>
-      </ul>
-    </li>
-  </ul>
-
-</div>
-
-<div class="centre">
-  <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" routerLink="/resultat" >
-    Soumettre les réponses
-  </button>
-  
-</div>
+      </ul> -->
