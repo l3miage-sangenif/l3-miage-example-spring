@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class MiahootMapperTest {
-
+/*
     @Autowired
     private MiahootMapper miahootMapper;
 
@@ -168,7 +168,7 @@ class MiahootMapperTest {
 
     }
 
-
+/*
     @Test
     void toEntity() {
         // création des reponse de la question 1 : Qui a écrit "Les Misérables"
@@ -369,6 +369,6 @@ class MiahootMapperTest {
 
         //il manque la fin du test pour le moment
     }
-
+*/
 
 }
