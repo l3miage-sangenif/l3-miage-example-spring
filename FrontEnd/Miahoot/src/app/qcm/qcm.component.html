@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="center" *ngFor="let question of questions; let i = index">
+  <h1 class="center"> Titre du Miahoot : {{miahoot.nom}}</h1>
+  <div class="center" *ngFor="let question of this.miahoot.questions; let i = index">
     <div class="question-container">
       <div class="input-group">
         <div class="input-group-prepend">

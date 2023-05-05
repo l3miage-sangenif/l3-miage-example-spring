@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EnseignantService } from '../services/enseignant.service';
 import { Miahoot } from '../models/miahoot';
 import { MiahootService } from '../miahoot.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-enseignant',
@@ -13,7 +15,7 @@ export class EnseignantComponent implements OnInit {
   namemiahoot: any;
   miahoots: any;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
-  /*miahoot :any = {
+  miahoot :any[] = [{
     nom: 'Kadi',
     owner: 1,
     question: [
@@ -22,17 +24,20 @@ export class EnseignantComponent implements OnInit {
         response: [{ label: 'Ami', estvalide: true }],
       },
     ],
-  };*/
+  }];
 
   tableauDesMiahoots : Miahoot[] = [];
+
+  displayedColumns: string[] = ['No', 'nom', 'actions'];
   
-  constructor(private enseignantService: EnseignantService) {}
+  constructor(private enseignantService: EnseignantService,private router: Router) {}
 
   ngOnInit(): void {
     /*this.enseignantService.getAllMiahoot().subscribe((data) => {
       this.miahoots = data;
       console.log(this.miahoots);
     });*/
+    this.getAllMiahoots();
     console.log(this.miahoots);
   }
 
@@ -64,5 +69,17 @@ export class EnseignantComponent implements OnInit {
     });
     
     return this.tableauDesMiahoots;
+  }
+
+  //cette fonction ouvrira une boite de dialogue ou on pourra editer unmiahoot
+  onEdit(miahoot:Miahoot):void{
+    //this.router.navigate(['/qcm/'+miahoot.nom, miahoot]);
+  }
+
+  onDelete(miahoot:Miahoot):void{
+    //this.enseignantService.deleteMiahoot(miahoot.id).subscribe();
+  }
+  onPresent(miahoot:Miahoot):void{
+
   }
 }

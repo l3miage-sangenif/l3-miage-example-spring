@@ -27,6 +27,7 @@ import { ListeDeQuestionComponent } from './liste-de-question/liste-de-question.
 import { ResultatQCMComponent } from './resultat-qcm/resultat-qcm.component';
 import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -38,7 +39,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     EnseignantComponent,
     QCMComponent,
     ListeDeQuestionComponent,
-    ResultatQCMComponent
+    ResultatQCMComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     HttpClientInMemoryWebApiModule,
     FormsModule,
     MatSlideToggleModule,
+    MatTableModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
