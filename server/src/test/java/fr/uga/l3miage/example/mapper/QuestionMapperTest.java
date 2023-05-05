@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class QuestionMapperTest {
+    /*
 
    /* @Autowired
     private QuestionMapper questionMapper;

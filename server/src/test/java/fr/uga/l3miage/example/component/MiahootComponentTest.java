@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, properties = "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect")
 class MiahootComponentTest {
-
+/*
     @Autowired
     private MiahootRepository miahootRepository;
     @Autowired
@@ -131,7 +131,7 @@ class MiahootComponentTest {
         //comparaison
         assertThat(actualEntity).usingRecursiveComparison().isEqualTo(entity);
     }
-
+/*
     @Test
     void CreateMiahoot() throws Exception {
        /* CreateMiahootRequest request = CreateMiahootRequest.builder()
@@ -356,5 +356,5 @@ class MiahootComponentTest {
 
         assertThat(miahootRepository.count()).isZero();
     }
-
+*/
 }

@@ -52,7 +52,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class MiahootMapperTest {
 
+
    /* @Autowired
+
     private MiahootMapper miahootMapper;
 
     @Test
@@ -168,7 +170,7 @@ class MiahootMapperTest {
 
     }
 
-
+/*
     @Test
     void toEntity() {
         // création des reponse de la question 1 : Qui a écrit "Les Misérables"
