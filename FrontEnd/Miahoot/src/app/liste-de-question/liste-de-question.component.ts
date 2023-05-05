@@ -48,6 +48,7 @@ export class ListeDeQuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
   
   
