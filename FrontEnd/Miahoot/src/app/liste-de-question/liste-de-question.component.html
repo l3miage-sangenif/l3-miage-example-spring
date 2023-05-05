@@ -5,12 +5,13 @@
     <li *ngFor="let question of miahootRecupere.miahoot.questions">
       <label>{{ question.label }}</label>
       <ul>
+        <label>egdsgzr{{ question.responses[0].label }}</label>
           <li *ngFor="let option of question.responses">
             <button style="background-color: rgb(209, 232, 244)" class="my-btn">
               <label>
                 <input
                   type="radio"
-                  name="{{ question.label }}"
+                  name="{{ option.label }}"
                   [value]="option"
                   [(ngModel)]="selectedResponse"
                 />
