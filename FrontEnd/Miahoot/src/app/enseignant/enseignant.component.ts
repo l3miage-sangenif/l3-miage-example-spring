@@ -72,7 +72,7 @@ export class EnseignantComponent implements OnInit {
 
   /*Pour récupérer tous les miahoots déjà crées */
   getAllMiahoots(): Miahoot[]{
-    this.enseignantService.getAllMiahoot().subscribe((data) => {
+    this.enseignantService.getAllMiahoot('123').subscribe((data) => {
       this.tableauDesMiahoots = data;
     });
     
