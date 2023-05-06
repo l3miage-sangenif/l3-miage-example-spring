@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class QuestionMapperTest {
     /*
 
-   /* @Autowired
+    @Autowired
     private QuestionMapper questionMapper;
     @Autowired
     private ReponseMapper reponseMapper;

@@ -51,10 +51,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class MiahootMapperTest {
-
-
-   /* @Autowired
-
+/*
+    @Autowired
     private MiahootMapper miahootMapper;
 
     @Test

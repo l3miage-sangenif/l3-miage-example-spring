@@ -134,7 +134,7 @@ class MiahootComponentTest {
 /*
     @Test
     void CreateMiahoot() throws Exception {
-       /* CreateMiahootRequest request = CreateMiahootRequest.builder()
+        CreateMiahootRequest request = CreateMiahootRequest.builder()
                 .nom("Miahoot 1")
                 .questions(new ArrayList<>(Arrays.asList(
                         CreateQuestionRequest.builder()
@@ -188,7 +188,7 @@ class MiahootComponentTest {
 
         MiahootEntity entityGet = miahootComponent.getMiahoot(expected.getMiahootId());
         assertThat(entityGet).usingRecursiveComparison()
-                .isEqualTo(expected);*/
+                .isEqualTo(expected);
     }
 
 
