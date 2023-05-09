@@ -28,6 +28,7 @@ export class QCMComponent implements OnInit {
   titreMiahoot = '';
 
   miahoot :Miahoot= {
+    uid:'user',
     miahootId:0,
     nom: '',
     questions: [
