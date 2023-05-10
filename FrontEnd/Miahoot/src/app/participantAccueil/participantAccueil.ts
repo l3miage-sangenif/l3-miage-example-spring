@@ -15,11 +15,8 @@ import { PartageMiahootService } from '../partage-miahoot.service';
   styleUrls: ['./participantAccueil.css'],
 })
 export class ParticipantAccueil implements OnInit {
-  public value: Number;
+  public value!: Number;
   
-
-submitAnswers() {
-}
 
   ngOnInit(): void {
   }

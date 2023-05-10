@@ -28,6 +28,7 @@ import { ResultatQCMComponent } from './resultat-qcm/resultat-qcm.component';
 import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
+import { ParticipantAccueil } from './participantAccueil/participantAccueil';
 
 
 
@@ -40,6 +41,7 @@ import { MatTableModule } from '@angular/material/table';
     QCMComponent,
     ListeDeQuestionComponent,
     ResultatQCMComponent,
+    ParticipantAccueil,
   ],
   imports: [
     BrowserModule,

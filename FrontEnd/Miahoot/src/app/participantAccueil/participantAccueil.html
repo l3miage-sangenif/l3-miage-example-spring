@@ -1,12 +1,8 @@
-<div class="qcm"> Rentrer ici le code de Miahoot : </div>
-<div class="container">
-  <!--<input type="text" [(ngModel)]="value" />-->
-</div> 
-<div class="centre">
-  <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" routerLink="/resultat" >
-    Soumettre les réponses
+<div class="qcm"> Rentrer ici le code de Miahoot :
+  <input type="text" [(ngModel)]="value" />
+  <button mat-raised-button color="primary" style = "position:center; text-align:center; " routerLink="/participant/{{value}}" >
+    se connecter
   </button>
-
 </div>
 
 
