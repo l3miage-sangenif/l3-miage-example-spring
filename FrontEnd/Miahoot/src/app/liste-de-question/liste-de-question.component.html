@@ -1,7 +1,7 @@
-<div class="qcm"> Participez au QCM du miahoot : {{miahootRecupere.miahoot.nom}} </div>
+<div class="qcm"> Participez au QCM du miahoot : {{miahootRecupere.nom}} </div>
 <div class="container">
   <ul>
-    <li *ngFor="let question of miahootRecupere.miahoot.questions ">
+    <li *ngFor="let question of miahootRecupere.questions ">
       <label>{{ question.label }}</label>
       <ul>
           <li *ngFor="let option of question.reponses">

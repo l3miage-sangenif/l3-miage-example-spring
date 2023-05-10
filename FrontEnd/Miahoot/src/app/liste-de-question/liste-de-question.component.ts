@@ -15,7 +15,7 @@ import { PartageMiahootService } from '../partage-miahoot.service';
 })
 export class ListeDeQuestionComponent implements OnInit {
 
-  
+  miahootRecupere!: Miahoot;
   idMiahoot!: number;
  // miahootApresenter : Miahoot ;
   selectedResponse! : Response ;
@@ -43,12 +43,18 @@ export class ListeDeQuestionComponent implements OnInit {
     ],
   };*/
 
-  constructor(private serviceQ : EnseignantService, public miahootRecupere : PartageMiahootService){
+  constructor(private serviceQ : EnseignantService, private route : ActivatedRoute){
+    
+    this.serviceQ.getMiahootById(Number(route.snapshot.paramMap.get('idMiahoot'))).subscribe(miahootRecupere=>{
+      this.miahootRecupere = miahootRecupere as Miahoot
+    })
+    console.log(Number(route.snapshot.paramMap.get('idMiahoot')))
     //this.miahootRecupere.s
 
   }
 
   ngOnInit(): void {
+    
     
   }
   
