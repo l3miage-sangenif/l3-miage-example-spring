@@ -16,6 +16,7 @@ export class EnseignantComponent implements OnInit {
   b: boolean = false;
   namemiahoot: any;
   miahoots: any;
+  userUid!: string;
   //Definition d'un tableau de Miahoot nommé miahoot en dure
   miahoot:Miahoot[]=[];
 
@@ -23,12 +24,15 @@ export class EnseignantComponent implements OnInit {
 
   displayedColumns: string[] = ['No', 'nom',/*'question'*/ 'actions'];
   
-  constructor(private enseignantService: EnseignantService,private router: Router, public miahootRecupere : PartageMiahootService, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {}
+  constructor(private enseignantService: EnseignantService,private router: Router, public miahootRecupere : PartageMiahootService, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {
+    if(transfertEnseignantQcmService.idUser!=undefined)
+    this.setUserUid(transfertEnseignantQcmService.idUser);
+  }
 
   ngOnInit(): void {
+    this.userUid=this.getUserUid();
     
     this.getAllMiahoots();
-    console.log(this.miahoots);
   }
 
   public choice() {
@@ -54,7 +58,7 @@ export class EnseignantComponent implements OnInit {
 
   /*Pour récupérer tous les miahoots déjà crées */
   getAllMiahoots(): Miahoot[]{
-    this.enseignantService.getAllMiahoot('123').subscribe((data) => {
+    this.enseignantService.getAllMiahoot(this.userUid).subscribe((data) => {
       this.tableauDesMiahoots = data;
       console.log(data);
     });
@@ -75,4 +79,16 @@ export class EnseignantComponent implements OnInit {
     console.log(this.miahootRecupere.miahoot);
     this.router.navigate(['/participant']);
   }
+
+  setUserUid(data:any){
+    localStorage.setItem("userUid",JSON.stringify(data));
+  }
+
+  getUserUid(){
+    let data = localStorage.getItem("userUid");
+    if(data!=null)
+    return JSON.parse(data);
+  }
+
+
 }

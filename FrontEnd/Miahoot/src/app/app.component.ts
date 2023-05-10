@@ -6,6 +6,8 @@ import { traceUntilFirst } from '@angular/fire/performance';
 import {Router} from '@angular/router';
 import { Location } from '@angular/common';
 import { EnseignantService } from './services/enseignant.service';
+import { UserCreate } from './models/userCreate';
+import { TransfertEnseignantQcmService } from './transfert-enseignant-qcm.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,12 @@ import { EnseignantService } from './services/enseignant.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  userCreate: UserCreate= {
+    uid:'123',
+    nom: '',
+    estEnseignant: false
+  }
 
   title = 'Miahoot';
   private readonly userDisposable: Subscription|undefined;
@@ -25,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userId : string | undefined;
   deconnexionAnonyme = false;
 
-  constructor(@Optional() private auth: Auth, private router: Router, private location: Location) {
+  constructor(@Optional() private auth: Auth, private router: Router, private location: Location,private serviceUser: EnseignantService,private enseignantPartage: TransfertEnseignantQcmService) {
     this.showLoginButton = false;
     if (auth) {
       console.log(this.user)
@@ -39,6 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.showLogoutButton = isLoggedIn;
       });
     }
+    
   }
 
   ngOnInit(): void { 
@@ -56,6 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.router.navigate(['/enseignant']);
       this.photo = result.user.photoURL;
       this.userId = result.user.uid;
+      this.enseignantPartage.idUser = this.userId;
+      this.userCreate.estEnseignant = true;
+      this.userCreate.nom = result.user.displayName as string;
+      this.userCreate.uid = this.userId;
+      this.serviceUser.createUser(this.userCreate).subscribe(response => {
+        console.log({response});
+      })
     });    
   }
 
@@ -65,14 +81,27 @@ export class AppComponent implements OnInit, OnDestroy {
       this.router.navigate(['/participant']);
       this.photo = result.user.photoURL;
       this.userId = result.user.uid;
-      
+      this.enseignantPartage.idUser = this.userId;
+      this.userCreate.estEnseignant = false;
+      this.userCreate.nom = result.user.displayName as string;
+      this.userCreate.uid = this.userId;
+      this.serviceUser.createUser(this.userCreate).subscribe(response => {
+        console.log({response});
+      })      
     });    
   }
 
   async loginAnonymously() {
     return await signInAnonymously(this.auth).then((result)=>{
       this.router.navigate(['/enseignant']);
+      this.userId = result.user.uid;
+      this.enseignantPartage.idUser = this.userId;
       this.deconnexionAnonyme = ! this.deconnexionAnonyme;
+      this.userCreate.estEnseignant = true;
+      this.userCreate.uid = this.userId;
+      this.serviceUser.createUser(this.userCreate).subscribe(response => {
+        console.log({response});
+      })
     });
   }
 

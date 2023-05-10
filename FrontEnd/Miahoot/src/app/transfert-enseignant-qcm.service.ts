@@ -8,5 +8,7 @@ export class TransfertEnseignantQcmService {
 
   public miahoot: any
 
+  public idUser!: string; 
+
   constructor() { }
 }

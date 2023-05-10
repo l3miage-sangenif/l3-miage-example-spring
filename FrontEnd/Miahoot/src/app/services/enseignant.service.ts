@@ -44,8 +44,9 @@ getMiahootById(miahootid: number): Observable<any> {
   }
 
   /*création d'un user*/
-  createUser(user : any) : Observable<any> {
-    const url = `${this.baseUrl}/users`;
+  createUser(user : any) : Observable<any> { 
+    const url = `${this.baseUrl}/users/`;
+    console.log("test creation ----------");
     return this.http.post(url, user);
   }
 }

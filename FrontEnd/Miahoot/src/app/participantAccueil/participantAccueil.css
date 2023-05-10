@@ -1,0 +1,26 @@
+
+
+.my-btn {
+  width: 200px;
+  height: 40px;
+  margin: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+}
+
+.centre{
+  text-align: center;
+}
+
+.qcm{
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  
+}
