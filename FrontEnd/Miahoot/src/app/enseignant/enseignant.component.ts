@@ -77,7 +77,7 @@ export class EnseignantComponent implements OnInit {
   onPresent(miahoot:Miahoot):void{
     this.miahootRecupere.miahoot = miahoot; 
     console.log(this.miahootRecupere.miahoot);
-    this.router.navigate(['/participant']);
+    this.router.navigate(['/participant/'+miahoot.miahootId]);
   }
 
   setUserUid(data:any){
