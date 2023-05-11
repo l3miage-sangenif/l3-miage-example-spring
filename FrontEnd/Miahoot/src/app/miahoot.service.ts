@@ -94,11 +94,5 @@ export class MiahootService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  /** POST: add a new miahoot to the server */
-  // addmiahoot(miahoot: Miahoot): Observable<Miahoot> {
-  //   return this.http.post<Miahoot>(this.miahootUrl, miahoot, this.httpOptions).pipe(
-  //     tap((newmiahoot: Miahoot) => this.log(`added miahoot w/ id=${newmiahoot.owner}`)),
-  //     catchError(this.handleError<Miahoot>('addmiahoot'))
-  //   );
-  // }
+  
 }

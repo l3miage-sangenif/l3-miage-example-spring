@@ -1,4 +1,4 @@
-<div class="qcm" >Résultats du quiz</div>
+<div class="qcm" >Résultats du quiz </div>
 
 <p class="container">Votre score : {{ getScore() }}%</p>
 <br />
@@ -20,13 +20,13 @@
       <strong>{{ response.label }}</strong>
       <br/>
 
-      Réponse valide : {{ response.estvalide }}
-      <label *ngIf="response.estvalide == true">
+      Réponse valide : {{ response.estValide }}
+      <label *ngIf="response.estValide == true">
         Bravo vous avez trouvez juste
       </label>
       <br/>
 
-      <label *ngIf="response.estvalide === false">
+      <label *ngIf="response.estValide === false">
         vous n'avez pas trovez la bonne response
       </label>
     </li>

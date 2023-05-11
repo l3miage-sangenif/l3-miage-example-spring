@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'qcm/:name', component: QCMComponent },
   { path: 'participant/:idMiahoot', component: ListeDeQuestionComponent },
   { path: 'participant', component: ParticipantAccueil },
-  { path: 'resultat', component: ResultatQCMComponent },
+  { path: 'resultat/:idMiahootR', component: ResultatQCMComponent },
   { path: '**', redirectTo: '/accueil', pathMatch: 'full' },
 ];
 
