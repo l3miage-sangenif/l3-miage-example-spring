@@ -3,6 +3,7 @@ package fr.uga.l3miage.example.controller;
 import fr.uga.l3miage.example.endpoint.MiahootPresentationEndpoint;
 import fr.uga.l3miage.example.request.CreateMiahootPresentationRequest;
 import fr.uga.l3miage.example.response.MiahootPresentation;
+import fr.uga.l3miage.example.response.QuestionPresentation;
 import fr.uga.l3miage.example.service.MiahootPresentationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,4 +44,15 @@ public class MiahootPresentationController implements MiahootPresentationEndpoin
     public void closePresentation(final int miahootId) {
         miahootService.closeMiahoot(miahootId);
     }
+
+    @Override
+    public QuestionPresentation getQuestionPresentationEntity(final int miahootId) {
+        return miahootService.getQuestionCourante(miahootId);
+    }
+    @Override
+    public void postQuestionPresentationEntity(final int miahootId) {
+        miahootService.questionSuivante(miahootId);
+    }
+
+
 }

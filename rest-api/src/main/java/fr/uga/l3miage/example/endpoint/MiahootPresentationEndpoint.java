@@ -6,6 +6,7 @@ import fr.uga.l3miage.example.error.NotFoundErrorResponse;
 import fr.uga.l3miage.example.request.CreateMiahootPresentationRequest;
 import fr.uga.l3miage.example.response.Miahoot;
 import fr.uga.l3miage.example.response.MiahootPresentation;
+import fr.uga.l3miage.example.response.QuestionPresentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -79,5 +80,23 @@ public interface MiahootPresentationEndpoint {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("miahoots/{miahootId}/over")
     void closePresentation(@PathVariable int miahootId);
+
+    @Operation(description = "Récupérer le DTO de l'entité Miahoot Presentation qui a pour id celui passé en paramètre")
+    @ApiResponse(responseCode = "200", description = "Renvoie le DTO de l'entité Miahoot demandée",
+            content = @Content(schema = @Schema(implementation = QuestionPresentation.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée ou que toute les question sont passe",
+            content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("{miahootId}/question")
+    QuestionPresentation getQuestionPresentationEntity(@PathVariable int miahootId);
+
+    @Operation(description = "Récupérer le DTO de l'entité Miahoot Presentation qui a pour id celui passé en paramètre")
+    @ApiResponse(responseCode = "200", description = "Renvoie le DTO de l'entité Miahoot demandée",
+            content = @Content(schema = @Schema(implementation = QuestionPresentation.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée ou que toute les question sont passe",
+            content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("{miahootId}/question")
+    void postQuestionPresentationEntity(@PathVariable int miahootId);
 
 }
