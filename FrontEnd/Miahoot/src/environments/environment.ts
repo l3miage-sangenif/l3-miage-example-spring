@@ -1,5 +1,5 @@
 export const environment = {
-  baseUrl:'http://129.88.210.162:8080/api',
+  baseUrl:'http://localhost:8080/api',
   firebase: {
     projectId: 'projetintegrateurmiahoot-61102',
     appId: '1:452461067766:web:7117b7e3c19147cc4e9bd7',

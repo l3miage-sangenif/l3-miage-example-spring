@@ -11,7 +11,7 @@ import { Miahoot } from '../models/miahoot';
 export class EnseignantService {
   miahootAvecReponses?: Miahoot
 
-  baseUrl = 'http://129.88.210.162:8080/api';
+  baseUrl = 'http://localhost:8080/api';
 
   httpOptions = {
     headers: new HttpHeaders({

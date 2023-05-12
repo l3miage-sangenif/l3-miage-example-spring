@@ -15,18 +15,18 @@
   <ng-container *ngIf="!(user | async)">
     <span class="gap">
       <button mat-raised-button [matMenuTriggerFor]="beforeMenu" class="register-button">
-        <mat-icon aria-hidden="false" aria-label="Register">person_add</mat-icon> Register
+        <mat-icon aria-hidden="false" aria-label="Register">person_add</mat-icon> Connexion
       </button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="loginEnseignant()">Enseignant</button>
         <button mat-menu-item (click)="loginParticipant()">Participant</button>
       </mat-menu>
     </span>
-    <span class="gap">
+    <!--<span class="gap">
       <button mat-raised-button class="login-button">
         <mat-icon aria-hidden="false" aria-label="Login">login</mat-icon> Login
       </button>
-    </span>
+    </span>-->
   </ng-container>
 
   <ng-container *ngIf="user | async">
