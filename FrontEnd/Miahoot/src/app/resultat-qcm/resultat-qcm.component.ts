@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MiahootService } from '../miahoot.service';
+
 import { Miahoot } from '../models/miahoot';
 import { Response } from '../models/response';
 import { Question } from '../models/question';
@@ -22,7 +22,7 @@ export class ResultatQCMComponent {
   ngOnInit(): void {
     /*this.miahootService.getMiahootById(Number(this.route.snapshot.paramMap.get('idMiahootR'))).subscribe(miahootRecupere=>{
       this.miahoot = miahootRecupere as Miahoot;
-     
+
     });*/
     this.miahoot = this.envoiMiahoot.miahoot;
   }

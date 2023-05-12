@@ -4,10 +4,13 @@
     <button class="create-button" mat-raised-button color="primary" (click)="loginAnonymously()">Create a Miahoot quiz as anonymous teacher</button>
     <div class="spacer"></div>
     <div class="join-button-group">
-      <button class="join-button" mat-raised-button color="accent" [matMenuTriggerFor]="menu">Join a Miahoot quiz as anonymous participant</button>
-      <mat-menu #menu="matMenu">
+      <label>
+        <button class="join-button" mat-raised-button color="accent"   routerLink="/participant/{{value}}">Join a Miahoot quiz as anonymous participant</button>
+      </label>
+
+      <!--<mat-menu #menu="matMenu">
         <input type="button" value="Enter Miahoot code " />
-      </mat-menu>
+      </mat-menu>-->
     </div>
   </div>
 </div>

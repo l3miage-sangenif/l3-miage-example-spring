@@ -22,5 +22,20 @@
   text-align: center;
   font-weight: bold;
   font-size: 25px;
+ 
+  
+}
+
+.qcmA{
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-40%);
+  margin-top: 20%;
+  
   
 }

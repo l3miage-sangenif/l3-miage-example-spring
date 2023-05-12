@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccueilComponent implements OnInit, OnDestroy {
+  public value!: Number;
 
   private readonly userDisposable: Subscription|undefined;
   public readonly user: Observable<User | null> = EMPTY;
@@ -20,7 +21,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
   showLogoutButton = false;
   connexion = false;
   deconnexionAnonyme = false;
-  
+
 
   constructor(@Optional() private auth: Auth, private router: Router) {
     if (auth) {
@@ -50,7 +51,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
     });
   }
 
-  
 
-  
+
+
 }
