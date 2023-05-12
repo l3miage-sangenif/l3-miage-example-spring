@@ -68,8 +68,8 @@ export class EnseignantComponent implements OnInit {
 
   //cette fonction ouvrira une boite de dialogue ou on pourra editer unmiahoot
   onEdit(miahoot:Miahoot):void{
-    //this.transfertEnseignantQcmService.miahoot = miahoot;
-    //this.router.navigate(['/qcm']);
+    this.transfertEnseignantQcmService.miahoot = miahoot;
+    this.router.navigate(['/qcm/:name']);
   }
 
   onDelete(miahoot:Miahoot):void{

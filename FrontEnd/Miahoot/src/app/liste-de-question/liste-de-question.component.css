@@ -24,3 +24,16 @@
   font-size: 25px;
   
 }
+
+.container {
+  position: relative;
+}
+
+.submit-button-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin-bottom: 20px;
+}
