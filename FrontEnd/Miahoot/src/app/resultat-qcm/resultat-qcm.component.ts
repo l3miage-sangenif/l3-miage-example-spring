@@ -1,33 +1,30 @@
-import { Component, Input } from '@angular/core';
-import { MiahootService } from '../miahoot.service';
-import {
-  Miahoot,
-  Question,
-  Response,
-  SelectedOption,
-} from '../miahoot.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Miahoot } from '../models/miahoot';
+import { Question } from '../models/question';
+import { Response } from "../models/response";
+import { EnseignantService } from '../services/enseignant.service';
 
 @Component({
   selector: 'app-resultat-qcm',
   templateUrl: './resultat-qcm.component.html',
   styleUrls: ['./resultat-qcm.component.css'],
 })
-export class ResultatQCMComponent {
-  @Input() miahoot: Miahoot | undefined;
+export class ResultatQCMComponent implements OnInit {
+ miahoot: Miahoot | undefined;
   showResponses = false;
-
-  constructor(private miahootService: MiahootService) {}
-
+  constructor(private enseignantService:EnseignantService){}
   ngOnInit(): void {
-    this.miahoot = this.miahootService.getMiahoot();
+this.miahoot=this.enseignantService.miahootAvecReponses;
+
   }
 
   getScore(): number {
+    this.miahoot=this.enseignantService.miahootAvecReponses;
     const numResponses = this.miahoot?.questions.length || 0;
     let numCorrect = 0;
     this.miahoot?.questions.forEach((question) => {
-      const selectedResponse = question.responses.find((r) => r.selected);
-      if (selectedResponse && selectedResponse.estvalide) {
+      const selectedResponse = question.reponses.find((r) => r.isSelected);
+      if (selectedResponse && selectedResponse.estValide) {
         numCorrect++;
       }
     });
@@ -36,14 +33,17 @@ export class ResultatQCMComponent {
 
   getResponses(): Response[] {
     const responses: Response[] = [];
+    this.miahoot=this.enseignantService.miahootAvecReponses;
+
+
     this.miahoot?.questions.forEach((question) => {
-      const selectedResponse = question.responses.find((r) => r.selected);
+      const selectedResponse = question.reponses.find((r) => r.isSelected);
       if (selectedResponse) {
         const response: Response = {
           // label: question.label,
           label: selectedResponse.label,
-          selected: selectedResponse.label.toString() === 'true',
-          estvalide: selectedResponse.estvalide.toString() === 'true',
+          isSelected: selectedResponse.label.toString() === 'true',
+          estValide: selectedResponse.estValide.toString() === 'true',
         };
         responses.push(response);
       }

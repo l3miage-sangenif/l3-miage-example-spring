@@ -1,16 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Miahoot } from '../miahoot.service';
+
 import { environment } from 'src/environments/environment';
+import { Miahoot } from '../models/miahoot';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnseignantService {
+  miahootAvecReponses?: Miahoot
 
   baseUrl = 'http://localhost:8080/api';
-  
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -44,9 +46,12 @@ getMiahootById(miahootid: number): Observable<any> {
   }
 
   /*création d'un user*/
-  createUser(user : any) : Observable<any> { 
+  createUser(user : any) : Observable<any> {
     const url = `${this.baseUrl}/users/`;
     console.log("test creation ----------");
     return this.http.post(url, user);
+  }
+  saveResponses(miahoot: Miahoot){
+this.miahootAvecReponses =miahoot;
   }
 }

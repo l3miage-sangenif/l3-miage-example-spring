@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnseignantService } from '../services/enseignant.service';
 import { Miahoot } from '../models/miahoot';
-import { MiahootService } from '../miahoot.service';
+
 import { Router } from '@angular/router';
 import { PartageMiahootService } from '../partage-miahoot.service';
 import { TransfertEnseignantQcmService } from '../transfert-enseignant-qcm.service';
@@ -23,7 +23,7 @@ export class EnseignantComponent implements OnInit {
   tableauDesMiahoots : Miahoot[] = [];
 
   displayedColumns: string[] = ['No', 'nom',/*'question'*/ 'actions'];
-  
+
   constructor(private enseignantService: EnseignantService,private router: Router, public miahootRecupere : PartageMiahootService, private transfertEnseignantQcmService:TransfertEnseignantQcmService) {
     if(transfertEnseignantQcmService.idUser!=undefined)
     this.setUserUid(transfertEnseignantQcmService.idUser);
@@ -31,7 +31,7 @@ export class EnseignantComponent implements OnInit {
 
   ngOnInit(): void {
     this.userUid=this.getUserUid();
-    
+
     this.getAllMiahoots();
   }
 
@@ -75,7 +75,7 @@ export class EnseignantComponent implements OnInit {
     //this.enseignantService.deleteMiahoot(miahoot.id).subscribe();
   }
   onPresent(miahoot:Miahoot):void{
-    this.miahootRecupere.miahoot = miahoot; 
+    this.miahootRecupere.miahoot = miahoot;
     console.log(this.miahootRecupere.miahoot);
     this.router.navigate(['/participant/'+miahoot.miahootId]);
   }

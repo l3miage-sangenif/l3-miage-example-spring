@@ -20,28 +20,17 @@
       <strong>{{ response.label }}</strong>
       <br/>
 
-      Réponse valide : {{ response.estvalide }}
-      <label *ngIf="response.estvalide == true">
+      Réponse valide : {{ response.estValide }}
+      <label *ngIf="response.estValide == true">
         Bravo vous avez trouvez juste
       </label>
       <br/>
 
-      <label *ngIf="response.estvalide === false">
+      <label *ngIf="response.estValide === false">
         vous n'avez pas trovez la bonne response
       </label>
     </li>
   </ul>
 </div>
+{{miahoot | json}}
 
-<!-- <div class="fixed-bottom">
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col-auto">
-        <button routerLink="/accueil" class="btn btn-primary">
-          Retour à l'accueille
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- {{ getResponses() | json }} -->
