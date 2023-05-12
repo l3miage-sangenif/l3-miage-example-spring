@@ -8,23 +8,28 @@
             <button style="background-color: rgb(209, 232, 244)" class="my-btn">
               <label>
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="{{ option.label }}"
                   [value]="option"
-                  [(ngModel)]="selectedResponse"
+                  [(ngModel)]="option.selected"
                 />
                 {{ option.label }}
               </label>
             </button>
+            <div>Your favorite choice is: {{option.selected| json }}</div>
+
           </li>
       </ul>
     </li>
   </ul>
-</div>
-<div class="centre">
-  <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()"  >
-    Soumettre les réponses
-  </button>
+
+  <div class="centre">
+    <button mat-raised-button color="primary" style = "position:center; text-align:center; " (click)="submitAnswers()" [routerLink]="['/resultat' , idMiahootR]" >
+      Soumettre les réponses
+    </button>
+
+  </div>
+
 
 </div>
 

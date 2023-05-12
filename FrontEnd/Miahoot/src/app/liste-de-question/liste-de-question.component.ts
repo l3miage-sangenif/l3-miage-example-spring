@@ -17,16 +17,17 @@ export class ListeDeQuestionComponent implements OnInit {
 
   miahootRecupere!: Miahoot ;
   idMiahoot!: number;
+  idMiahootR! : number;
+ // miahootApresenter : Miahoot ;
 
-  selectedResponse! : Response ;
 
 
-  constructor(private serviceQ : EnseignantService, private route : ActivatedRoute,private router:Router){
+  constructor(private serviceQ : EnseignantService, private route : ActivatedRoute, private envoiMiahoot : PartageMiahootService){
 
     this.serviceQ.getMiahootById(Number(route.snapshot.paramMap.get('idMiahoot'))).subscribe(miahootRecupere=>{
-
-      this.miahootRecupere = miahootRecupere;
-
+      this.envoiMiahoot.miahoot = miahootRecupere as Miahoot
+      this.idMiahootR = miahootRecupere.miahootId;
+      this.miahootRecupere = miahootRecupere as Miahoot
     })
     console.log(Number(route.snapshot.paramMap.get('idMiahoot')))
 
@@ -42,7 +43,6 @@ export class ListeDeQuestionComponent implements OnInit {
   @Output() answerSelected = new EventEmitter<void>();
 
   public showResults = false;
-
 
   submitAnswers() {
     this.showResults = true;

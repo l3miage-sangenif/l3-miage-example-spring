@@ -61,6 +61,7 @@ export class EnseignantComponent implements OnInit {
     this.enseignantService.getAllMiahoot(this.userUid).subscribe((data) => {
       this.tableauDesMiahoots = data;
       console.log(data);
+      console.log(this.userUid);
     });
     return this.tableauDesMiahoots;
   }
@@ -72,7 +73,7 @@ export class EnseignantComponent implements OnInit {
   }
 
   onDelete(miahoot:Miahoot):void{
-    //this.enseignantService.deleteMiahoot(miahoot.id).subscribe();
+    this.enseignantService.deleteMiahoot(miahoot.miahootId).subscribe();
   }
   onPresent(miahoot:Miahoot):void{
     this.miahootRecupere.miahoot = miahoot;

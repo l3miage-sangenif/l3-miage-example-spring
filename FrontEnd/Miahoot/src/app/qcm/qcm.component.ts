@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Miahoot } from '../models/miahoot';
 import { Question } from '../models/question';
 import { Response } from '../models/response';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EnseignantService } from '../services/enseignant.service';
 import { TransfertEnseignantQcmService } from '../transfert-enseignant-qcm.service';
 
@@ -18,13 +18,7 @@ export class QCMComponent implements OnInit {
   qcm:any
   chaine: string =
     'https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp';
-  //ajouté par damessis pour qu'on ai au minimum deux reponse par question
-  /*questions: Question[] = [
-    {
-      label: '',
-      responses: [{ label: '', estValide: false }, { label: '', estValide: false }],
-    },
-  ];*/
+  
   titreMiahoot = '';
 
   miahoot :Miahoot= {
@@ -34,13 +28,13 @@ export class QCMComponent implements OnInit {
     questions: [
       { 
         label: '',
-        reponses: [{label: '', estValide: false,isSelected:false }, { label: '', estValide: false,isSelected:false }],
+        reponses: [{label: '', estValide: false,selected:false }, { label: '', estValide: false,selected:false }],
       }
     ]
   }
   
 
-  constructor(private serviceE : EnseignantService, private route : ActivatedRoute,private transfertEnseignantQcmService:TransfertEnseignantQcmService){
+  constructor(private serviceE : EnseignantService, private route : ActivatedRoute,private transfertEnseignantQcmService:TransfertEnseignantQcmService, private router: Router){
 
   }
   ngOnInit(): void {
@@ -79,12 +73,12 @@ export class QCMComponent implements OnInit {
   addQuestion() {
     this.miahoot.questions.push({
       label: '',
-      reponses: [{ label: '', estValide: false , isSelected:false}, { label: '', estValide: false,isSelected:false }],
+      reponses: [{ label: '', estValide: false , selected:false}, { label: '', estValide: false,selected:false }],
     });
   }
 
   addResponse(questionIndex: number) {
-    this.miahoot.questions[questionIndex].reponses.push({ label: '', estValide: false, isSelected:false});
+    this.miahoot.questions[questionIndex].reponses.push({ label: '', estValide: false, selected:false});
   }
 
   removeResponse(questionIndex: number,index: number) {
@@ -111,5 +105,6 @@ export class QCMComponent implements OnInit {
     this.serviceE.createMiahoot(this.miahoot).subscribe(response => {
       console.log({response});
     });
+    this.router.navigate(['/enseignant']);
   }
 }

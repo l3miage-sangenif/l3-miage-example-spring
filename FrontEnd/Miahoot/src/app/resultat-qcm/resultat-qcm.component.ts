@@ -1,29 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MiahootService } from '../miahoot.service';
 import { Miahoot } from '../models/miahoot';
+import { Response } from '../models/response';
 import { Question } from '../models/question';
-import { Response } from "../models/response";
 import { EnseignantService } from '../services/enseignant.service';
+import { ActivatedRoute } from '@angular/router';
+import { PartageMiahootService } from '../partage-miahoot.service';
 
 @Component({
   selector: 'app-resultat-qcm',
   templateUrl: './resultat-qcm.component.html',
   styleUrls: ['./resultat-qcm.component.css'],
 })
-export class ResultatQCMComponent implements OnInit {
- miahoot: Miahoot | undefined;
+export class ResultatQCMComponent {
+  miahoot!: Miahoot;
   showResponses = false;
-  constructor(private enseignantService:EnseignantService){}
-  ngOnInit(): void {
-this.miahoot=this.enseignantService.miahootAvecReponses;
+  idMiahoot!: number;
 
+  constructor(private miahootService: EnseignantService, private route : ActivatedRoute, private envoiMiahoot : PartageMiahootService) {}
+
+  ngOnInit(): void {
+    /*this.miahootService.getMiahootById(Number(this.route.snapshot.paramMap.get('idMiahootR'))).subscribe(miahootRecupere=>{
+      this.miahoot = miahootRecupere as Miahoot;
+
+    });*/
+    this.miahoot = this.envoiMiahoot.miahoot;
   }
 
   getScore(): number {
-    this.miahoot=this.enseignantService.miahootAvecReponses;
-    const numResponses = this.miahoot?.questions.length || 0;
+    const numResponses = this.miahoot.questions.length || 0;
     let numCorrect = 0;
-    this.miahoot?.questions.forEach((question) => {
-      const selectedResponse = question.reponses.find((r) => r.isSelected);
+    this.miahoot.questions.forEach((question) => {
+      const selectedResponse = question.reponses.find((r) => r.selected);
       if (selectedResponse && selectedResponse.estValide) {
         numCorrect++;
       }
@@ -33,16 +41,13 @@ this.miahoot=this.enseignantService.miahootAvecReponses;
 
   getResponses(): Response[] {
     const responses: Response[] = [];
-    this.miahoot=this.enseignantService.miahootAvecReponses;
-
-
-    this.miahoot?.questions.forEach((question) => {
-      const selectedResponse = question.reponses.find((r) => r.isSelected);
+    this.miahoot.questions.forEach((question) => {
+      const selectedResponse = question.reponses.find((r) => r.selected);
       if (selectedResponse) {
         const response: Response = {
           // label: question.label,
           label: selectedResponse.label,
-          isSelected: selectedResponse.label.toString() === 'true',
+          selected: selectedResponse.label.toString() === 'true',
           estValide: selectedResponse.estValide.toString() === 'true',
         };
         responses.push(response);
