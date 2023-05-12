@@ -8,11 +8,9 @@ import fr.uga.l3miage.example.exception.technical.technicalTestException.IsNotTe
 import fr.uga.l3miage.example.exception.technical.technicalTestException.TestEntityNotFoundException;
 import fr.uga.l3miage.example.mapper.TestMapper;
 import fr.uga.l3miage.example.mapper.UserMapper;
-import fr.uga.l3miage.example.models.MiahootEntity;
-import fr.uga.l3miage.example.models.MiahootPresentationEntity;
-import fr.uga.l3miage.example.models.TestEntity;
-import fr.uga.l3miage.example.models.UserEntity;
+import fr.uga.l3miage.example.models.*;
 import fr.uga.l3miage.example.repository.MiahootPresentationRepository;
+import fr.uga.l3miage.example.repository.ReponsePresentationRepository;
 import fr.uga.l3miage.example.repository.TestRepository;
 import fr.uga.l3miage.example.repository.UserRepository;
 import fr.uga.l3miage.example.response.Miahoot;
@@ -51,6 +49,7 @@ import java.util.Set;
 public class UserComponent {
     private final UserRepository userRepository;
     private final MiahootPresentationRepository miahootPresentationRepository;
+    private final ReponsePresentationRepository reponsePresentationRepository;
     private final UserMapper userMapper;
 
     /**
@@ -132,6 +131,27 @@ public class UserComponent {
                 Set<MiahootPresentationEntity> listMiahoot = user.get().getMiahootParticipes();
                 listMiahoot.add(miahoot);
                 user.get().setMiahootParticipes(listMiahoot);
+            }
+            userRepository.save(user.get());
+        } catch (EntityNotFoundException ex) {
+            throw ex;
+        } catch (DataAccessException ex) {
+            throw new RuntimeException("Impossible de mettre à jour l'entité Miahoot : " + ex.getMessage(), ex);
+        }
+    }
+
+    public void addReponse(final String userId,int reponseId) throws EntityNotFoundException {
+        try {
+            ReponsePresentationEntity miahoot = reponsePresentationRepository.findByReponseId(reponseId)
+                    .orElseThrow(() -> new EntityNotFoundException(String.format("Aucune entité n'a été trouvée pour miahootId [%s]", reponseId), reponseId));
+            Optional<UserEntity> user = userRepository.findByUid(userId);
+            if (user.isEmpty()) {
+                throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour user  [%s]", userId),404);
+            }
+            else {
+                Set<ReponsePresentationEntity> listReponse = user.get().getReponseDonnes();
+                listReponse.add(miahoot);
+                user.get().setReponseDonnes(listReponse);
             }
             userRepository.save(user.get());
         } catch (EntityNotFoundException ex) {

@@ -35,4 +35,9 @@ public class UserController implements UserEndpoint {
         userService.addParticipant(userId,miahootId);
     }
 
+    @Override
+    public void addReponse(final String userId,final int reponseId) {
+        userService.addReponse(userId,reponseId);
+    }
+
 }

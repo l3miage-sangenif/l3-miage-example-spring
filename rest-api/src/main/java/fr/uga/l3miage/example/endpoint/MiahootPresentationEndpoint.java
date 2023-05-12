@@ -44,7 +44,6 @@ public interface MiahootPresentationEndpoint {
     MiahootPresentation getMiahootPresentationEntity(@PathVariable int miahootId);
 
 
-
     @Operation(description = "Création d'une entité Miahoot")
     @ApiResponse(responseCode = "201", description = "L'entité Miahoot a bien été créée.")
     @Error400Custom

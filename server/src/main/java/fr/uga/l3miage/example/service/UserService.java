@@ -79,4 +79,12 @@ public class UserService {
             throw new EntityNotDeletedRestException(ex.getMessage());
         }
     }
+
+    public void addReponse(String userId, int miahootId) {
+        try {
+            userComponent.addReponse(userId,miahootId);
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotDeletedRestException(ex.getMessage());
+        }
+    }
 }

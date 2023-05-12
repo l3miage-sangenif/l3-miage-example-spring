@@ -151,4 +151,13 @@ public interface UserEndpoint {
     @PostMapping("{userId}/miahoot/{miahootId}")
     void addParticipant(@PathVariable String userId,@PathVariable int miahootId);
 
+    @Operation(description = "Met fin a la présentation Presentation qui a pour id celui passé en paramètre")
+    @ApiResponse(responseCode = "200", description = "Renvoie le DTO de l'entité Miahoot demandée",
+            content = @Content(schema = @Schema(implementation = MiahootPresentation.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
+            content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("{userId}/reponse/{reponseId}")
+    void addReponse(@PathVariable String userId,@PathVariable int reponseId);
+
 }
