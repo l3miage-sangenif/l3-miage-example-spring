@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MiahootService } from '../miahoot.service';
+
 import { Miahoot } from '../models/miahoot';
 import { Response } from '../models/response';
 import { Question } from '../models/question';

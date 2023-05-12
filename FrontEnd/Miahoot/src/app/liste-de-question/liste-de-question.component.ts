@@ -47,6 +47,6 @@ export class ListeDeQuestionComponent implements OnInit {
   submitAnswers() {
     this.showResults = true;
     this.serviceQ.saveResponses(this.miahootRecupere);
-    this.router.navigateByUrl("/resultat");
+    // this.router.navigateByUrl("/resultat");
   }
 }
