@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,6 +25,15 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<MiahootEntity> miahoots;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<MiahootPresentationEntity> miahootPresente;
+
+    @ManyToMany
+    private Set<MiahootPresentationEntity> miahootParticipes;
+
+    @ManyToMany
+    private Set<ReponsePresentationEntity> reponseDonnes;
 
     @Override
     public boolean equals(Object o) {

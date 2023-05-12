@@ -8,6 +8,7 @@ import fr.uga.l3miage.example.exception.technical.EntityNotFoundException;
 import fr.uga.l3miage.example.mapper.MiahootMapper;
 import fr.uga.l3miage.example.mapper.UserMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.MiahootPresentationEntity;
 import fr.uga.l3miage.example.models.UserEntity;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
 import fr.uga.l3miage.example.request.CreateUserRequest;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -57,6 +59,24 @@ public class UserService {
             return miahootEntities;
         } catch (EntityNotFoundException ex) {
             throw new EntityNotFoundRestException(String.format("Impossible de charger l'entité. Raison : [%s]", ex.getMessage()), 0, ex);
+        }
+    }
+
+    public Set<MiahootPresentationEntity> getAllMiahootPresentationByUserUid(String uid) {
+        try {
+            //List<MiahootEntity> miahootEntities=miahootComponent.getAllMiahootByUserUid(uid);
+            Set<MiahootPresentationEntity> miahootEntities=userComponent.getAllMiahootPresentationByUserUid(uid);
+            return miahootEntities;
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundRestException(String.format("Impossible de charger l'entité. Raison : [%s]", ex.getMessage()), 0, ex);
+        }
+    }
+
+    public void addParticipant(String userId, int miahootId) {
+        try {
+            userComponent.addParticipant(userId,miahootId);
+        } catch (EntityNotFoundException ex) {
+            throw new EntityNotDeletedRestException(ex.getMessage());
         }
     }
 }

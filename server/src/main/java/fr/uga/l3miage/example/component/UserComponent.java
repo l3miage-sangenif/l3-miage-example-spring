@@ -9,8 +9,10 @@ import fr.uga.l3miage.example.exception.technical.technicalTestException.TestEnt
 import fr.uga.l3miage.example.mapper.TestMapper;
 import fr.uga.l3miage.example.mapper.UserMapper;
 import fr.uga.l3miage.example.models.MiahootEntity;
+import fr.uga.l3miage.example.models.MiahootPresentationEntity;
 import fr.uga.l3miage.example.models.TestEntity;
 import fr.uga.l3miage.example.models.UserEntity;
+import fr.uga.l3miage.example.repository.MiahootPresentationRepository;
 import fr.uga.l3miage.example.repository.TestRepository;
 import fr.uga.l3miage.example.repository.UserRepository;
 import fr.uga.l3miage.example.response.Miahoot;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Pour respecter l'architecture hexagonale, ici nous ne traitons que les données
@@ -47,6 +50,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserComponent {
     private final UserRepository userRepository;
+    private final MiahootPresentationRepository miahootPresentationRepository;
     private final UserMapper userMapper;
 
     /**
@@ -105,6 +109,36 @@ public class UserComponent {
         }
 
         return user.get().getMiahoots();
+    }
+
+    public Set<MiahootPresentationEntity> getAllMiahootPresentationByUserUid(String uid) throws EntityNotFoundException {
+        Optional<UserEntity> user = userRepository.findByUid(uid);
+        if (user.isEmpty()) {
+            throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour user  [%s]", uid),404);
+        }
+
+        return user.get().getMiahootPresente();
+    }
+
+    public void addParticipant(final String userId,int miahootId) throws EntityNotFoundException {
+        try {
+            MiahootPresentationEntity miahoot = miahootPresentationRepository.findByMiahootId(miahootId)
+                    .orElseThrow(() -> new EntityNotFoundException(String.format("Aucune entité n'a été trouvée pour miahootId [%s]", miahootId), miahootId));
+            Optional<UserEntity> user = userRepository.findByUid(userId);
+            if (user.isEmpty()) {
+                throw new EntityNotFoundException(String.format("Aucune entité n'a été trouvé pour user  [%s]", userId),404);
+            }
+            else {
+                Set<MiahootPresentationEntity> listMiahoot = user.get().getMiahootParticipes();
+                listMiahoot.add(miahoot);
+                user.get().setMiahootParticipes(listMiahoot);
+            }
+            userRepository.save(user.get());
+        } catch (EntityNotFoundException ex) {
+            throw ex;
+        } catch (DataAccessException ex) {
+            throw new RuntimeException("Impossible de mettre à jour l'entité Miahoot : " + ex.getMessage(), ex);
+        }
     }
 }
 

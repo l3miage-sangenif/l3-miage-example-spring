@@ -30,4 +30,9 @@ public class UserController implements UserEndpoint {
         userService.deleteUser(uid);
     }
 
+    @Override
+    public void addParticipant(final String userId,final int miahootId) {
+        userService.addParticipant(userId,miahootId);
+    }
+
 }

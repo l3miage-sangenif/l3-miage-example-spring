@@ -9,6 +9,7 @@ import fr.uga.l3miage.example.error.testError.TestIntIsZeroErrorResponse;
 import fr.uga.l3miage.example.request.CreateMiahootRequest;
 import fr.uga.l3miage.example.request.CreateUserRequest;
 import fr.uga.l3miage.example.response.Miahoot;
+import fr.uga.l3miage.example.response.MiahootPresentation;
 import fr.uga.l3miage.example.response.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -140,5 +141,14 @@ public interface UserEndpoint {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{uid}")
     void deleteUser(@PathVariable String uid) ;
+
+    @Operation(description = "Met fin a la présentation Presentation qui a pour id celui passé en paramètre")
+    @ApiResponse(responseCode = "200", description = "Renvoie le DTO de l'entité Miahoot demandée",
+            content = @Content(schema = @Schema(implementation = MiahootPresentation.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "404", description = "Renvoie une erreur 404 si l'entité n'est pas trouvée",
+            content = @Content(schema = @Schema(implementation = NotFoundErrorResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("{userId}/miahoot/{miahootId}")
+    void addParticipant(@PathVariable String userId,@PathVariable int miahootId);
 
 }
